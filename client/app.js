@@ -10,6 +10,6 @@ angular.module('myapp', [])
 
   template: 
   `<div>
-    Coinsaver App here (Angular Main component is working)
+    Angular Main component is working
   </div>`
 })
