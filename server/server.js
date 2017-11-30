@@ -17,6 +17,7 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 
 app.use('/main', router);
 app.listen(port, () => {
-  console.log('Server is running on port: ' + port)
+  // console.log('Server is running on port: ' + port)
+  console.log('What does the server say about its port level? ITS OVER ' + (port-1).toString() +'!!');
 })
 
