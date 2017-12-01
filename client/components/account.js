@@ -1,12 +1,12 @@
 angular.module('coinsaver')
-.component('stats', {
+.component('account', {
   bindings: {
   },
   controller: function () {
   },
   template: `
     <div>
-      This line is written in the stats.js component
+      This line is written in the account.js component
     </div>
   `
 });

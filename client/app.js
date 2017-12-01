@@ -38,26 +38,26 @@ angular.module('coinsaver', ['ngMaterial'])
 
     <div ng-if="$ctrl.view === 'home'">
       <md-content layout="column" flex>
-        Home goes here
-        <!-- <home /> -->
+        Home component here:
+        <home />
       </md-content>
     </div>
     <div ng-if="$ctrl.view === 'stats'">
       <md-content layout="column" flex>
-        Stats go here
-        <!-- <home /> -->
+        Stats component here:
+        <stats />
       </md-content>
     </div>
     <div ng-if="$ctrl.view === 'banks'">
       <md-content layout="column" flex>
-        Banks go here
-        <!-- <home /> -->
+        Banks component here:
+        <banks />
       </md-content>
     </div>
     <div ng-if="$ctrl.view === 'account'">
       <md-content layout="column" flex>
-        Account goes here
-        <!-- <home /> -->
+        Account component here:
+        <account />
       </md-content>
     </div>
 
