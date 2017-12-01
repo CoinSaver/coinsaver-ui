@@ -3,7 +3,7 @@ const parser = require('body-parser');
 const path = require('path');
 // const db = require('../database/db.js'); //When we add the extremely complex coinsaver db
 
-const app = express();
+const app = express()
 const router = express.Router();
 // const router = require('./router.js'); // After we restructure
 
