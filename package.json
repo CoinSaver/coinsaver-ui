@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/server.js", 
+    "precommit": "npm run commit",
+    "start": "nodemon server/server.js",
     "commit": "npm run lint && npm run test && git commit",
     "test": "jest",
     "lint": "./node_modules/.bin/eslint client/* --ext .js; ./node_modules/.bin/eslint database/* --ext .js; ./node_modules/.bin/eslint server/* --ext .js"
@@ -22,6 +23,7 @@
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "husky": "^0.14.3"
   }
 }
