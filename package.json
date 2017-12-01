@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "commit": "npm run lint && npm run test && git commit",
+    "test": "jest",
     "lint": "./node_modules/.bin/eslint client/* --ext .js; ./node_modules/.bin/eslint database/* --ext .js; ./node_modules/.bin/eslint server/* --ext .js"
   },
   "author": "",
@@ -12,6 +14,7 @@
     "angular": "^1.6.7",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "jest": "^21.2.1",
     "mongoose": "^4.13.5"
   },
   "devDependencies": {
