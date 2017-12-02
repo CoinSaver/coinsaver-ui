@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "//": "add 'precommit': npm run lint && npm run test' to scripts to hook up precommit checks",
   "scripts": {
-    "precommit": "npm run lint && npm run test",
     "start": "nodemon server/server.js",
     "commit": "npm run lint && npm run test && git commit",
     "test": "jest",
