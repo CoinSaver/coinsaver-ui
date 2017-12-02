@@ -1,22 +1,22 @@
 angular.module('coinsaver', ['ngMaterial'])
-.config(function ($mdThemingProvider) {
-  $mdThemingProvider.theme('default')
-    .primaryPalette('blue-grey')
+  .config(($mdThemingProvider) => {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue-grey');
     // .dark();
-})
-.component('myApp', {
-  controller: function($http) {
-    const ctrl = this;
+  })
+  .component('myApp', {
+    controller($http) {
+      const ctrl = this;
 
-    let loggedIn = false;
-    let view = 'home';
+      const loggedIn = false;
+      const view = 'home';
 
     // this.$onInit = () => {
     //   console.log('main controller', ctrl);
     // }
-  },
+    },
 
-  template: 
+    template:
     `
     <md-content layout="column" flex>
       <md-nav-bar md-selected-nav-item="$ctrl.currentNavItem" nav-bar-aria-label="navigation links">
@@ -62,8 +62,8 @@ angular.module('coinsaver', ['ngMaterial'])
     </div>
 
     <md-content>
-  `
-})
+  `,
+  });
 
 
 // LOGIN CONTENT
