@@ -7,9 +7,10 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "commit": "npm run lint && npm run test && git commit",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "./node_modules/.bin/eslint client/* --ext .js; ./node_modules/.bin/eslint database/* --ext .js; ./node_modules/.bin/eslint server/* --ext .js"
   },
+  "eslintIgnore": ["index.html"],
   "author": "",
   "license": "ISC",
   "dependencies": {
