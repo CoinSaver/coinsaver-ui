@@ -1,11 +1,11 @@
-angular.module('coinsaver', ['ngMaterial'])
+angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
   .config(($mdThemingProvider) => {
     $mdThemingProvider.theme('default')
       .primaryPalette('blue-grey');
     // .dark();
   })
   .component('myApp', {
-    controller($http) {
+    controller($mdDialog, $http, $cookies) {
       const ctrl = this;
 
       const loggedIn = false;
