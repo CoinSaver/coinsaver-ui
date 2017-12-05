@@ -28,7 +28,8 @@ var ScheduleSchema = new Schema({
   amount: Number,
 })
 
-module.exports = mongoose.model('CoinUser', UserSchema);
+const CoinUser = mongoose.model('CoinUser', UserSchema);
+const CoinSchedule = mongoose.model('CoinSchedule', ScheduleSchema);
 
 
- 
+module.exports = {CoinUser, CoinSchedule}
