@@ -10,7 +10,9 @@
     "test": "jest --coverage",
     "lint": "./node_modules/.bin/eslint client/* --ext .js; ./node_modules/.bin/eslint database/* --ext .js; ./node_modules/.bin/eslint server/* --ext .js"
   },
-  "eslintIgnore": ["index.html"],
+  "eslintIgnore": [
+    "index.html"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -18,7 +20,8 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jest": "^21.2.1",
-    "mongoose": "^4.13.5"
+    "mongoose": "^4.13.5",
+    "plaid": "^2.2.0"
   },
   "devDependencies": {
     "eslint": "^4.12.1",
