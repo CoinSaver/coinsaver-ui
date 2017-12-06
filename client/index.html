@@ -23,12 +23,24 @@
     <script src="./components/stats.js"></script>
     <script src="./components/banks.js"></script>
     <script src="./components/account.js"></script>
+    <script src="./components/login.js"></script>
     <script src="./components/bottomnav.js"></script>
-
+    <script src="./factory.js"></script>
+    
     <!-- [ Firebase Libraries ] -->
     <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-      
+    <script>
+      var config = {
+        apiKey: "AIzaSyBwaVKfY2HaJGCNOxNP3ojEW4kish3UyN0",
+        authDomain: "coinsaverapp.firebaseapp.com",
+        databaseURL: "https://coinsaverapp.firebaseio.com",
+        projectId: "coinsaverapp",
+        storageBucket: "coinsaverapp.appspot.com",
+        messagingSenderId: "100717274584"
+      };
+      firebase.initializeApp(config);
+    </script>
     <!-- [ Bootstrap ] -->
 
   </head>
