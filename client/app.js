@@ -78,6 +78,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
                 callback(false);
               });
           };
+
           logwin.loginUser = (callback) => {
             Auth.$signInWithEmailAndPassword(logwin.email, logwin.password)
               .then(function(firebaseUser) {
@@ -94,18 +95,15 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
 
           logwin.handleLoginButton = (displayName, password) => {
             if (logwin.loginType === 'signup') {
-              //create new user and switch back to login
               logwin.createUser(function(isCreated) {
                 if (isCreated) {
                   logwin.password = '';
                   logwin.loginType = 'login';
                 } else {
-                  //user creation failed
-
+                  console.log('user creation failed, look around')
                 }
               });
             } else {
-              //log in new user
               logwin.loginUser(function(signedInUser) {
                 if (signedInUser) {
                   logwin.showProgress = true;
@@ -121,7 +119,6 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
                   });
                 } else {
                   console.log('something went wrong in authentication')
-
                 }
               });
             }
@@ -193,8 +190,8 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
                       </md-button>
                     </div>
                     <div layout="row" layout-align="center center">
-                      <md-button class="md-icon-button logo" ng-click="login.handleSocialLogin('google')" aria-label="googleSubmit">
-                        <img class="logo-image" style="width:100%; height:100%;" src="./images/social-svg/google.png">
+                      <md-button ng-click="login.handleSocialLogin('google')" aria-label="googleSubmit">
+                        <img style="width:200px; height:40px;" src="./images/googlelog.png">
                       </md-button>
                     </div>
                   </div>
@@ -216,9 +213,13 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
           });
       };
 
-    // this.$onInit = () => {
-    //   console.log('main controller', ctrl);
-    // }
+    // ------------------
+    // END FIREBASE
+    // ------------------
+
+      this.$onInit = () => {
+        // console.log('Controller up!');
+      }
     },
 
     template:
@@ -243,7 +244,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
         <md-nav-item md-nav-click="$ctrl.openLoginDialog($event, 'login')" name="login">
           [ Login ]
         </md-nav-item>
-        
+
       </md-nav-bar>
     </md-content>
     <md-content>
