@@ -57,3 +57,7 @@ main {
 .demo-menu-item.selected {
   color: rgb(16, 108, 200);
 }
+
+.fill-space {
+  flex: 1 1 auto;
+}
