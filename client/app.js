@@ -263,7 +263,9 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
         </div>
 
         <div ng-if="$ctrl.loggedIn === true">
-            Welcome, $USER WILL BE HERE
+          <md-button>
+          Welcome, {{$ctrl.displayName}}
+          </md-button>
         </div>
 
       </md-nav-bar>
