@@ -6,8 +6,8 @@ const router = require('./router.js');
 
 const app = express();
 
-
-const port = 9001;
+const port = 443;
+// const port = 9001;
 
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
@@ -18,6 +18,6 @@ app.use(router);
 
 app.listen(port, () => {
   // console.log('Server is running on port: ' + port)
-  console.log(`What does the server say about its port level? ITS OVER ${(port - 1).toString()}!!`);
+  console.log(`What does the server say about its port level? ITS OVER ${(port - 1).toString()}!! Port: ${port}`);
 });
 
