@@ -20,8 +20,16 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
 
       const ctrl = this;
 
-      const loggedIn = false;
-      const view = 'home';
+      this.loggedIn = false;
+      this.user = {};
+
+      this.view = 'home';
+
+      this.testFunc = function(){
+        console.log('The test func has been clicked,')
+        console.log('The current user data is; ')
+        console.log(ctrl.user)
+      }
 
       // ------------------
       // BEGIN FIREBASE
@@ -208,6 +216,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
             ctrl.user = user;
             ctrl.displayName = user.displayName;
             ctrl.isValidUser = true;
+            ctrl.loggedIn = true;
           }, function () {
             // console.log('canceled');
           });
@@ -224,6 +233,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
 
     template:
     `
+    <!-- Nav Bar -->
     <md-content layout="column" flex>
       <md-nav-bar md-selected-nav-item="$ctrl.currentNavItem" nav-bar-aria-label="navigation links">
         <md-nav-item md-nav-click="$ctrl.view='home'" name="home">
@@ -238,12 +248,23 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
         <md-nav-item md-nav-click="$ctrl.view='account'" name="account">
           Account
         </md-nav-item>
+        <md-button ng-click="$ctrl.testFunc()">
+          Work
+        </md-button>
 
+        <!-- Spacer -->
         <span class="fill-space"></span>
 
-        <md-nav-item md-nav-click="$ctrl.openLoginDialog($event, 'login')" name="login">
-          [ Login ]
-        </md-nav-item>
+        <!-- Login / Welcome -->
+        <div ng-if="$ctrl.loggedIn === false">
+          <md-nav-item md-nav-click="$ctrl.openLoginDialog($event, 'login')" name="login">
+            [ Login ]
+          </md-nav-item>
+        </div>
+
+        <div ng-if="$ctrl.loggedIn === true">
+            Welcome, $USER WILL BE HERE
+        </div>
 
       </md-nav-bar>
     </md-content>
