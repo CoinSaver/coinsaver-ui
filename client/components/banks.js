@@ -4,10 +4,10 @@ angular.module('coinsaver')
     },
     controller: 'BankController',
     template: `
-    <div>
-      <md-button id="link-btn" class="md-raised md-primary" ng-click="$ctrl.checkClick()">Link A Bank Account</md-button>
-    </div>
-  `,
+  <div>
+    <md-button id="link-btn" class="md-raised md-primary" ng-click="$ctrl.checkClick()">Link A Bank Account</md-button>
+  </div>
+`,
   })
   .controller('BankController', function bankControllerFunction($http) {
     const ctrl = this;
