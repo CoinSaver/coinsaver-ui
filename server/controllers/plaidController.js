@@ -66,18 +66,28 @@ module.exports = {
           return res.json({ error });
         }
 
-        const resObj = {
-          accounts: [],
-          transactions: {},
-        };
+        // const resObj = {
+        //   accounts: [],
+        //   transactions: {},
+        // };
+
+        const resObj = [];
+        const indexTrack = {};
 
         for (let i = 0; i < transactionsResponse.accounts.length; i++) {
           const accObj = {
+            id: transactionsResponse.accounts[i].account_id,
             name: transactionsResponse.accounts[i].name,
             type: transactionsResponse.accounts[i].subtype,
+            transactions: [],
           };
-          resObj.accounts.push(accObj);
-          resObj.transactions[transactionsResponse.accounts[i].account_id] = [];
+          // resObj.accounts.push(accObj);
+          // resObj.accounts.transactions = [];
+          resObj.push(accObj);
+
+          // indexTrack just keeps track of which index in resObj array
+          // stores which account_id's information for quicker lookup
+          indexTrack[accObj.id] = resObj.length - 1;
         }
         // console.log('------', resObj);
         console.log('-------TRANSACTIONS', transactionsResponse.transactions[0]);
@@ -93,12 +103,14 @@ module.exports = {
             },
             name: temp.name,
           };
-          resObj.transactions[temp.account_id].push(transactionObj);
+          // resObj.transactions[temp.account_id].push(transactionObj);
+          resObj[indexTrack[temp.account_id]].transactions.push(transactionObj);
         }
 
         console.log(`Pulled ${transactionsResponse.transactions.length} transactions`);
+        console.log('-----', resObj);
         res.json(resObj);
-      })
-    }
+      });
+    },
   },
 };

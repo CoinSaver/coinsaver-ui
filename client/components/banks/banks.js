@@ -32,16 +32,16 @@ angular.module('coinsaver')
             ctrl.linked = true;
             console.log('Successful post to exchange tokens!', res);
 
-            $http.get('/accounts')
-              .then((res) => {
-                console.log('Account data:');
-                console.log(res.data.accounts);
-                ctrl.accounts = res.data.accounts;
-              });
+            // $http.get('/accounts')
+            //   .then((res) => {
+            //     console.log('Account data:');
+            //     console.log(res.data.accounts);
+            //     ctrl.accounts = res.data.accounts;
+            //   });
 
             $http.get('/transactions')
               .then((res) => {
-                console.log('Transaction data:');
+                console.log('User data:');
                 console.log(res.data);
                 ctrl.transactions = res.data.transactions;
               });
