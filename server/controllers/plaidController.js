@@ -66,8 +66,38 @@ module.exports = {
           return res.json({ error });
         }
 
+        const resObj = {
+          accounts: [],
+          transactions: {},
+        };
+
+        for (let i = 0; i < transactionsResponse.accounts.length; i++) {
+          const accObj = {
+            name: transactionsResponse.accounts[i].name,
+            type: transactionsResponse.accounts[i].subtype,
+          };
+          resObj.accounts.push(accObj);
+          resObj.transactions[transactionsResponse.accounts[i].account_id] = [];
+        }
+        // console.log('------', resObj);
+        console.log('-------TRANSACTIONS', transactionsResponse.transactions[0]);
+
+        for (let i = 0; i < transactionsResponse.transactions.length; i++) {
+          const temp = transactionsResponse.transactions[i];
+          const transactionObj = {
+            amount: temp.amount,
+            round: Math.ceil(temp.amount) - temp.amount,
+            date: temp.date,
+            location: {
+              city: temp.location.city,
+            },
+            name: temp.name,
+          };
+          resObj.transactions[temp.account_id].push(transactionObj);
+        }
+
         console.log(`Pulled ${transactionsResponse.transactions.length} transactions`);
-        res.json(transactionsResponse.transactions);
+        res.json(resObj);
       })
     }
   },

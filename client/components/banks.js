@@ -6,8 +6,9 @@ angular.module('coinsaver')
     template: `
   <div>
       <md-button id="link-btn" class="md-raised md-primary" ng-if="$ctrl.linked===false" ng-click="$ctrl.checkClick()">Link A Bank Account</md-button>
-      <md-button class="md-raised md-warn" ng-if="$ctrl.linked===true" ng-click="$ctrl.getAccountHandler()">Get Accounts</md-button>
-      <md-button class="md-raised md-warn" ng-if="$ctrl.linked===true" ng-click="$ctrl.getTransactionsHandler()">Get Transactions</md-button>            
+      <div ng-if="$ctrl.linked===true">
+        <p>Transactions go here</p>
+      </div>
   </div>
 `,
   })
@@ -30,6 +31,20 @@ angular.module('coinsaver')
           .then((res) => {
             ctrl.linked = true;
             console.log('Successful post to exchange tokens!', res);
+
+            $http.get('/accounts')
+              .then((res) => {
+                console.log('Account data:');
+                console.log(res.data.accounts);
+                ctrl.accounts = res.data.accounts;
+              });
+
+            $http.get('/transactions')
+              .then((res) => {
+                console.log('Transaction data:');
+                console.log(res.data);
+                ctrl.transactions = res.data.transactions;
+              });
           });
       },
     });
