@@ -1,4 +1,4 @@
-angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
+angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router'])
   .config(($mdThemingProvider) => {
     $mdThemingProvider.theme('default')
     .dark()
@@ -13,6 +13,32 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
     .accentPalette('green', {
       'default': '200' // use shade 200 for default, and keep all other shades the same
     });
+  })
+  .config(function($stateProvider) {
+    var homeState = {
+      name: 'home',
+      url: '/',
+      template: '<home />'
+    }
+    var statsState = {
+      name: 'stats',
+      url: '/stats',
+      template: '<stats />'
+    }
+    var banksState = {
+      name: 'banks',
+      url: '/banks',
+      template: '<banks />'
+    }
+    var accountState = {
+      name: 'account',
+      url: '/account',
+      template: '<account />'
+    }
+    $stateProvider.state(homeState);
+    $stateProvider.state(statsState);
+    $stateProvider.state(banksState);
+    $stateProvider.state(accountState);
   })
 
   .component('myApp', {
@@ -236,16 +262,16 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
     <!-- Nav Bar -->
     <md-content layout="column" flex>
       <md-nav-bar md-selected-nav-item="$ctrl.currentNavItem" nav-bar-aria-label="navigation links">
-        <md-nav-item md-nav-click="$ctrl.view='home'" name="home">
+        <md-nav-item  ui-sref="home" ui-sref-active="home" md-nav-click="$ctrl.view='home'" name="home">
           Home
         </md-nav-item>
-        <md-nav-item md-nav-click="$ctrl.view='stats'" name="stats">
+        <md-nav-item ui-sref="stats" ui-sref-active="stats" md-nav-click="$ctrl.view='stats'" name="stats">
           Stats
         </md-nav-item>
-        <md-nav-item md-nav-click="$ctrl.view='banks'" name="banks">
+        <md-nav-item ui-sref="banks" ui-sref-active="banks" md-nav-click="$ctrl.view='banks'" name="banks">
           Banks
         </md-nav-item>
-        <md-nav-item md-nav-click="$ctrl.view='account'" name="account">
+        <md-nav-item ui-sref="account" ui-sref-active="account" md-nav-click="$ctrl.view='account'" name="account">
           Account
         </md-nav-item>
         <md-button ng-click="$ctrl.testFunc()">
@@ -272,36 +298,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies'])
     </md-content>
     <md-content>
 
-    <div ng-if="$ctrl.view === 'home'">
-      <md-content layout="column" flex>
-        Home component here:
-        <home />
-      </md-content>
-    </div>
-    <div ng-if="$ctrl.view === 'stats'">
-      <md-content layout="column" flex>
-        Stats component here:
-        <stats />
-      </md-content>
-    </div>
-    <div ng-if="$ctrl.view === 'banks'">
-      <md-content layout="column" flex>
-        Banks component here:
-        <banks />
-      </md-content>
-    </div>
-    <div ng-if="$ctrl.view === 'account'">
-      <md-content layout="column" flex>
-        Account component here:
-        <account />
-      </md-content>
-    </div>
-    <div ng-if="$ctrl.view === 'login'">
-      <md-content layout="column" flex>
-        Login component here:
-        <login />
-      </md-content>
-    </div>
+      <ui-view></ui-view>
 
     <md-content>
   `,
