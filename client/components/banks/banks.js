@@ -6,9 +6,7 @@ angular.module('coinsaver')
     template: `
   <div>
       <md-button id="link-btn" class="md-raised md-primary" ng-if="$ctrl.linked===false" ng-click="$ctrl.checkClick()">Link A Bank Account</md-button>
-      <div ng-if="$ctrl.linked===true">
-        <p>Transactions go here</p>
-      </div>
+      <transactions ng-repeat="item in $ctrl.transactions" info="item"/>
   </div>
 `,
   })
@@ -29,7 +27,6 @@ angular.module('coinsaver')
         console.log('plaid client created: public token', publicToken);
         $http.post('/get_access_token', { publicToken })
           .then((res) => {
-            ctrl.linked = true;
             console.log('Successful post to exchange tokens!', res);
 
             // $http.get('/accounts')
@@ -43,7 +40,8 @@ angular.module('coinsaver')
               .then((res) => {
                 console.log('User data:');
                 console.log(res.data);
-                ctrl.transactions = res.data.transactions;
+                ctrl.transactions = res.data;
+                ctrl.linked = true;
               });
           });
       },
@@ -67,7 +65,16 @@ angular.module('coinsaver')
         .then((res) => {
           console.log('Transaction data:');
           console.log(res.data);
-          ctrl.transactions = res.data.transactions;
+          ctrl.transactions = res.data;
         });
     };
+
+    $http.get('/transactions')
+      .then((res) => {
+        console.log('Transaction data:');
+        console.log(res.data);
+        ctrl.transactions = res.data;
+        ctrl.linked = true;
+      });
+
   }).$inject = ['plaid'];
