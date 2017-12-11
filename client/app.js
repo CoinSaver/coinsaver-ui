@@ -83,7 +83,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
                 logwin.user.displayName = result.user.displayName;
                 $http({
                   method: 'POST',
-                  url: '/login',
+                  url: '/#/account',
                   data: logwin.user
                 }).then(function(userData) {
                   logwin.answer(userData.data);
