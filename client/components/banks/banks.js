@@ -4,13 +4,14 @@ angular.module('coinsaver')
     },
     controller: 'BankController',
     template: `
-  <div>
+    <div>
       <md-button id="link-btn" class="md-raised md-primary" ng-if="$ctrl.linked===false" ng-click="$ctrl.checkClick()">Link A Bank Account</md-button>
+      <md-button id="test-btn" class="md-raised md-primary" ng-click="$ctrl.handleTest()">Test button</md-button>
       <transactions ng-repeat="item in $ctrl.transactions" info="item"/>
-  </div>
-`,
+    </div>
+    `,
   })
-  .controller('BankController', function bankControllerFunction($http, User) {
+  .controller('BankController', function bankControllerFunction($http, $mdDialog, User) {
     const ctrl = this;
 
     this.linked = false;
@@ -42,6 +43,23 @@ angular.module('coinsaver')
                 console.log(res.data);
                 ctrl.transactions = res.data;
                 ctrl.linked = true;
+
+                // Opens account selection overlay
+                // $mdDialog.show({
+                //   controller: DialogController,
+                //   templateUrl: '/components/banks/banks.html',
+                //   parent: angular.element(document.body),
+                //   targetEvent: null,
+                //   clickOutsideToClose: true,
+                //   fullscreen: ctrl.customFullscreen // Only for -xs, -sm breakpoints.
+                // })
+                //   .then(function(answer) {
+                //     ctrl.status = 'You said the information was "' + answer + '".';
+                //   }, function() {
+                //     ctrl.status = 'You cancelled the dialog.';
+                //   });
+                ctrl.handleTest();
+
               });
           });
       },
@@ -68,6 +86,46 @@ angular.module('coinsaver')
           ctrl.transactions = res.data;
         });
     };
+
+    this.status = '  ';
+    this.handleTest = (ev) => {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '/components/banks/banks.html',
+        parent: angular.element(document.body),
+        targetEvent: null,
+        clickOutsideToClose: true,
+        locals: {
+          transactions: ctrl.transactions,
+        },
+        fullscreen: ctrl.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function(answer) {
+        ctrl.status = 'You said the information was "' + answer + '".';
+        console.log(ctrl.status);
+      }, function() {
+        ctrl.status = 'You cancelled the dialog.';
+      });
+    };
+
+
+    function DialogController($scope, $mdDialog, transactions) {
+      
+      $scope.transactions = transactions;
+      
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+      
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+      
+      $scope.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
+
+    }
 
     $http.get('/transactions')
       .then((res) => {

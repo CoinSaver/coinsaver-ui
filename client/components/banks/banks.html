@@ -1,0 +1,27 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Please select an account</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <span>We currently only support checking accounts</span>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="column">
+        <div ng-repeat="account in transactions">
+          <md-button class="md-primary" ng-disabled="account.type !== 'checking'" ng-click="answer(account.id)">
+            {{account.name}}
+          </md-button>
+        </div>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
