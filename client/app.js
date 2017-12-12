@@ -253,7 +253,38 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     // ------------------
 
       this.$onInit = () => {
-        // console.log('Controller up!');
+        // Gather all info from cookies we have;
+        const userCookie = $cookies.getObject('mycoinsaveruser');
+
+        if (userCookie){
+          console.log(' theres a user cookie and it is, ', userCookie)
+
+          // THIS WILL BE USED TO REQUEST COINBASE API
+
+          // $http({
+          //   method: 'GET',
+          //   url: '/tokens',
+          //   params: userCookie
+          // }).then(function(userExists) {
+          //   //server should send back list data
+          //   // console.log(userExists.data);
+          //   if (userExists.data) {
+          //     ctrl.isValidUser = true;
+          //     ctrl.displayName = userCookie.displayName;
+          //     ctrl.user = userCookie;
+          //     ctrl.allItineraries = userExists.data.allItineraries;
+          //     ctrl.selectedItinerary = '' + ctrl.allItineraries[0].id;
+          //     ctrl.handleItineraryChange();
+          //     // console.log('logged in ', ctrl.user);
+          //   } else {
+          //     // console.log('user doesn\'t exist on server');
+          //     $cookies.remove('coinsaverapp');
+          //   }
+            
+          // }, function(err) {
+          //   console.log('user auth on localhost failed', err);
+          // });
+        }
       }
     },
 
