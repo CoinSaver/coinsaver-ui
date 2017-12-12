@@ -57,6 +57,12 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         console.log(ctrl.user)
       }
 
+      this.logOut = function(){
+        this.loggedIn = false;
+        this.user = {};
+        $cookies.remove('coinsaveruser')
+      }
+
       // ------------------
       // BEGIN FIREBASE
       // ------------------
@@ -173,7 +179,6 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
               displayName: userData.displayName,
               firebaseId: userData.firebaseId,
             };
-            // ctrl.allItineraries = userData.allItineraries;
             $cookies.putObject('mycoinsaveruser', user);
             $mdDialog.hide(userData);
           };
@@ -258,6 +263,9 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
         if (userCookie){
           console.log(' theres a user cookie and it is, ', userCookie)
+          ctrl.user = userCookie;
+          ctrl.displayName = userCookie.displayName
+          ctrl.loggedIn = true;
 
           // THIS WILL BE USED TO REQUEST COINBASE API
 
@@ -284,6 +292,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           // }, function(err) {
           //   console.log('user auth on localhost failed', err);
           // });
+
         }
       }
     },
@@ -322,6 +331,9 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         <div ng-if="$ctrl.loggedIn === true">
           <md-button>
           Welcome, {{$ctrl.displayName}}
+          </md-button>
+          <md-button ng-click="$ctrl.logOut()" name="logout">
+          [ Log out ]
           </md-button>
         </div>
 
