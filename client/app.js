@@ -174,7 +174,6 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
           logwin.answer = function (userData) {
             console.log('Succesfully signed in: ', userData);
-            //store user cookie
             var user = {
               displayName: userData.displayName,
               firebaseId: userData.firebaseId,
@@ -267,7 +266,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           ctrl.displayName = userCookie.displayName
           ctrl.loggedIn = true;
 
-          // THIS WILL BE USED TO REQUEST COINBASE API
+          // <!-- This will be used to request coinbase API access -->
 
           // $http({
           //   method: 'GET',
@@ -338,12 +337,11 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         </div>
 
       </md-nav-bar>
-    </md-content>
-    <md-content>
 
+    <!-- Ui Router Body -->
       <ui-view></ui-view>
 
-    <md-content>
+    </md-content>
   `,
   });
 
