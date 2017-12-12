@@ -57,6 +57,12 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         console.log(ctrl.user)
       }
 
+      this.logOut = function(){
+        this.loggedIn = false;
+        this.user = {};
+        $cookies.remove('coinsaveruser')
+      }
+
       // ------------------
       // BEGIN FIREBASE
       // ------------------
@@ -83,7 +89,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
                 logwin.user.displayName = result.user.displayName;
                 $http({
                   method: 'POST',
-                  url: '/login',
+                  url: '/#/account',
                   data: logwin.user
                 }).then(function(userData) {
                   logwin.answer(userData.data);
@@ -168,12 +174,10 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
           logwin.answer = function (userData) {
             console.log('Succesfully signed in: ', userData);
-            //store user cookie
             var user = {
               displayName: userData.displayName,
               firebaseId: userData.firebaseId,
             };
-            // ctrl.allItineraries = userData.allItineraries;
             $cookies.putObject('mycoinsaveruser', user);
             $mdDialog.hide(userData);
           };
@@ -253,7 +257,42 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     // ------------------
 
       this.$onInit = () => {
-        // console.log('Controller up!');
+        // Gather all info from cookies we have;
+        const userCookie = $cookies.getObject('mycoinsaveruser');
+
+        if (userCookie){
+          console.log(' theres a user cookie and it is, ', userCookie)
+          ctrl.user = userCookie;
+          ctrl.displayName = userCookie.displayName
+          ctrl.loggedIn = true;
+
+          // <!-- This will be used to request coinbase API access -->
+
+          // $http({
+          //   method: 'GET',
+          //   url: '/tokens',
+          //   params: userCookie
+          // }).then(function(userExists) {
+          //   //server should send back list data
+          //   // console.log(userExists.data);
+          //   if (userExists.data) {
+          //     ctrl.isValidUser = true;
+          //     ctrl.displayName = userCookie.displayName;
+          //     ctrl.user = userCookie;
+          //     ctrl.allItineraries = userExists.data.allItineraries;
+          //     ctrl.selectedItinerary = '' + ctrl.allItineraries[0].id;
+          //     ctrl.handleItineraryChange();
+          //     // console.log('logged in ', ctrl.user);
+          //   } else {
+          //     // console.log('user doesn\'t exist on server');
+          //     $cookies.remove('coinsaverapp');
+          //   }
+            
+          // }, function(err) {
+          //   console.log('user auth on localhost failed', err);
+          // });
+
+        }
       }
     },
 
@@ -292,15 +331,17 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           <md-button>
           Welcome, {{$ctrl.displayName}}
           </md-button>
+          <md-button ng-click="$ctrl.logOut()" name="logout">
+          [ Log out ]
+          </md-button>
         </div>
 
       </md-nav-bar>
-    </md-content>
-    <md-content>
 
+    <!-- Ui Router Body -->
       <ui-view></ui-view>
 
-    <md-content>
+    </md-content>
   `,
   });
 
