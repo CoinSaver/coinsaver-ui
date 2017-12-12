@@ -6,7 +6,6 @@ angular.module('coinsaver')
     template: `
     <div>
       <md-button id="link-btn" class="md-raised md-primary" ng-if="$ctrl.linked===false" ng-click="$ctrl.checkClick()">Link A Bank Account</md-button>
-      <md-button id="test-btn" class="md-raised md-primary" ng-click="$ctrl.handleTest()">Test button</md-button>
       <transactions ng-repeat="item in $ctrl.transactions" info="item"/>
     </div>
     `,
@@ -30,36 +29,12 @@ angular.module('coinsaver')
           .then((res) => {
             console.log('Successful post to exchange tokens!', res);
 
-            // $http.get('/accounts')
-            //   .then((res) => {
-            //     console.log('Account data:');
-            //     console.log(res.data.accounts);
-            //     ctrl.accounts = res.data.accounts;
-            //   });
-
             $http.get('/transactions')
               .then((res) => {
                 console.log('User data:');
                 console.log(res.data);
-                ctrl.transactions = res.data;
-                ctrl.linked = true;
-
-                // Opens account selection overlay
-                // $mdDialog.show({
-                //   controller: DialogController,
-                //   templateUrl: '/components/banks/banks.html',
-                //   parent: angular.element(document.body),
-                //   targetEvent: null,
-                //   clickOutsideToClose: true,
-                //   fullscreen: ctrl.customFullscreen // Only for -xs, -sm breakpoints.
-                // })
-                //   .then(function(answer) {
-                //     ctrl.status = 'You said the information was "' + answer + '".';
-                //   }, function() {
-                //     ctrl.status = 'You cancelled the dialog.';
-                //   });
-                ctrl.handleTest();
-
+                ctrl.accounts = res.data;
+                ctrl.handleChooseAccount();
               });
           });
       },
@@ -88,51 +63,67 @@ angular.module('coinsaver')
     };
 
     this.status = '  ';
-    this.handleTest = (ev) => {
+    this.handleChooseAccount = (ev) => {
       $mdDialog.show({
         controller: DialogController,
         templateUrl: '/components/banks/banks.html',
         parent: angular.element(document.body),
         targetEvent: null,
-        clickOutsideToClose: true,
+        clickOutsideToClose: false,
+        escapeToClose: false,
         locals: {
-          transactions: ctrl.transactions,
+          accounts: ctrl.accounts,
         },
-        fullscreen: ctrl.customFullscreen // Only for -xs, -sm breakpoints.
+        fullscreen: ctrl.customFullscreen, // Only for -xs, -sm breakpoints.
       })
-      .then(function(answer) {
-        ctrl.status = 'You said the information was "' + answer + '".';
-        console.log(ctrl.status);
-      }, function() {
-        ctrl.status = 'You cancelled the dialog.';
-      });
+        .then((answer) => {
+          ctrl.transactions.push(ctrl.accounts[parseInt(answer)]);
+          ctrl.linked = true;
+        }, () => {
+          ctrl.linked = false;
+          ctrl.accounts = [];
+          ctrl.transactions = [];
+        });
     };
 
 
-    function DialogController($scope, $mdDialog, transactions) {
-      
-      $scope.transactions = transactions;
-      
-      $scope.hide = function() {
+    function DialogController($scope, accounts) {
+      $scope.accounts = accounts;
+
+      $scope.currentId = '';
+
+      $scope.hide = () => {
         $mdDialog.hide();
       };
-      
-      $scope.cancel = function() {
+
+      $scope.cancel = () => {
         $mdDialog.cancel();
       };
-      
-      $scope.answer = function(answer) {
+
+      $scope.answer = (answer) => {
         $mdDialog.hide(answer);
       };
 
+      $scope.selectedIndex;
+
+      $scope.setSelection = (index, name) => {
+        $scope.selectedIndex = index;
+        $scope.selectedItem = name;
+      };
+
+      $scope.selectedItem = 'Select an account';
+
+      $scope.getSelectedText = () => {
+        return $scope.selectedItem;
+      };
     }
 
+    // *Leave commented out for testing purposes. Links account
     $http.get('/transactions')
       .then((res) => {
         console.log('Transaction data:');
         console.log(res.data);
-        ctrl.transactions = res.data;
-        ctrl.linked = true;
+        ctrl.accounts = res.data;
+        ctrl.handleChooseAccount();
       });
-
   }).$inject = ['plaid'];

@@ -12,16 +12,31 @@
 
     <md-dialog-content>
       <div class="md-dialog-content">
-        <span>We currently only support checking accounts</span>
+        <div ng-if="accounts.length===0">
+          <h3>You don't have any accounts we can watch at this bank</h3>
+          <h4>Please choose a different bank</h4>
+        </div>
+        <div ng-if="accounts.length>0">
+          <h1 class="md-title">Confirm a checking account</h1>
+          <div layout="row">
+            <md-input-container>
+              <label>Checking accounts</label>
+                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+                  <md-optgroup label="accounts">
+                    <md-option ng-click="setSelection($index, account.name)" ng-value="account.name" ng-repeat="account in accounts track by $index">
+                      {{account.name}}
+                    </md-option>
+                  </md-optgroup>
+                </md-select>
+            </md-input-container>
+          </div>
+        </div>
       </div>
     </md-dialog-content>
 
     <md-dialog-actions layout="column">
-        <div ng-repeat="account in transactions">
-          <md-button class="md-primary" ng-disabled="account.type !== 'checking'" ng-click="answer(account.id)">
-            {{account.name}}
-          </md-button>
-        </div>
+      <md-button ng-if="accounts.length>0" class="md-primary" ng-disabled="selectedIndex === undefined" ng-click="answer(selectedIndex)">Confirm</md-button>
+      <md-button class="md-warn" ng-click="cancel()">cancel</md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>
