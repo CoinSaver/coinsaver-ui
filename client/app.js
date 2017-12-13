@@ -33,8 +33,18 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     const accountState = {
       name: 'account',
       url: '/account',
+<<<<<<< HEAD
       template: '<account />',
     };
+=======
+      template: '<account />'
+    }
+    var coinState = {
+      name: 'coin',
+      url: '/?code',
+      template: '<account />'
+    }
+>>>>>>> Coinbase API connected, able to access coinebase client.
     $stateProvider.state(homeState);
     $stateProvider.state(statsState);
     $stateProvider.state(banksState);
