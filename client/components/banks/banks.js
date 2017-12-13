@@ -6,7 +6,7 @@ angular.module('coinsaver')
     template: `
     <div>
       <md-button id="link-btn" class="md-raised md-primary" ng-if="$ctrl.linked===false" ng-click="$ctrl.checkClick()">Link A Bank Account</md-button>
-      <transactions ng-if="$ctrl.linked===true" info="$ctrl.transactions[0]"/>
+      <transactions ng-if="$ctrl.linked===true" info="$ctrl.transactions[0]" delink="$ctrl.delink()"/>
     </div>
     `,
   })
@@ -43,6 +43,12 @@ angular.module('coinsaver')
     this.checkClick = () => {
       this.handler.open();
     };
+
+    this.delink = () => {
+      this.linked = false;
+      this.accounts = [];
+      this.transactions = [];
+    }
 
     this.getAccountHandler = () => {
       $http.get('/accounts')

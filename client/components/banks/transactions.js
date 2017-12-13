@@ -2,6 +2,7 @@ angular.module('coinsaver')
   .component('transactions', {
     bindings: {
       info: '<',
+      delink: '&',
     },
     controller: function () {
       const ctrl = this;
@@ -15,8 +16,9 @@ angular.module('coinsaver')
 
       <span style="font-size: 80%;">Uninvested change: {{$ctrl.info.roundSum | currency}}</span>
 
-      <md-button class="md-icon-button" aria-label="More">
+      <md-button class="md-icon-button" aria-label="More" ng-click="$ctrl.delink()">
         <md-icon>highlight_off</md-icon>
+        <md-tooltip md-direction="bottom">Disconnect from CoinSaver</md-tooltip>
       </md-button>
     </div>
   </md-toolbar>
