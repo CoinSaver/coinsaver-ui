@@ -1,49 +1,47 @@
 angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router'])
   .config(($mdThemingProvider) => {
     $mdThemingProvider.theme('default')
-    .dark()
-    .primaryPalette('light-green', {
-      'default': '400', // by default use shade 400 from the pink palette for primary intentions
-      'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
-      'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
-      'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
-    })
+      .dark()
+      .primaryPalette('light-green', {
+        default: '400', // by default use shade 400 from the pink palette for primary intentions
+        'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
+        'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
+        'hue-3': 'A100', // use shade A100 for the <code>md-hue-3</code> class
+      })
     // If you specify less than all of the keys, it will inherit from the
     // default shades
-    .accentPalette('green', {
-      'default': '200' // use shade 200 for default, and keep all other shades the same
-    });
+      .accentPalette('green', {
+        default: '200', // use shade 200 for default, and keep all other shades the same
+      });
   })
-  .config(function($stateProvider) {
-    var homeState = {
+  .config(($stateProvider) => {
+    const homeState = {
       name: 'home',
       url: '/',
-      template: '<home />'
-    }
-    var statsState = {
+      template: '<home />',
+    };
+    const statsState = {
       name: 'stats',
       url: '/stats',
-      template: '<stats />'
-    }
-    var banksState = {
+      template: '<stats />',
+    };
+    const banksState = {
       name: 'banks',
       url: '/banks',
-      template: '<banks />'
-    }
-    var accountState = {
+      template: '<banks />',
+    };
+    const accountState = {
       name: 'account',
       url: '/account',
-      template: '<account />'
-    }
+      template: '<account />',
+    };
     $stateProvider.state(homeState);
     $stateProvider.state(statsState);
     $stateProvider.state(banksState);
     $stateProvider.state(accountState);
   })
-
   .component('myApp', {
     controller($mdDialog, $http, $cookies) {
-
       const ctrl = this;
 
       this.loggedIn = false;
@@ -51,24 +49,24 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
       this.view = 'home';
 
-      this.testFunc = function(){
-        console.log('The test func has been clicked,')
-        console.log('The current user data is; ')
-        console.log(ctrl.user)
-      }
+      this.testFunc = function () {
+        console.log('The test func has been clicked,');
+        console.log('The current user data is; ');
+        console.log(ctrl.user);
+      };
 
-      this.logOut = function(){
+      this.logOut = function () {
         this.loggedIn = false;
         this.user = {};
-        $cookies.remove('coinsaveruser')
-      }
+        $cookies.remove('coinsaveruser');
+      };
 
       // ------------------
       // BEGIN FIREBASE
       // ------------------
 
       this.openLoginDialog = (event, loginType) => {
-        var loginWindow = function($mdDialog, $http, Auth, $cookies) {
+        const loginWindow = function ($mdDialog, $http, Auth, $cookies) {
           const logwin = this;
 
           this.loginType = loginType;
@@ -82,38 +80,38 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           logwin.handleSocialLogin = (website) => {
             logwin.showProgress = true;
             Auth.$signInWithPopup(website)
-              .then(function(result) {
-                console.log('Signed into ' + website + '  as: ' + result.user);
+              .then((result) => {
+                console.log(`Signed into ${website}  as: ${result.user}`);
                 logwin.user.firebaseId = result.user.uid;
                 logwin.user.accountInfo = result.user;
                 logwin.user.displayName = result.user.displayName;
                 $http({
                   method: 'POST',
                   url: '/#/account',
-                  data: logwin.user
-                }).then(function(userData) {
+                  data: logwin.user,
+                }).then((userData) => {
                   logwin.answer(userData.data);
                   logwin.showProgress = false;
-                }, function(err) {
-                  console.log(website + ' auth on localhost failed', err);
+                }, (err) => {
+                  console.log(`${website} auth on localhost failed`, err);
                 });
                 logwin.answer(logwin.user);
-              }).catch(function(error) {
+              }).catch((error) => {
                 console.error('Authentication failed:', error);
               });
           };
 
           logwin.handleGoogleLogin = () => {
-            logwin.showProgress = true;            
-            logwin.handleSocialLogin('google');            
+            logwin.showProgress = true;
+            logwin.handleSocialLogin('google');
           };
 
           logwin.createUser = (callback) => {
             Auth.$createUserWithEmailAndPassword(logwin.email, logwin.password)
-              .then(function(firebaseUser) {
+              .then((firebaseUser) => {
                 // console.log('user created ', firebaseUser);
                 callback(true);
-              }).catch(function(error) {
+              }).catch((error) => {
                 // console.log('error creating', error);
                 callback(false);
               });
@@ -121,13 +119,13 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
           logwin.loginUser = (callback) => {
             Auth.$signInWithEmailAndPassword(logwin.email, logwin.password)
-              .then(function(firebaseUser) {
+              .then((firebaseUser) => {
                 logwin.user.firebaseId = firebaseUser.uid;
                 logwin.user.accountInfo = firebaseUser;
                 logwin.user.displayName = logwin.displayName;
                 // console.log('user logged in ', logwin.user.displayName);
                 callback(logwin.user);
-              }).catch(function(error) {
+              }).catch((error) => {
                 callback(false);
                 console.log('login error ', error);
               });
@@ -135,30 +133,30 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
           logwin.handleLoginButton = (displayName, password) => {
             if (logwin.loginType === 'signup') {
-              logwin.createUser(function(isCreated) {
+              logwin.createUser((isCreated) => {
                 if (isCreated) {
                   logwin.password = '';
                   logwin.loginType = 'login';
                 } else {
-                  console.log('user creation failed, look around')
+                  console.log('user creation failed, look around');
                 }
               });
             } else {
-              logwin.loginUser(function(signedInUser) {
+              logwin.loginUser((signedInUser) => {
                 if (signedInUser) {
                   logwin.showProgress = true;
                   $http({
                     method: 'POST',
                     url: '/login',
-                    data: signedInUser
-                  }).then(function(userData) {
+                    data: signedInUser,
+                  }).then((userData) => {
                     logwin.answer(userData.data);
-                    logwin.showProgress = false;                    
-                  }, function(err) {
+                    logwin.showProgress = false;
+                  }, (err) => {
                     console.log('auth error: ', err);
                   });
                 } else {
-                  console.log('something went wrong in authentication')
+                  console.log('something went wrong in authentication');
                 }
               });
             }
@@ -174,7 +172,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
           logwin.answer = function (userData) {
             console.log('Succesfully signed in: ', userData);
-            var user = {
+            const user = {
               displayName: userData.displayName,
               firebaseId: userData.firebaseId,
             };
@@ -183,7 +181,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           };
         };
 
-        //shows the dialog directive with the above controller
+        // shows the dialog directive with the above controller
         $mdDialog.show({
           controller: loginWindow,
           controllerAs: 'login',
@@ -241,29 +239,29 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           parent: angular.element(document.body),
           clickOutsideToClose: true,
         })
-          .then(function (user) {
+          .then((user) => {
             // console.log('answered', user);
             ctrl.user = user;
             ctrl.displayName = user.displayName;
             ctrl.isValidUser = true;
             ctrl.loggedIn = true;
-          }, function () {
+          }, () => {
             // console.log('canceled');
           });
       };
 
-    // ------------------
-    // END FIREBASE
-    // ------------------
+      // ------------------
+      // END FIREBASE
+      // ------------------
 
       this.$onInit = () => {
         // Gather all info from cookies we have;
         const userCookie = $cookies.getObject('mycoinsaveruser');
 
-        if (userCookie){
-          console.log(' theres a user cookie and it is, ', userCookie)
+        if (userCookie) {
+          console.log(' theres a user cookie and it is, ', userCookie);
           ctrl.user = userCookie;
-          ctrl.displayName = userCookie.displayName
+          ctrl.displayName = userCookie.displayName;
           ctrl.loggedIn = true;
 
           // <!-- This will be used to request coinbase API access -->
@@ -287,13 +285,12 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           //     // console.log('user doesn\'t exist on server');
           //     $cookies.remove('coinsaverapp');
           //   }
-            
+
           // }, function(err) {
           //   console.log('user auth on localhost failed', err);
           // });
-
         }
-      }
+      };
     },
 
     template:

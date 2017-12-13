@@ -1,0 +1,42 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Please select an account</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div ng-if="accounts.length===0">
+          <h3>You don't have any accounts we can watch at this bank</h3>
+          <h4>Please choose a different bank</h4>
+        </div>
+        <div ng-if="accounts.length>0">
+          <h1 class="md-title">Confirm a checking account</h1>
+          <div layout="row">
+            <md-input-container>
+              <label>Checking accounts</label>
+                <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+                  <md-optgroup label="accounts">
+                    <md-option ng-click="setSelection($index, account.name)" ng-value="account.name" ng-repeat="account in accounts track by $index">
+                      {{account.name}}
+                    </md-option>
+                  </md-optgroup>
+                </md-select>
+            </md-input-container>
+          </div>
+        </div>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="column">
+      <md-button ng-if="accounts.length>0" class="md-primary" ng-disabled="selectedIndex === undefined" ng-click="answer(selectedIndex)">Confirm</md-button>
+      <md-button class="md-warn" ng-click="cancel()">cancel</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -1,0 +1,164 @@
+[
+  {
+    "id": "NkA7Mg5aDDCRDkNEwoZDtwx6PaA8J8TLm1R4y",
+    "name": "Plaid Checking",
+    "type": "checking",
+    "transactions": [
+      {
+        "amount": 6.33,
+        "round": 0.6699999999999999,
+        "date": "2017-12-10",
+        "location": {
+          "city": null
+        },
+        "name": "Uber 072515 SF**POOL**"
+      },
+      {
+        "amount": 5.4,
+        "round": 0.5999999999999996,
+        "date": "2017-11-27",
+        "location": {
+          "city": null
+        },
+        "name": "Uber 063015 SF**POOL**"
+      },
+      {
+        "amount": -500,
+        "round": 0,
+        "date": "2017-11-25",
+        "location": {
+          "city": null
+        },
+        "name": "United Airlines"
+      },
+      {
+        "amount": 12,
+        "round": 0,
+        "date": "2017-11-24",
+        "location": {
+          "city": null
+        },
+        "name": "McDonald's"
+      },
+      {
+        "amount": 4.33,
+        "round": 0.6699999999999999,
+        "date": "2017-11-24",
+        "location": {
+          "city": null
+        },
+        "name": "Starbucks"
+      },
+      {
+        "amount": 89.4,
+        "round": 0.5999999999999943,
+        "date": "2017-11-23",
+        "location": {
+          "city": null
+        },
+        "name": "SparkFun"
+      }
+    ],
+    "roundSum": 2.539999999999994,
+    "totalSum": -382.53999999999996
+  },
+  {
+    "id": "PnmQjo5NDDFQDxNpbnvDtgwV7aoADAiEZ4qPX",
+    "name": "Plaid Saving",
+    "type": "savings",
+    "transactions": [
+      {
+        "amount": 25,
+        "round": 0,
+        "date": "2017-11-27",
+        "location": {
+          "city": null
+        },
+        "name": "CREDIT CARD 3333 PAYMENT *//"
+      },
+      {
+        "amount": -4.22,
+        "round": 0.21999999999999975,
+        "date": "2017-11-22",
+        "location": {
+          "city": null
+        },
+        "name": "INTRST PYMNT"
+      }
+    ],
+    "roundSum": 0,
+    "totalSum": 20.78
+  },
+  {
+    "id": "jQwJkPlrnnio4zV19bB4uDb3Qexl4lUoq3nVZ",
+    "name": "Plaid CD",
+    "type": "cd",
+    "transactions": [
+      {
+        "amount": 1000,
+        "round": 0,
+        "date": "2017-11-26",
+        "location": {
+          "city": null
+        },
+        "name": "CD DEPOSIT .INITIAL."
+      }
+    ],
+    "roundSum": 0,
+    "totalSum": 1000
+  },
+  {
+    "id": "7z8aLlEyDDtykMGov8mkiypvjAPgZgC4LGDo1",
+    "name": "Plaid Credit Card",
+    "type": "credit card",
+    "transactions": [
+      {
+        "amount": 500,
+        "round": 0,
+        "date": "2017-12-07",
+        "location": {
+          "city": null
+        },
+        "name": "Tectra Inc"
+      },
+      {
+        "amount": 500,
+        "round": 0,
+        "date": "2017-12-06",
+        "location": {
+          "city": null
+        },
+        "name": "KFC"
+      },
+      {
+        "amount": 500,
+        "round": 0,
+        "date": "2017-12-06",
+        "location": {
+          "city": null
+        },
+        "name": "Madison Bicycle Shop"
+      },
+      {
+        "amount": 78.5,
+        "round": 0.5,
+        "date": "2017-11-25",
+        "location": {
+          "city": null
+        },
+        "name": "Touchstone Climbing"
+      },
+      {
+        "amount": 500,
+        "round": 0,
+        "date": "2017-11-12",
+        "location": {
+          "city": null
+        },
+        "name": "United Airlines"
+      }
+    ],
+    "roundSum": 0.5,
+    "totalSum": 2078.5
+  }
+]
