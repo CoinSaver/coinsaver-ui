@@ -35,6 +35,11 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       url: '/account',
       template: '<account />'
     }
+    var coinState = {
+      name: 'coin',
+      url: '/?code',
+      template: '<account />'
+    }
     $stateProvider.state(homeState);
     $stateProvider.state(statsState);
     $stateProvider.state(banksState);
