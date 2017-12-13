@@ -4,6 +4,8 @@ angular.module('coinsaver')
   },
   controller($http, $mdDialog) {
 
+    this.accounts = [];
+
     this.getCoinapi = function() {
       console.log('ding')
       const getRequest = () => {
@@ -29,7 +31,7 @@ angular.module('coinsaver')
       
       }
       // var coinlink = window.open("https://www.coinbase.com/oauth/authorize?client_id=f9d7e163baa378a50f4c65602294b21b59a8ec5043e2f17eefcf52cd401d5e1d&redirect_uri=http%3A%2F%2Flocalhost%3A9001&response_type=code&scope=wallet%3Auser%3Aread&account=all", "Coinbase Connection", "width=600")
-      window.location.replace("https://www.coinbase.com/oauth/authorize?client_id=f9d7e163baa378a50f4c65602294b21b59a8ec5043e2f17eefcf52cd401d5e1d&redirect_uri=http%3A%2F%2Flocalhost%3A9001&response_type=code&scope=wallet%3Auser%3Aread&account=all")
+      window.location.replace("https://www.coinbase.com/oauth/authorize?client_id=f9d7e163baa378a50f4c65602294b21b59a8ec5043e2f17eefcf52cd401d5e1d&redirect_uri=http%3A%2F%2Flocalhost%3A9001%2Fverifybase&response_type=code&scope=wallet%3Aaccounts%3Aread&account=all")
       // getRequest();
     };
     
@@ -41,7 +43,9 @@ angular.module('coinsaver')
   <div>
     This line is written in the account.js component;
 
-    This button does everything:
+    <p>Click here to tie your ocinbase account:</p>
+
+    Go:
 
     <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.getCoinapi()">
       The Work Button
