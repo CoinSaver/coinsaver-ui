@@ -20,7 +20,8 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-var emailList = ['coinsaverbot@gmail.com', 'codeslingbot@gmail.com'];
+// var emailList = ['coinsaverbot@gmail.com', 'codeslingbot@gmail.com'];
+var emailList = ['coinsaverbot@gmail.com'];
 var ourMessage = 'This is the first email from CoinSaver, hope it goes through!';
 console.log('Button was clicked - server TEXT: ', ourMessage);
 var mailOptions = {
@@ -30,13 +31,14 @@ var mailOptions = {
   // text: `Users input code: ${'\n \n'} ${ourMessage}`
   subject: 'Greetings from CodeslingBot',
   text: `${ourMessage}`,
-  html: '<b>Html Test</b>'
+  // html: '<b>Html Test</b>'
 };
-transporter.sendMail(mailOptions, function(error, info) {
-  if (error) {
-    console.log('Your CodeslingEmail Error: ', error);
-  } else {
-    console.log('CodeSling Email sent: ' + info.response);
-  }
-});
+
+// transporter.sendMail(mailOptions, function(error, info) {
+//   if (error) {
+//     console.log('Your CodeslingEmail Error: ', error);
+//   } else {
+//     console.log('CodeSling Email sent: ' + info.response);
+//   }
+// });
 console.log('IN END of /send event');
