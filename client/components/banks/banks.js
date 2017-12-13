@@ -6,7 +6,7 @@ angular.module('coinsaver')
     template: `
     <div>
       <md-button id="link-btn" class="md-raised md-primary" ng-if="$ctrl.linked===false" ng-click="$ctrl.checkClick()">Link A Bank Account</md-button>
-      <transactions ng-repeat="item in $ctrl.transactions" info="item"/>
+      <transactions ng-if="$ctrl.linked===true" info="$ctrl.transactions[0]"/>
     </div>
     `,
   })
@@ -119,11 +119,11 @@ angular.module('coinsaver')
     }
 
     // *Leave commented out for testing purposes. Links account
-    $http.get('/transactions')
-      .then((res) => {
-        console.log('Transaction data:');
-        console.log(res.data);
-        ctrl.accounts = res.data;
-        ctrl.handleChooseAccount();
-      });
+    // $http.get('/transactions')
+    //   .then((res) => {
+    //     console.log('Transaction data:');
+    //     console.log(res.data);
+    //     ctrl.accounts = res.data;
+    //     ctrl.handleChooseAccount();
+    //   });
   }).$inject = ['plaid'];
