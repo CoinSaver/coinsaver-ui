@@ -50,7 +50,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   $stateProvider.state(settingsState);
 })
 .component('myApp', {
-  controller($http, $cookies, Auth) {
+  controller($http, $cookies, $firebaseObject, Auth) {
     const ctrl = this;
 
     this.loggedIn = false;
@@ -81,6 +81,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
             ctrl.user.accountInfo = result.user;
             ctrl.user.displayName = result.user.displayName;
             ctrl.loggedIn = true;
+            ctrl.checkfbUser();
           })
     }
 
@@ -88,9 +89,51 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     // BEGIN FIREBASE
     // ------------------
 
-    this.newUserProfile = () => {
-      
+
+    
+    this.checkfbUser = () => {
+
+      console.log('checking if this user exists...')
+
+      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/userinfo');
+
+      ref.once("value", snapshot => {
+        const user = snapshot.val();
+        if (user){
+          console.log('THIS USER ALREADY EXISTS, it is:', snapshot.val());
+        } else {
+          ctrl.writefbUser('works','true')
+        }
+      })
+
     }
+
+
+    this.writefbUser = function (property, value) {
+      
+      var currentuser = Auth.$getAuth()
+
+      console.log('writing a new user for you now, ')
+      console.log('here are your items to strip off of: ', )
+
+      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/userinfo');
+      var obj = {};
+
+      obj[property] = value;
+      obj.name = currentuser.displayName;
+      obj.email = '';
+      obj.signupdate = '';
+      obj.name = 
+
+      ref.set(obj)
+
+      ref.on('value', function(snapshot){
+        console.log('the new profile is: ', snapshot.val())
+        }, function (errorObject){
+        console.log('read failed: ', errorObject)
+      })
+      
+    } 
 
     // ------------------
     // END FIREBASE
