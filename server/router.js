@@ -37,6 +37,8 @@ router.get('/account', (req, res) => {
   let usercode = req._parsedOriginalUrl.query.split('=')[1];
   res.redirect('/#/account/' + usercode)
   
+  } else {
+    res.redirect('/#/account/')
   }
 
 })
