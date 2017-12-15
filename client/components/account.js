@@ -25,9 +25,10 @@ angular.module('coinsaver')
 
       console.log('checking firebase for your data now')
 
-      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/bank');
+      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/userinfo');
       var obj = {};
-      obj[property] = 'bank info';
+      obj['name'] = 'mike';
+      obj['email'] = 'f u @ g mail .com';
 
       ref.set(obj)
 
