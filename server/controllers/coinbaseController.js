@@ -16,13 +16,16 @@ var getClient = function(accessTokenTemp, refreshTokenTemp){
     accounts.forEach(function(acct) {
       console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
     });
+
+    // set something = accounts
+  
   });
 }
 
 var getAccessToken = function(usercode){
   console.log('working on code: ', usercode)
 
-  axios.post("https://api.coinbase.com/oauth/token", {
+  return axios.post("https://api.coinbase.com/oauth/token", {
     grant_type: 'authorization_code',
     code: usercode,
     client_id: COINBASE_KEYS.COINBASE_CLIENT_ID,
@@ -30,8 +33,9 @@ var getAccessToken = function(usercode){
     redirect_uri: 'http://localhost:9001/verifybase',
   })
   .then(function (response) {
-    console.log(response.data);
-    getClient(response.data.access_token, response.data.refresh_token)
+    console.log('the response data is:', response.data);
+    return response.data
+    // getClient(response.data.access_token, response.data.refresh_token)
   })
   .catch(function (error) {
     console.log('fail')
