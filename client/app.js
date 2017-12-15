@@ -32,8 +32,11 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     };
     const accountState = {
       name: 'account',
-      url: '/account',
+      url: '/account/:myParam',
       template: '<account />',
+      controller: function ($stateParams) {
+        console.log($stateParams)
+      }
     };
     $stateProvider.state(homeState);
     $stateProvider.state(statsState);
@@ -307,7 +310,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         <md-nav-item ui-sref="banks" ui-sref-active="banks" md-nav-click="$ctrl.view='banks'" name="banks">
           Banks
         </md-nav-item>
-        <md-nav-item ui-sref="account" ui-sref-active="account" md-nav-click="$ctrl.view='account'" name="account">
+        <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-click="$ctrl.view='account'" name="account">
           Account
         </md-nav-item>
         <md-button ng-click="$ctrl.testFunc()">
