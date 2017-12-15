@@ -3,7 +3,7 @@ angular.module('coinsaver')
   bindings: {
 
   },
-  controller($http, $mdDialog, $cookies) {
+  controller($http, $mdDialog, $cookies, $firebaseObject, Auth) {
 
     let coinacct = this;
 
@@ -14,7 +14,7 @@ angular.module('coinsaver')
 
     this.$onInit = () => {
 
-      console.log(window.location.href.length)
+      // console.log(window.location.href.length)
       if (window.location.href.length === 96 && window.location.href.includes('/account/')){
         console.log('going into code processing logic!!')
         var currenturl = window.location.href.slice(window.location.href.length-64, window.location.href.length)
@@ -24,10 +24,30 @@ angular.module('coinsaver')
 
       userCookie = $cookies.getObject('mycoinsaveruser'); 
       if (userCookie) {
-        console.log(' rendering account cookies');
+        console.log(' rendering account cookies for: ', userCookie);
         coinacct.user = userCookie;
         coinacct.displayName = userCookie.displayName;
-        coinacct.loggedIn = true; 
+        coinacct.loggedIn = true;
+      }
+
+      if (coinacct.loggedIn === true){
+        var ref = firebase.database().ref('users/' + coinacct.user.firebaseId);
+        var obj = {code: coinacct.user.firebaseId}
+
+        ref.push(obj)
+
+        ref.on('value', function(snapshot){
+          console.log(snapshot.val())
+          }, function (errorObject){
+          console.log('read failed: ', errorObject)
+        })
+
+        // userRef.on
+        // var profile = $firebaseObject(ref.child('coinacct.user.firebaseId'))
+        console.log('Current auth is: ', Auth.$getAuth())
+        setTimeout(function(){ 
+          console.log('Current auth2 is: ', Auth.$getAuth()); 
+        }, 3000);
       }
       
     }
@@ -39,21 +59,8 @@ angular.module('coinsaver')
       });
     }
 
-
-    this.getCoinacct1 = (code) => {
-      console.log('getting a new Coinacct')    
-        $http({
-        method: 'POST',
-        url: 'http://localhost:9001/verifybase',
-        data: {
-          code: code
-        }
-      }).then((response) =>{
-        console.log('Get /verified success, ', response)
-    //some action with response.data
-      }), (err) => {
-        console.log('Get /verified err', err)
-      }
+    this.testAuth = () => {
+      console.log('Current auth is: ', Auth.$getAuth())
     }
 
     this.getCoinapi = function() {
@@ -63,6 +70,12 @@ angular.module('coinsaver')
       // getRequest();
     };
     
+    this.writeUserData= function(userId, property, value) {
+      firebase.database().ref('users/' + userId).set({
+        property: value,
+      })
+    };
+
   },
 
   //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -77,6 +90,11 @@ angular.module('coinsaver')
 
     <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.getCoinapi()">
       The Work Button
+    </md-button>
+
+
+    <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.testAuth()">
+    The Work Button 2
     </md-button>
 
   </div>
@@ -107,4 +125,23 @@ angular.module('coinsaver')
     //     })
       
     //   }
+
+
+    // this.getCoinacctB = (code) => {
+    //   console.log('getting a new Coinacct')    
+    //     $http({
+    //     method: 'POST',
+    //     url: 'http://localhost:9001/verifybase',
+    //     data: {
+    //       code: code
+    //     }
+    //   }).then((response) =>{
+    //     console.log('Get /verified success, ', response)
+    // //some action with response.data
+    //   }), (err) => {
+    //     console.log('Get /verified err', err)
+    //   }
+    // }
+
+
     //  ===== END LOGIC =====
