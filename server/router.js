@@ -31,11 +31,13 @@ router.post('/verifybase', (req, res) => {
 })
 
 router.get('/account', (req, res) => {
+  
+  if (req._parsedOriginalUrl.length){
 
   let usercode = req._parsedOriginalUrl.query.split('=')[1];
-  
   res.redirect('/#/account/' + usercode)
   
+  }
 })
 
 router.get('/verified', (req, res) =>{
