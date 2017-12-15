@@ -24,20 +24,21 @@ angular.module('coinsaver')
 
       userCookie = $cookies.getObject('mycoinsaveruser'); 
       if (userCookie) {
-        console.log(' rendering account cookies for: ', userCookie);
+        // console.log('checking for your cookies and they are: ', userCookie);
         coinacct.user = userCookie;
         coinacct.displayName = userCookie.displayName;
         coinacct.loggedIn = true;
       }
 
       if (coinacct.loggedIn === true){
+        console.log('checking firebase for your data now')
         var ref = firebase.database().ref('users/' + coinacct.user.firebaseId);
         var obj = {code: coinacct.user.firebaseId}
 
-        ref.push(obj)
+        ref.set(obj)
 
         ref.on('value', function(snapshot){
-          console.log(snapshot.val())
+          console.log('the snapshot value is: ', snapshot.val())
           }, function (errorObject){
           console.log('read failed: ', errorObject)
         })
