@@ -38,10 +38,16 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         // console.log($stateParams)
       }
     };
+    const settingsState = {
+      name: 'settings',
+      url: '/settings',
+      template: '<settings />',
+    };
     $stateProvider.state(homeState);
     $stateProvider.state(statsState);
     $stateProvider.state(banksState);
     $stateProvider.state(accountState);
+    $stateProvider.state(settingsState);
   })
   .component('myApp', {
     controller($mdDialog, $http, $cookies, Auth) {
@@ -325,11 +331,11 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           Banks
         </md-nav-item>
         <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-click="$ctrl.view='account'" name="account">
-          Account
+          Wallet
         </md-nav-item>
-        <md-button ng-click="$ctrl.testFunc()">
-          Work
-        </md-button>
+        <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
+          Account Settings
+        </md-nav-item>
 
         <!-- Spacer -->
         <span class="fill-space"></span>

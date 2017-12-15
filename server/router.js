@@ -38,6 +38,7 @@ router.get('/account', (req, res) => {
   res.redirect('/#/account/' + usercode)
   
   }
+
 })
 
 router.get('/verified', (req, res) =>{
