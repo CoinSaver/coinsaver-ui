@@ -24,6 +24,7 @@
     "coinbase": "^2.0.6",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "firebase-admin": "^5.5.1",
     "forever": "^0.15.3",
     "fs": "0.0.1-security",
     "jest": "^21.2.1",

@@ -25,6 +25,12 @@ app.use(cors({
   methods: ['GET, POST, PUT, DELETE', 'OPTIONS']
 }));
 
+
+// app.all('/*', function(req,res,next){
+//   res.sendFile('index.html', {root: './client'})
+// });
+
+
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client')));
@@ -35,6 +41,7 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 //   res.header("Access-Control-Allow-Methods", 'GET, POST, PUT ,DELETE');
 //   next();
 // })
+
 
 app.use(router);
 
