@@ -10,73 +10,60 @@ angular.module('coinsaver')
     this.loggedIn = false;
     this.user = {}
 
-    this.accounts = [];
-
     this.$onInit = () => {
-
       // console.log(window.location.href.length)
       if (window.location.href.length === 96 && window.location.href.includes('/account/')){
         console.log('going into code processing logic!!')
-        var currenturl = window.location.href.slice(window.location.href.length-64, window.location.href.length)
-        console.log('the code url is: ', currenturl)
-        return coinacct.getCoinacct(currenturl)
+        var urlcode = window.location.href.slice(window.location.href.length-64, window.location.href.length)
+        console.log('the code url is: ', urlcode)
+        return coinacct.redirectCode(urlcode)
       }
 
-      userCookie = $cookies.getObject('mycoinsaveruser'); 
-      if (userCookie) {
-        // console.log('checking for your cookies and they are: ', userCookie);
-        coinacct.user = userCookie;
-        coinacct.displayName = userCookie.displayName;
-        coinacct.loggedIn = true;
-      }
+    }
 
-      if (coinacct.loggedIn === true){
-        console.log('checking firebase for your data now')
-        var ref = firebase.database().ref('users/' + coinacct.user.firebaseId);
-        var obj = {code: coinacct.user.firebaseId}
+    this.firebaseUpdate = function (property, value) {
 
-        ref.set(obj)
+      console.log('checking firebase for your data now')
 
-        ref.on('value', function(snapshot){
-          console.log('the snapshot value is: ', snapshot.val())
-          }, function (errorObject){
-          console.log('read failed: ', errorObject)
-        })
+      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/bank');
+      var obj = {};
+      obj[property] = 'bank info';
 
-        // userRef.on
-        // var profile = $firebaseObject(ref.child('coinacct.user.firebaseId'))
-        console.log('Current auth is: ', Auth.$getAuth())
-        setTimeout(function(){ 
-          console.log('Current auth2 is: ', Auth.$getAuth()); 
-        }, 3000);
-      }
+      ref.set(obj)
+
+      ref.on('value', function(snapshot){
+        console.log('the snapshot value is: ', snapshot.val())
+        }, function (errorObject){
+        console.log('read failed: ', errorObject)
+      })
       
     }
 
-    this.getCoinacct = (code) => {
+    this.redirectCode = (code) => {
       $http.post('/verifybase', { code })
       .then((res) => {
         console.log('Successful post to exchange tokens!', res);
       });
     }
 
-    this.testAuth = () => {
+    this.checkAuth = () => {
       console.log('Current auth is: ', Auth.$getAuth())
+      //this needs a promise instead
+      setTimeout(function(){ 
+        console.log('Current auth2 is: ', Auth.$getAuth()); 
+      }, 3000);
+
+      setTimeout(function(){
+        coinacct.firebaseUpdate('favorite cheese is', 'swiss')
+      }, 1000)
     }
 
-    this.getCoinapi = function() {
-
+    this.linkCoinbase = function() {
       // var coinlink = window.open("https://www.coinbase.com/oauth/authorize?client_id=f9d7e163baa378a50f4c65602294b21b59a8ec5043e2f17eefcf52cd401d5e1d&redirect_uri=http%3A%2F%2Flocalhost%3A9001&response_type=code&scope=wallet%3Auser%3Aread&account=all", "Coinbase Connection", "width=600")
       window.location.replace("https://www.coinbase.com/oauth/authorize?client_id=f9d7e163baa378a50f4c65602294b21b59a8ec5043e2f17eefcf52cd401d5e1d&redirect_uri=http%3A%2F%2Flocalhost%3A9001%2Faccount%2F&response_type=code&scope=wallet%3Aaccounts%3Aread&account=all")
       // getRequest();
     };
     
-    this.writeUserData= function(userId, property, value) {
-      firebase.database().ref('users/' + userId).set({
-        property: value,
-      })
-    };
-
   },
 
   //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -89,13 +76,13 @@ angular.module('coinsaver')
 
     Please click here Mr. {{$ctrl.user.displayName}}
 
-    <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.getCoinapi()">
-      The Work Button
+    <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.linkCoinbase()">
+      Link Coinbase
     </md-button>
 
 
-    <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.testAuth()">
-    The Work Button 2
+    <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.checkAuth()">
+      Check Auth
     </md-button>
 
   </div>
