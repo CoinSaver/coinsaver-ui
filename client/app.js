@@ -276,7 +276,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         const userCookie = $cookies.getObject('mycoinsaveruser');
 
         if (userCookie) {
-          console.log(' theres a user cookie and it is, ', userCookie);
+          // console.log('checking for your cookies and they are: ', userCookie);
           ctrl.user = userCookie;
           ctrl.displayName = userCookie.displayName;
           ctrl.loggedIn = true;
