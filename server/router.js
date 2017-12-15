@@ -12,7 +12,7 @@ router.post('/verifybase', (req, res) => {
 
   console.log(req.body)
 
-  res.send('hello')
+  res.send(req.body)
 
   // console.log('now attempting to get access token')
   // coinbaseController.getAccessToken(usercode)

@@ -35,7 +35,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       url: '/account/:myParam',
       template: '<account />',
       controller: function ($stateParams) {
-        console.log($stateParams)
+        // console.log($stateParams)
       }
     };
     $stateProvider.state(homeState);
@@ -44,7 +44,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     $stateProvider.state(accountState);
   })
   .component('myApp', {
-    controller($mdDialog, $http, $cookies) {
+    controller($mdDialog, $http, $cookies, Auth) {
       const ctrl = this;
 
       this.loggedIn = false;
@@ -54,8 +54,10 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
       this.testFunc = function () {
         console.log('The test func has been clicked,');
-        console.log('The current user data is; ');
-        console.log(ctrl.user);
+        // console.log('The current user data is; ');
+        // console.log(ctrl.user);
+        console.log('Auth options are: ', Auth)
+        console.log('Current auth is: ', Auth.$getAuth())
       };
 
       this.logOut = function () {
@@ -80,28 +82,40 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           this.user = {};
           this.showProgress = false;
 
+          // logwin.handleSocialLogin = (website) => {
+          //   logwin.showProgress = true;
+          //   Auth.$signInWithPopup(website)
+          //     .then((result) => {
+          //       console.log(`Signed into ${website}  as: ${result.user.displayName}`);
+          //       logwin.user.firebaseId = result.user.uid;
+          //       logwin.user.accountInfo = result.user;
+          //       logwin.user.displayName = result.user.displayName;
+          //       $http({
+          //         method: 'POST',
+          //         url: '/#/account',
+          //         data: logwin.user,
+          //       }).then((userData) => {
+          //         logwin.answer(userData.data);
+          //         logwin.showProgress = false;
+          //       }, (err) => {
+          //         console.log(`${website} auth on localhost failed`, err);
+          //       });
+          //       logwin.answer(logwin.user);
+          //     }).catch((error) => {
+          //       console.error('Authentication failed:', error);
+          //     });
+          // };
+
           logwin.handleSocialLogin = (website) => {
             logwin.showProgress = true;
             Auth.$signInWithPopup(website)
               .then((result) => {
-                console.log(`Signed into ${website}  as: ${result.user}`);
+                console.log(`Signed into ${website}  as: ${result.user.displayName}`);
                 logwin.user.firebaseId = result.user.uid;
                 logwin.user.accountInfo = result.user;
                 logwin.user.displayName = result.user.displayName;
-                $http({
-                  method: 'POST',
-                  url: '/#/account',
-                  data: logwin.user,
-                }).then((userData) => {
-                  logwin.answer(userData.data);
-                  logwin.showProgress = false;
-                }, (err) => {
-                  console.log(`${website} auth on localhost failed`, err);
-                });
                 logwin.answer(logwin.user);
-              }).catch((error) => {
-                console.error('Authentication failed:', error);
-              });
+              })
           };
 
           logwin.handleGoogleLogin = () => {
@@ -110,59 +124,59 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           };
 
           logwin.createUser = (callback) => {
-            Auth.$createUserWithEmailAndPassword(logwin.email, logwin.password)
-              .then((firebaseUser) => {
-                // console.log('user created ', firebaseUser);
-                callback(true);
-              }).catch((error) => {
-                // console.log('error creating', error);
-                callback(false);
-              });
+            // Auth.$createUserWithEmailAndPassword(logwin.email, logwin.password)
+            //   .then((firebaseUser) => {
+            //     // console.log('user created ', firebaseUser);
+            //     callback(true);
+            //   }).catch((error) => {
+            //     // console.log('error creating', error);
+            //     callback(false);
+            //   });
           };
 
           logwin.loginUser = (callback) => {
-            Auth.$signInWithEmailAndPassword(logwin.email, logwin.password)
-              .then((firebaseUser) => {
-                logwin.user.firebaseId = firebaseUser.uid;
-                logwin.user.accountInfo = firebaseUser;
-                logwin.user.displayName = logwin.displayName;
-                // console.log('user logged in ', logwin.user.displayName);
-                callback(logwin.user);
-              }).catch((error) => {
-                callback(false);
-                console.log('login error ', error);
-              });
+            // Auth.$signInWithEmailAndPassword(logwin.email, logwin.password)
+            //   .then((firebaseUser) => {
+            //     logwin.user.firebaseId = firebaseUser.uid;
+            //     logwin.user.accountInfo = firebaseUser;
+            //     logwin.user.displayName = logwin.displayName;
+            //     // console.log('user logged in ', logwin.user.displayName);
+            //     callback(logwin.user);
+            //   }).catch((error) => {
+            //     callback(false);
+            //     console.log('login error ', error);
+            //   });
           };
 
           logwin.handleLoginButton = (displayName, password) => {
-            if (logwin.loginType === 'signup') {
-              logwin.createUser((isCreated) => {
-                if (isCreated) {
-                  logwin.password = '';
-                  logwin.loginType = 'login';
-                } else {
-                  console.log('user creation failed, look around');
-                }
-              });
-            } else {
-              logwin.loginUser((signedInUser) => {
-                if (signedInUser) {
-                  logwin.showProgress = true;
-                  $http({
-                    method: 'POST',
-                    url: '/login',
-                    data: signedInUser,
-                  }).then((userData) => {
-                    logwin.answer(userData.data);
-                    logwin.showProgress = false;
-                  }, (err) => {
-                    console.log('auth error: ', err);
-                  });
-                } else {
-                  console.log('something went wrong in authentication');
-                }
-              });
-            }
+            // if (logwin.loginType === 'signup') {
+            //   logwin.createUser((isCreated) => {
+            //     if (isCreated) {
+            //       logwin.password = '';
+            //       logwin.loginType = 'login';
+            //     } else {
+            //       console.log('user creation failed, look around');
+            //     }
+            //   });
+            // } else {
+            //   logwin.loginUser((signedInUser) => {
+            //     if (signedInUser) {
+            //       logwin.showProgress = true;
+            //       $http({
+            //         method: 'POST',
+            //         url: '/login',
+            //         data: signedInUser,
+            //       }).then((userData) => {
+            //         logwin.answer(userData.data);
+            //         logwin.showProgress = false;
+            //       }, (err) => {
+            //         console.log('auth error: ', err);
+            //       });
+            //     } else {
+            //       console.log('something went wrong in authentication');
+            //     }
+            //   });
+            // }
           };
 
           logwin.hide = function () {
@@ -245,7 +259,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           .then((user) => {
             // console.log('answered', user);
             ctrl.user = user;
-            ctrl.displayName = user.displayName;
+            ctrl.user.displayName = user.displayName;
             ctrl.isValidUser = true;
             ctrl.loggedIn = true;
           }, () => {
