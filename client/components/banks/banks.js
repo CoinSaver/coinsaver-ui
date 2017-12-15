@@ -29,11 +29,11 @@ angular.module('coinsaver')
           .then((res) => {
             console.log('Successful post to exchange tokens!', res);
 
-            $http.get('/transactions')
+            $http.get('/accounts')
               .then((res) => {
                 console.log('User data:');
                 console.log(res.data);
-                ctrl.accounts = res.data;
+                ctrl.accounts = res.data.accounts;
                 ctrl.handleChooseAccount();
               });
           });
@@ -48,24 +48,6 @@ angular.module('coinsaver')
       this.linked = false;
       this.accounts = [];
       this.transactions = [];
-    }
-
-    this.getAccountHandler = () => {
-      $http.get('/accounts')
-        .then((res) => {
-          console.log('Account data:');
-          console.log(res.data.accounts);
-          ctrl.accounts = res.data.accounts;
-        });
-    };
-
-    this.getTransactionsHandler = () => {
-      $http.get('/transactions')
-        .then((res) => {
-          console.log('Transaction data:');
-          console.log(res.data);
-          ctrl.transactions = res.data;
-        });
     };
 
     this.status = '  ';
@@ -83,8 +65,13 @@ angular.module('coinsaver')
         fullscreen: ctrl.customFullscreen, // Only for -xs, -sm breakpoints.
       })
         .then((answer) => {
-          ctrl.transactions.push(ctrl.accounts[parseInt(answer)]);
-          ctrl.linked = true;
+          // ctrl.transactions.push(ctrl.accounts[parseInt(answer)]);
+          $http.get('/transactions')
+            .then((res) => {
+              console.log('Transactions: ',res.data);
+              ctrl.transactions = res.data;
+              ctrl.linked = true;
+            });
         }, () => {
           ctrl.linked = false;
           ctrl.accounts = [];

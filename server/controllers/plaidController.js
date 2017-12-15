@@ -2,6 +2,7 @@ const plaid = require('plaid');
 const moment = require('moment');
 const fs = require('fs');
 const PLAID_KEYS = require('../../config/config.js').plaidAPI;
+const plaidHelper = require('./plaidHelper.js');
 
 let accessToken = '';
 let publicToken = '';
@@ -45,10 +46,24 @@ module.exports = {
         }
 
         console.log(authResponse.accounts);
+
+        const resArray = [];
+
+        for (let i = 0; i < authResponse.accounts.length; i++) {
+          if (authResponse.accounts[i].subtype === 'checking') {
+            resArray.push({
+              accountId: authResponse.accounts[i].account_id,
+              balance: authResponse.accounts[i].balances.current,
+              name: authResponse.accounts[i].name,
+              officialName: authResponse.accounts[i].official_name,
+              type: authResponse.accounts[i].subtype,
+            });
+          }
+        }
+
         res.json({
           error: false,
-          accounts: authResponse.accounts,
-          // numbers: authResponse.numbers,
+          accounts: resArray,
         });
       });
     },
@@ -74,7 +89,8 @@ module.exports = {
       // });
 
 
-      // Use below when deploying
+      // ******* Use below when deploying *******
+
       const startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
       const endDate = moment().format('YYYY-MM-DD');
       client.getTransactions(accessToken, startDate, endDate, {
@@ -86,57 +102,7 @@ module.exports = {
           return res.json({ error });
         }
 
-        const resObj = [];
-        const indexTrack = {};
-
-        for (let i = 0; i < transactionsResponse.accounts.length; i++) {
-          if (transactionsResponse.accounts[i].subtype === 'checking') {
-            const accObj = {
-              id: transactionsResponse.accounts[i].account_id,
-              name: transactionsResponse.accounts[i].name,
-              type: transactionsResponse.accounts[i].subtype,
-              transactions: [],
-              roundSum: 0,
-              totalSum: 0,
-            };
-            // resObj.accounts.push(accObj);
-            // resObj.accounts.transactions = [];
-            resObj.push(accObj);
-
-            // indexTrack just keeps track of which index in resObj array
-            // stores which account_id's information for quicker lookup
-            indexTrack[accObj.id] = resObj.length - 1;
-          }
-        }
-        // console.log('------', resObj);
-        console.log('-------TRANSACTIONS', transactionsResponse.transactions[0]);
-
-        for (let i = 0; i < transactionsResponse.transactions.length; i++) {
-          const temp = transactionsResponse.transactions[i];
-
-          // If current transaction is for an account in our indexTrack
-          // it means this transactions is for a valid account
-          if (indexTrack[temp.account_id] !== undefined) {
-            const transactionObj = {
-              amount: temp.amount,
-              round: Math.ceil(temp.amount) - temp.amount,
-              date: temp.date,
-              location: {
-                city: temp.location.city,
-              },
-              name: temp.name,
-            };
-            resObj[indexTrack[temp.account_id]].transactions.push(transactionObj);
-            resObj[indexTrack[temp.account_id]].totalSum += transactionObj.amount;
-            if (transactionObj.amount > 0) {
-              resObj[indexTrack[temp.account_id]].roundSum += transactionObj.round;
-            }
-          }
-        }
-
-        console.log(`Pulled ${transactionsResponse.transactions.length} transactions`);
-        console.log('-----', resObj);
-        res.json(resObj);
+        res.json(plaidHelper.formatTransactions(transactionsResponse));
       });
     },
   },
