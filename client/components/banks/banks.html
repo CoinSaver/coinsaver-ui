@@ -24,7 +24,7 @@
                 <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
                   <md-optgroup label="accounts">
                     <md-option ng-click="setSelection($index, account.name)" ng-value="account.name" ng-repeat="account in accounts track by $index">
-                      {{account.name}}
+                      {{account.name}} (Balance: {{account.balance | currency}})
                     </md-option>
                   </md-optgroup>
                 </md-select>

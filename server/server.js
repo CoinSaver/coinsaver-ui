@@ -4,7 +4,8 @@ const path = require('path');
 const router = require('./router.js');
 const cors = require('cors')
 // const db = require('../database/db.js'); //When we add the extremely complex coinsaver db
-const PRIVATE_IP = require('../config/config.js').AWS.PRIVATE_IP || null
+const PRIVATE_IP = require('../config/config.js').AWS.PRIVATE_IP || null;
+const testCron = require('./workers/cron.js').testCronJob;
 
 const app = express();
 
@@ -42,5 +43,5 @@ app.listen(port, PRIVATE_IP, () => {
   console.log(`What does the server say about its port number? ITS OVER ${(port - 1).toString()}!! Port: ${port}`);
 });
 
-
+//testCron.start();
 
