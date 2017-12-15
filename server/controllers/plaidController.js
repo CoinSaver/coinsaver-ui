@@ -16,7 +16,6 @@ const client = new plaid.Client(
   plaid.environments[PLAID_KEYS.PLAID_ENV]
 );
 
-
 module.exports = {
   get_access_token: {
     post: function getAccessTokenFunction(req, res, next) {
@@ -107,5 +106,11 @@ module.exports = {
     },
   },
 
-  // ***************** NOT FOR ENDPOINTS ***************** //
+  // ***************** NOT FOR API ENDPOINTS ***************** //
+  // The functions below are to be used by the cronworker and  //
+  // are written in this file to prevent multiple instances of //
+  // plaid.Client being created.                               //
+  // ********************************************************* //
+
+
 };
