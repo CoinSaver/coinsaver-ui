@@ -88,7 +88,6 @@ angular.module('coinsaver')
         });
     };
 
-
     function DialogController($scope, accounts) {
       $scope.accounts = accounts;
       $scope.currentId = '';
@@ -115,7 +114,7 @@ angular.module('coinsaver')
       };
     }
 
-    // *Leave commented out for testing purposes. Links account
+    // *Comment out when testing to prevent excessive calls to Plaid
     // $http.get('/transactions')
     //   .then((res) => {
     //     console.log('Transaction data:');
