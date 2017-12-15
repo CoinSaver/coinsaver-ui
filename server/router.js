@@ -35,7 +35,13 @@ router.get('/account', (req, res) => {
   if (req._parsedOriginalUrl.length){
 
   let usercode = req._parsedOriginalUrl.query.split('=')[1];
+  res.redirect('/#/account/' + usercode)
+  
+  } else {
+    res.redirect('/#/account/')
+  }
 
+<<<<<<< HEAD
   console.log('now handing the secret code to the server')
   console.log(usercode)
 
@@ -52,6 +58,15 @@ router.get('/verified', (req, res) =>{
   res.send('hello')
 })
 
+=======
+})
+
+router.get('/verified', (req, res) =>{
+  console.log(req.data);
+  res.send('hello')
+})
+
+>>>>>>> f8990f379c5b2e0b93c478eb3a25ef52846ab6b1
 module.exports = router;
 
 
