@@ -2,6 +2,7 @@ const axios = require('axios');
 const router = require('express').Router();
 const plaidController = require('./controllers/plaidController.js');
 const coinbaseController = require('./controllers/coinbaseController.js');
+const firebaseController = require('./controllers/firebaseController.js');
 
 router.post('/get_access_token', plaidController.get_access_token.post);
 router.get('/accounts', plaidController.accounts.get);
