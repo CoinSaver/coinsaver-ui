@@ -2,8 +2,6 @@ const COINBASE_KEYS = require('../../config/config.js').coinbaseAPI;
 const coinbase = require('coinbase');
 const axios = require('axios');
 
-let accessToken = '';
-let refreshToken = '';
 
 var getClient = function(accessTokenTemp, refreshTokenTemp){
   const client = new coinbase.Client({
@@ -22,7 +20,7 @@ var getClient = function(accessTokenTemp, refreshTokenTemp){
   });
 }
 
-var getAccessToken = function(usercode){
+var getAccessToken = function(usercode, callback){
   console.log('working on code: ', usercode)
 
   return axios.post("https://api.coinbase.com/oauth/token", {
@@ -30,15 +28,15 @@ var getAccessToken = function(usercode){
     code: usercode,
     client_id: COINBASE_KEYS.COINBASE_CLIENT_ID,
     client_secret: COINBASE_KEYS.COINBASE_SECRET,
-    redirect_uri: 'http://localhost:9001/verifybase',
+    redirect_uri: 'http://localhost:9001/account/',
   })
   .then(function (response) {
     console.log('the response data is:', response.data);
-    return response.data
+    callback(response.data)
     // getClient(response.data.access_token, response.data.refresh_token)
   })
   .catch(function (error) {
-    console.log('fail')
+    console.log('fail: ', error)
   });
 }
 

@@ -9,10 +9,19 @@ router.post('/get_access_token', plaidController.get_access_token.post);
 router.get('/accounts', plaidController.accounts.get);
 router.get('/transactions', plaidController.transactions.get);
 
-
 router.post('/verifybase', (req, res) => {
 
-  console.log(req.body)
+  var verifycode = req.body.code
+  var userid = req.body.useruid
+
+  console.log('the code is:', verifycode)
+
+  // NEED RICHARDS HELP MAKING A PROMISE
+
+  coinbaseController.getAccessToken(req.body.code, function(token){
+    console.log('working on a token that is: ', token);
+    firebaseController.coinAuthUser(userid, token.access_token, token.refresh_token, token.scope)
+  })
 
   res.send(req.body)
 
@@ -41,7 +50,7 @@ router.get('/account', (req, res) => {
 })
 
 router.get('/verified', (req, res) =>{
-  console.log(req.data);
+  console.log('the code is', req.data);
   res.send('hello')
 })
 
