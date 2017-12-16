@@ -3,12 +3,13 @@ angular.module('coinsaver')
   bindings: {
 
   },
-  controller($http, $mdDialog, $cookies, $firebaseObject, Auth) {
+  controller($http, $mdDialog, $cookies, $firebaseObject, Auth, User) {
 
     let coinacct = this;
 
     this.loggedIn = false;
-    this.user = {};
+    this.coinlink = false;
+    this.user = User.get();
     this.wallet = {};
 
     this.$onInit = () => {
@@ -20,8 +21,6 @@ angular.module('coinsaver')
     this.checkcoinbase = function(){
 
       console.log('checking for coinbase creds')
-      
-      var currentuser = Auth.$getAuth()
 
       setTimeout(function(){ 
         var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/coinbaseinfo');
@@ -30,7 +29,8 @@ angular.module('coinsaver')
           const db = snapshot.val();
           if (db){
             if (db.credentials === 'valid'){
-              console.log('change something here to change to a db view')
+              coinacct.coinlink = true;
+              coinacct.getcoinwallet(Auth.$getAuth().uid)
             }
           } else {
             // ctrl.writefbUser('works','true')
@@ -38,26 +38,16 @@ angular.module('coinsaver')
           }
         })   
         
-      }, 3000);
+      }, 500);
 
  
     }
 
     this.firebaseUpdate = function (property, value, path) {
-
-      var currentuser = Auth.$getAuth()
-
-      var ref = firebase.database().ref('users/' + currentuser.uid + path);
+      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + path);
       var obj = {};
       obj[property] = value;
       ref.update(obj)
-
-      // ref.on('value', function(snapshot){
-      //   console.log('the `${property}` value is: ', snapshot.val())
-      //   }, function (errorObject){
-      //   console.log('read failed: ', errorObject)
-      // })
-      
     }
 
     this.testcoincode = function (){
@@ -76,6 +66,14 @@ angular.module('coinsaver')
     this.writefbcoincode = function (property, value) {
       coinacct.firebaseUpdate(property, value, '/coinbaseinfo')
     } 
+
+    this.getcoinwallet = (useruid) => {
+      $http.post('/retrievewallet', { useruid })
+      .then((res) => {
+        coinacct.wallet = res.data;
+        console.log(coinacct.wallet)
+      });
+    }
 
     this.redirectCode = (code, useruid) => {
       $http.post('/verifybase', { code , useruid })
@@ -117,6 +115,10 @@ angular.module('coinsaver')
     <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.checkAuth()">
       Check Auth
     </md-button>
+    
+    <div ng-if="$ctrl.wallet !== {}">
+      {{$ctrl.wallet}}
+    </div>
 
   </div>
 `,

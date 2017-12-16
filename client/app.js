@@ -50,7 +50,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   $stateProvider.state(settingsState);
 })
 .component('myApp', {
-  controller($http, $cookies, $firebaseObject, Auth) {
+  controller($http, $cookies, $firebaseObject, Auth, User) {
     const ctrl = this;
 
     this.loggedIn = false;
@@ -71,6 +71,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       this.user = {};
       $cookies.remove('coinsaveruser');
       Auth.$signOut();
+      User.set({})
     };
 
     this.login = function (){
@@ -138,16 +139,20 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     // ------------------
 
     this.$onInit = () => {
-      // Gather all info from cookies we have;
-      const userCookie = $cookies.getObject('mycoinsaveruser');
 
-      if (userCookie) {
-        // console.log('checking for your cookies and they are: ', userCookie);
-        ctrl.user = userCookie;
-        ctrl.displayName = userCookie.displayName;
-        ctrl.loggedIn = true;
+      Auth.$onAuthStateChanged(function(firebaseUser) {
+        if (firebaseUser) {
+          console.log("Signed in as:", firebaseUser.uid);
+          let tempUser = firebaseUser;
+          User.set(tempUser)
+          console.log('factory user is: ', User.get())
+          ctrl.user = firebaseUser;
+          ctrl.loggedIn = true;
+        } else {
+          console.log("Signed out");
+        }
+      });
 
-      }
     };
   },
 
@@ -184,7 +189,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
       <div ng-if="$ctrl.loggedIn === true">
         <md-button>
-        Welcome, {{$ctrl.displayName}}
+        Welcome, {{$ctrl.user.displayName}}
         </md-button>
         <md-button ng-click="$ctrl.logOut()" name="logout">
         [ Log out ]

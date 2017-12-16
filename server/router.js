@@ -27,6 +27,26 @@ router.post('/verifybase', (req, res) => {
 
 })
 
+router.post('/retrievewallet', (req, res) => {
+  
+    var userid = req.body.useruid
+
+    firebaseController.coinAuthRefresh(userid, function(wallet){
+      coinbaseController.getWallet(userid, wallet.access_token, wallet.refresh_token, function(coincount){
+        res.send(coincount)
+      })
+    });
+
+  
+    // // coinbaseController.getAccessToken(req.body.code, function(token){
+    // //   console.log('working on a token that is: ', token);
+    // //   firebaseController.coinAuthUser(userid, token.access_token, token.refresh_token, token.scope)
+    // // })
+  
+    // res.send(req.body)
+  
+  })
+
 //This path is responsible for handling coinbase usercodes
 router.get('/account', (req, res) => {
   

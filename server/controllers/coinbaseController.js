@@ -15,8 +15,26 @@ var getClient = function(accessTokenTemp, refreshTokenTemp){
       console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
     });
 
-    // set something = accounts
+  // set something = accounts
   
+  });
+}
+
+var getWallet = function(uid, accessTokenTemp, refreshTokenTemp, callback){
+  const client = new coinbase.Client({
+    'accessToken' : accessTokenTemp,
+    'refreshToken' : refreshTokenTemp
+  })
+
+  client.getAccounts({}, function(err, accounts) {
+    
+    let acctobj = {};
+      accounts.forEach(function(acct) {
+        acctobj[acct.name] = acct.balance.amount 
+        console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
+      });
+    callback(acctobj)
+    // set something = accounts
   });
 }
 
@@ -40,4 +58,4 @@ var getAccessToken = function(usercode, callback){
   });
 }
 
-module.exports = {getAccessToken}
+module.exports = {getAccessToken, getClient, getWallet}
