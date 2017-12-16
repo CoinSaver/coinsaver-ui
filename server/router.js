@@ -14,34 +14,25 @@ router.post('/verifybase', (req, res) => {
 
   res.send(req.body)
 
-  // console.log('now attempting to get access token')
-  // coinbaseController.getAccessToken(usercode)
-  //   .then((response)=>{
-  //       console.log('response is: ', response)
-  //       res.send(response)
-  //     res.redirect('/#/account/' + usercode)
-  //   })
-    // console.log('the token is: ', token)
-  // res.redirect('/#/account')
-
-
-
-  // res.redirect('/#/account')
-  // res.send('hello')
 })
 
+//This path is responsible for handling coinbase usercodes
 router.get('/account', (req, res) => {
   
-  if (req._parsedOriginalUrl.length){
+  console.log(req._parsedOriginalUrl.query.length)
 
-  let usercode = req._parsedOriginalUrl.query.split('=')[1];
-
-  console.log('now handing the secret code to the server')
-  console.log(usercode)
-
-  res.redirect(`/#/account/${usercode}`)
-  
-  } else {
+  if (req._parsedOriginalUrl.query){
+    if (req._parsedOriginalUrl.query.length === 69){
+      let usercode = req._parsedOriginalUrl.query.split('=')[1];
+      
+      console.log('now handing the secret code to the server')
+      console.log(usercode)
+      
+        res.redirect(`/#/account/${usercode}`)
+        
+    }
+  } 
+  else {
     res.redirect('/#/account/')
   }
 

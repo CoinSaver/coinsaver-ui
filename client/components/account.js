@@ -16,7 +16,10 @@ angular.module('coinsaver')
         console.log('going into code processing logic!!')
         var urlcode = window.location.href.slice(window.location.href.length-64, window.location.href.length)
         console.log('the code url is: ', urlcode)
-        return coinacct.redirectCode(urlcode)
+        // return coinacct.redirectCode(urlcode)
+        setTimeout(function(){
+          coinacct.writefbcoincode('coinbasetempcode', urlcode)
+        }, 2000)
       }
 
     }
@@ -47,16 +50,33 @@ angular.module('coinsaver')
       });
     }
 
+    this.writefbcoincode = function (property, value) {
+      
+      var currentuser = Auth.$getAuth()
+
+      console.log('writing over your token now, ')
+
+      var ref = firebase.database().ref('users/' + currentuser.uid + '/walletinfo');
+      var obj = {};
+
+      obj[property] = value;
+
+      ref.set(obj)
+
+      ref.on('value', function(snapshot){
+        console.log('the newly updated code is: ', snapshot.val())
+        }, function (errorObject){
+        console.log('read failed: ', errorObject)
+      })
+      
+    } 
+
     this.checkAuth = () => {
       console.log('Current auth is: ', Auth.$getAuth())
       //this needs a promise instead
       setTimeout(function(){ 
         console.log('Current auth2 is: ', Auth.$getAuth()); 
       }, 3000);
-
-      setTimeout(function(){
-        coinacct.firebaseUpdate('favorite cheese is', 'swiss')
-      }, 1000)
     }
 
     this.linkCoinbase = function() {

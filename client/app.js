@@ -70,6 +70,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       this.loggedIn = false;
       this.user = {};
       $cookies.remove('coinsaveruser');
+      Auth.$signOut();
     };
 
     this.login = function (){
@@ -88,8 +89,6 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     // ------------------
     // BEGIN FIREBASE
     // ------------------
-
-
     
     this.checkfbUser = () => {
 
@@ -108,13 +107,12 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
     }
 
-
     this.writefbUser = function (property, value) {
       
       var currentuser = Auth.$getAuth()
 
       console.log('writing a new user for you now, ')
-      console.log('here are your items to strip off of: ', )
+      console.log('here are your items to strip off of: ', currentuser )
 
       var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/userinfo');
       var obj = {};
@@ -142,6 +140,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     this.$onInit = () => {
       // Gather all info from cookies we have;
       const userCookie = $cookies.getObject('mycoinsaveruser');
+      console.log(Auth.$getAuth())
 
       if (userCookie) {
         // console.log('checking for your cookies and they are: ', userCookie);
