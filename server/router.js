@@ -20,7 +20,7 @@ router.post('/verifybase', (req, res) => {
 
   coinbaseController.getAccessToken(req.body.code, function(token){
     console.log('working on a token that is: ', token);
-    firebaseController.coinAuthUser(userid, token.access_token, token.refresh_token, token.scope)
+    firebaseController.saveCoinAuth(userid, token.access_token, token.refresh_token, token.scope)
   })
 
   res.send(req.body)
@@ -31,12 +31,14 @@ router.post('/retrievewallet', (req, res) => {
   
     var userid = req.body.useruid
 
-    firebaseController.coinAuthRefresh(userid, function(wallet){
-      coinbaseController.getWallet(userid, wallet.access_token, wallet.refresh_token, function(coincount){
-        res.send(coincount)
+    firebaseController.coinAuthRefresh(userid, function(updatekeys){
+      coinbaseController.getRefreshToken(userid, updatekeys, function(newkey){
+        firebaseController.saveCoinAuth(userid, newkey.access_token, newkey.refresh_token, newkey.scope)
+        coinbaseController.getWallet(userid, newkey.access_token, newkey.refresh_token, function(coincount){
+          res.send(coincount)
+        })
       })
     });
-
   
     // // coinbaseController.getAccessToken(req.body.code, function(token){
     // //   console.log('working on a token that is: ', token);

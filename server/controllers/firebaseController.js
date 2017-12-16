@@ -49,7 +49,7 @@ var updateFB = function(userid, path, property, value){
 
 
 
-var coinAuthUser = function(userid,access_token,refresh_token,scope){
+var saveCoinAuth = function(userid,access_token,refresh_token,scope){
   var userpath = db.ref('users/' + userid + '/coinbaseinfo')
   // console.log(userpath)
 
@@ -65,9 +65,10 @@ var coinAuthRefresh = function(userid, callback){
   var userpath = db.ref('users/' + userid + '/coinbaseinfo')
   
   userpath.once("value", snapshot => {
-    const db = snapshot.val();
-    if (db){
-      callback(db);
+    const refreshToken = snapshot.val().refresh_token;
+    if (refreshToken){
+      // console.log('the refresh token is: ', refreshToken)
+      callback(refreshToken);
     } else {
       // ctrl.writefbUser('works','true')
       console.log('Is your database currently empty? Try linking a google account')
@@ -75,4 +76,4 @@ var coinAuthRefresh = function(userid, callback){
   })
 }
 
-module.exports = {updateFB, printDB, coinAuthUser, coinAuthRefresh}
+module.exports = {updateFB, printDB, saveCoinAuth, coinAuthRefresh}
