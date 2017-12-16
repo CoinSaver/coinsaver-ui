@@ -6,10 +6,7 @@ angular.module('coinsaver')
   ])
   .factory('User', () => {
     const state = {
-      data: {
-        user: 'test',
-        accounts: ['1', '2', '3'],
-      },
+      data: {}
     };
 
     return {

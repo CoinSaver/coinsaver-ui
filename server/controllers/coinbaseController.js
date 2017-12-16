@@ -2,8 +2,6 @@ const COINBASE_KEYS = require('../../config/config.js').coinbaseAPI;
 const coinbase = require('coinbase');
 const axios = require('axios');
 
-let accessToken = '';
-let refreshToken = '';
 
 var getClient = function(accessTokenTemp, refreshTokenTemp){
   const client = new coinbase.Client({
@@ -17,12 +15,29 @@ var getClient = function(accessTokenTemp, refreshTokenTemp){
       console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
     });
 
-    // set something = accounts
-  
+  // set something = accounts
   });
 }
 
-var getAccessToken = function(usercode){
+var getWallet = function(uid, accessTokenTemp, refreshTokenTemp, callback){
+  const client = new coinbase.Client({
+    'accessToken' : accessTokenTemp,
+    'refreshToken' : refreshTokenTemp
+  })
+
+  client.getAccounts({}, function(err, accounts) {
+    // console.log(accounts);
+
+    let acctobj = {};
+      accounts.forEach(function(acct) {
+        acctobj[acct.name] = acct.balance.amount 
+        console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
+      });
+    callback(acctobj)
+  });
+}
+
+var getAccessToken = function(usercode, callback){
   console.log('working on code: ', usercode)
 
   return axios.post("https://api.coinbase.com/oauth/token", {
@@ -30,16 +45,35 @@ var getAccessToken = function(usercode){
     code: usercode,
     client_id: COINBASE_KEYS.COINBASE_CLIENT_ID,
     client_secret: COINBASE_KEYS.COINBASE_SECRET,
-    redirect_uri: 'http://localhost:9001/verifybase',
+    redirect_uri: 'http://localhost:9001/account/',
   })
   .then(function (response) {
     console.log('the response data is:', response.data);
-    return response.data
+    callback(response.data)
     // getClient(response.data.access_token, response.data.refresh_token)
   })
   .catch(function (error) {
-    console.log('fail')
+    console.log('fail: ', error)
   });
 }
 
-module.exports = {getAccessToken}
+var getRefreshToken = function(usercode, refreshToken, callback){
+  console.log('working on refresh code: ', usercode)
+  
+  return axios.post("https://api.coinbase.com/oauth/token", {
+    grant_type: 'refresh_token',
+    client_id: COINBASE_KEYS.COINBASE_CLIENT_ID,
+    client_secret: COINBASE_KEYS.COINBASE_SECRET,
+    refresh_token: refreshToken
+  })
+  .then(function (response) {
+    console.log('the response data is:', response.data);
+    callback(response.data)
+    // getClient(response.data.access_token, response.data.refresh_token)
+  })
+  .catch(function (error) {
+    console.log('fail: ', error)
+  });
+}
+
+module.exports = {getAccessToken, getClient, getWallet, getRefreshToken}
