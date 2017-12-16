@@ -47,5 +47,5 @@ var sendCoinsaverbotEmail = function (mailOptions) {
   });
   console.log('sendCoinsaverbotEmail function ran');
 }
-sendCoinsaverbotEmail(mailOptions);
+// sendCoinsaverbotEmail(mailOptions);
 
