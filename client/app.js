@@ -225,4 +225,3 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   </md-content>
 `,
 });
-
