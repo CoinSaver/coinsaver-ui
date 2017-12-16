@@ -5,18 +5,28 @@ var UserSchema = new Schema({
   id: Number,
   username: String,
   coinbase_id: String,
+  plaid_user_id: String,
+  plaid_account_id: String,
   email: String,
-  userLevel: Number,
-  userType: String,
+  userLevel: Number, //0, 1, 2
+  userType: String, // Free, Paid, Etc
   userSignupDate: { type: Date, default: Date.now },
   isNewCoinbaseUser: Boolean, 
+  usersettings: Schema.Types.Mixed,
+  isPurchaseEnabled: Boolean,
+  purchaseMin: Number,
+  purchaseMax: Number,
+  purchaseAuto: Number,
+  ethpercent: Number, //0 to 1
+  statsLastPurchaseUsd: Number,
+  statsLastPurchaseEth: Number,
+  statsLastPurchaseBtc: Number,
+  statsTotalPurchaseUsd: Number,
+  statsTotalPurchaseEth: Number,
+  statsTotalPurchaseBtc: Number,
   refcode: String,
   refby: String,
-  usersettings: Schema.Types.Mixed,
-  ethpercent: Number,
-  statsTotalEthBought: Number,
-  statsTotalBtcBought: Number,
-  statsTotalPaid: Number,
+  promocode: String,
 })
 
 var ScheduleSchema = new Schema({
@@ -25,6 +35,8 @@ var ScheduleSchema = new Schema({
   frequency: String,
   ethpercent: Number,
   day: String,
+  nextPurchaseDate: String,
+  lastPurchaseDate: String,
   amount: Number,
 })
 
