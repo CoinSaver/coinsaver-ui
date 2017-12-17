@@ -26,6 +26,13 @@ angular.module('coinsaver')
             </md-input-container>
 
             <md-card>
+
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-if="!enableEdit" ng-click="activateEdit()">Edit</md-button>
+                <md-button ng-if="enableEdit" ng-click="deactivateEdit()">Cancel</md-button>
+                <md-button ng-if="enableEdit">Save</md-button>
+              </md-card-actions>
+
               <md-card-content>
 
                 <h4 style="margin-bottom:0px; padding-bottom:0px;">BTC:ETH purchase ratio</h4>
@@ -41,8 +48,10 @@ angular.module('coinsaver')
                         <p style="margin-top:0px;">{{bitcoin}}</p>
                       </div>
 
-                      <md-slider min="0" max="100" ng-model="bitcoin" aria-label="ratioslider" ng-change="sliderControl()">
-                      </md-slider>
+                      <md-slider-container ng-disabled="!enableEdit">
+                        <md-slider min="0" max="100" ng-model="bitcoin" aria-label="ratioslider" ng-change="sliderControl()">
+                        </md-slider>
+                      </md-slider-container>
 
                       <div layout="column" style="margin-left:15px; text-align:center;">
                         <p style="margin-bottom:0px; padding-top:0px;"><b>ETH</b></p>
@@ -59,7 +68,7 @@ angular.module('coinsaver')
                   <h4 style="margin-right:20px;">Auto-purchase frequency:</h4>
 
                   <md-input-container>
-                    <md-select style="margin-top:-5px;" ng-model="frequency" aria-label="frequencyselect">
+                    <md-select style="margin-top:-5px;" ng-model="frequency" aria-label="frequencyselect" ng-disabled="!enableEdit">
                       <md-option ng-value="weekly" selected>weekly</md-option>
                     </md-select>
                   </md-input-container>
@@ -73,12 +82,12 @@ angular.module('coinsaver')
                     <div layout="row">
                       <md-input-container class="amountinput">
                         <label>Minimum purchase</label>
-                        <input ng-model="minPurchase" type="tel" ng-blur="formatCurrency()">
+                        <input ng-model="minPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit">
                       </md-input-container>
 
                       <md-input-container class="amountinput">
                         <label>Add'l Purchase</label>
-                        <input ng-model="autoPurchase" type="tel" ng-blur="formatCurrency()">
+                        <input ng-model="autoPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit">
                           <md-tooltip class="tooltipcolor" md-direction="top" style="margin-top:-20px;">
                             (Optional) Set a flat, additional purchase amount
                           </md-tooltip>
@@ -88,21 +97,22 @@ angular.module('coinsaver')
                       <div>
                         <md-input-container class="amountinput">
                           <label>Total minimum</label>
-                          <input name="total" ng-model="totalMin" ng-min="5" min="5" ng-readonly="true" type="tel" required>
+                          <input name="total" ng-model="totalMin" ng-min="5" min="5" ng-readonly="true" type="tel">
                         </md-input-container>
                         <p ng-show="totalMin < 5" style="color:red; margin-top:-40px; font-size:10px; margin-left:3px;">Total minimum must be at least $5</p>
                       </div>
                     </div>
 
                     <div class="enablecheck">
-                      <input type="checkbox" ng-model="enableMaxPurchase">
+                      <input type="checkbox" ng-model="enableMaxPurchase" ng-disabled="!enableEdit">
                         Set maximum purchase limit?
                       </input>
 
                       <div layout="row">
                         <md-input-container class="amountinput" ng-style="{'visibility': enableMaxPurchase?'visible':'hidden'}">
                           <label>Maximum purchase</label>
-                          <input ng-model="maxPurchase" type="tel" ng-blur="formatCurrency()">
+                          <input ng-model="maxPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit">
+                          <p ng-show="maxPurchase < totalMin" style="color:red; font-size:10px; margin-left:3px;">Maximum must be greater than total minimum</p>
                         </md-input-container>
                       </div>
                     </div>
@@ -111,12 +121,6 @@ angular.module('coinsaver')
                 </div>
 
               </md-card-content>
-
-              <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-if="!enableEdit" ng-click="activateEdit()">Edit</md-button>
-                <md-button ng-if="enableEdit" ng-click="deactivateEdit()">Cancel</md-button>
-                <md-button ng-if="enableEdit">Save</md-button>
-              </md-card-actions>
             </md-card>
 
           </form>
@@ -144,14 +148,14 @@ angular.module('coinsaver')
     $scope.noMaxPurchase = true;
 
     $scope.decBTC = () => {
-      if ($scope.bitcoin !== 0) {
+      if ($scope.bitcoin !== 0 && $scope.enableEdit) {
         $scope.bitcoin--;
         $scope.ethereum++;
       }
     };
 
     $scope.decETH = () => {
-      if ($scope.ethereum !== 0) {
+      if ($scope.ethereum !== 0 && $scope.enableEdit) {
         $scope.ethereum--;
         $scope.bitcoin++;
       }
