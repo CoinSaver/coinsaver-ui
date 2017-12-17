@@ -76,3 +76,34 @@ main {
   -o-user-select: none;
   user-select: none;
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.inputdemoErrors .inputErrorsApp {
+  min-height: 48px; }
+
+.inputdemoErrors md-input-container > p {
+  font-size: 0.8em;
+  text-align: left;
+  width: 100%; }
+
+.amountinput {
+  width: 130px;
+  padding-right: 10px;
+}
+
+.autopurchase {
+  margin-left:20px;
+}
+
+.enablecheck {
+  margin-top: -28px;
+}
+
+.tooltipcolor {
+  color: rgb(78, 112, 42) !important;
+}
