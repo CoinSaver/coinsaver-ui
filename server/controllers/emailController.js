@@ -1,8 +1,6 @@
 const nodemailer = require('nodemailer');
 const coinsaverbot = require('../../config/config.js').coinsaverbot
 
-console.log('nodemailer: ', nodemailer);
-
 var transporter = nodemailer.createTransport({
     host: "smtp.gmail.com", // hostname
     // secure: false, // use SSL
@@ -35,7 +33,7 @@ var mailOptions = {
   html: `Our message is: ${emailMessage}
   Our message is: ${emailHtml}`
 };
-console.log('Email was triggered - server TEXT: ', mailOptions);
+// console.log('Email was triggered - server TEXT: ', mailOptions);
 
 var sendCoinsaverbotEmail = function (mailOptions) { 
   transporter.sendMail(mailOptions, function(error, info) {
