@@ -69,55 +69,58 @@ angular.module('coinsaver')
 
                   <md-input-container>
                     <md-select style="margin-top:-5px;" ng-model="frequency" aria-label="frequencyselect" ng-disabled="!enableEdit">
-                      <md-option ng-value="weekly" selected>weekly</md-option>
+                      <md-option ng-value="monthly" selected>monthly</md-option>
                     </md-select>
                   </md-input-container>
                 </div>
 
                 <div layout="column">
-                  <h4>Auto-purchase amount:</h4>
+
+                <h4>Additional auto-purchase amounts:</h4>
 
                   <div class="autopurchase">
 
-                    <div layout="row">
-                      <md-input-container class="amountinput">
-                        <label>Minimum purchase</label>
-                        <input ng-model="minPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit">
-                      </md-input-container>
-
-                      <md-input-container class="amountinput">
-                        <label>Add'l Purchase</label>
-                        <input ng-model="autoPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit">
-                          <md-tooltip class="tooltipcolor" md-direction="top" style="margin-top:-20px;">
-                            (Optional) Set a flat, additional purchase amount
-                          </md-tooltip>
-                        </input>
-                      </md-input-container>
+                    <div class="enableAdditional">
 
                       <div>
+                        <input type="checkbox" ng-model="enableAdditionalPurchase" ng-disabled="!enableEdit">
+                          Enable additional auto-purchase amount
+                          <md-tooltip class="tooltipcolor" md-direction="bottom">This is a flat amount separate from accumulated change</md-tooltip>                        
+                        </input>
+                      </div>
+
+
+                      <div layout="row">
                         <md-input-container class="amountinput">
-                          <label>Total minimum</label>
-                          <input name="total" ng-model="totalMin" ng-min="5" min="5" ng-readonly="true" type="tel">
+                          <label>Additional purchase</label>
+                          <input ng-model="additionalPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit || !enableAdditionalPurchase">
+                          <p ng-show="additionalPurchase < 0" style="color:red; font-size:10px; margin-left:3px;">Cannot be a negative number</p>
                         </md-input-container>
-                        <p ng-show="totalMin < 5" style="color:red; margin-top:-40px; font-size:10px; margin-left:3px;">Total minimum must be at least $5</p>
                       </div>
                     </div>
 
-                    <div class="enablecheck">
+                    <div class="enableMax">
                       <input type="checkbox" ng-model="enableMaxPurchase" ng-disabled="!enableEdit">
-                        Set maximum purchase limit?
+                        Enable maximum purchase limit
                       </input>
 
                       <div layout="row">
-                        <md-input-container class="amountinput" ng-style="{'visibility': enableMaxPurchase?'visible':'hidden'}">
+                        <md-input-container class="amountinput">
                           <label>Maximum purchase</label>
-                          <input ng-model="maxPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit">
-                          <p ng-show="maxPurchase < totalMin" style="color:red; font-size:10px; margin-left:3px;">Maximum must be greater than total minimum</p>
+                          <input ng-model="maxPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit || !enableAdditionalPurchase">
+                          <p ng-show="maxPurchase < trueMin" style="color:red; font-size:10px; margin-left:3px;">Maximum must be greater than {{trueMin | currency}}</p>
                         </md-input-container>
                       </div>
                     </div>
-
+                    
                   </div>
+
+
+
+
+
+
+
                 </div>
 
               </md-card-content>
@@ -140,12 +143,13 @@ angular.module('coinsaver')
     $scope.enableEdit = false;
     $scope.bitcoin = 50;
     $scope.ethereum = 100 - $scope.bitcoin;
-    $scope.frequency = 'weekly';
-    $scope.autoPurchase = 0.00;
+    $scope.frequency = 'monthly';
     $scope.minPurchase = 0.00;
-    $scope.totalMin = $scope.autoPurchase + $scope.minPurchase;
+    $scope.trueMin = Math.max(5, $scope.additionalPurchase);
     $scope.maxPurchase = 0.00;
-    $scope.noMaxPurchase = true;
+    $scope.additionalPurchase = 0;
+    $scope.enableMaxPurchase = false;
+    $scope.enableAdditionalPurchase = false;
 
     $scope.decBTC = () => {
       if ($scope.bitcoin !== 0 && $scope.enableEdit) {
@@ -166,8 +170,7 @@ angular.module('coinsaver')
     };
 
     $scope.formatCurrency = () => {
-      $scope.autoPurchase = parseFloat(parseFloat($scope.autoPurchase).toFixed(2)) || 0;
-      $scope.minPurchase = parseFloat(parseFloat($scope.minPurchase).toFixed(2)) || 0;
+      $scope.additionalPurchase = parseFloat(parseFloat($scope.minPurchase).toFixed(2)) || 0;
       $scope.maxPurchase = parseFloat(parseFloat($scope.maxPurchase).toFixed(2)) || null;
       $scope.totalMin = $scope.autoPurchase + $scope.minPurchase;
     };
