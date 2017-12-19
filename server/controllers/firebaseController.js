@@ -1,5 +1,6 @@
 const admin = require("firebase-admin");
 const serviceAccount = require('../../config/firebaseconfig.json');
+const moment = require('moment');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -94,7 +95,7 @@ var setupNewUserFB = function(userid, display_name, email){
   })
 }
 //!!  Example SetupNewUser
-// setupNewUserFB('testuserid2', 'bob', 'bobby123@gmail.com')
+setupNewUserFB('testuserid2', 'bob', 'bobby123@gmail.com')
 
 
 
