@@ -178,7 +178,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
         Banks
       </md-nav-item>
-      <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-sref="account" name="account">
+      <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
         Wallet
       </md-nav-item>
       <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">

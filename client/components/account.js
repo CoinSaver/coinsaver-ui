@@ -62,6 +62,10 @@ angular.module('coinsaver')
       window.location.replace("https://www.coinbase.com/oauth/authorize?client_id=f9d7e163baa378a50f4c65602294b21b59a8ec5043e2f17eefcf52cd401d5e1d&redirect_uri=http%3A%2F%2Flocalhost%3A9001%2Faccount%2F&response_type=code&scope=wallet%3Aaccounts%3Aread&account=all")
     };
 
+    this.newCoinbase = function(){
+      window.open("https://www.coinbase.com/join/5a2ed616e0226602a21850e2")
+    }
+
   },
 
   template: `
@@ -70,9 +74,14 @@ angular.module('coinsaver')
     <br><br>
 
     <div layout="row" ng-if="$ctrl.connected == false">
-      <md-button class="md-raised md-primary" flex ng-click="$ctrl.linkCoinbase()">
-        Link A Coinbase Account
-      </md-button>
+      <div flex></div>
+        <md-button class="md-raised md-primary" style="min-width:300px" ng-click="$ctrl.linkCoinbase()">
+          Link A Coinbase Account
+        </md-button>
+        <md-button class="md-raised md-primary" style="min-width:300px" ng-click="$ctrl.linkCoinbase()">
+          Connect A Coinbase Account
+        </md-button>
+      <div flex></div> 
     </div>
 
     <div layout="row" layout-xs="column" ng-if="$ctrl.connected == true">
