@@ -111,6 +111,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
     }
 
+
     this.writefbUser = function (property, value) {
       
       var currentuser = Auth.$getAuth()
@@ -125,11 +126,50 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       obj.name = currentuser.displayName;
       obj.email = '';
       obj.signupdate = '';
-      obj.name = 
 
-      ref.set(obj)
+      // userobj = {
+      //   // id: Number,
+      //   //// plaidinfo
+      //   plaid_user_id: '',
+      //   plaid_account_id: '',
 
-      ref.on('value', function(snapshot){
+      //   //// coinbaseinfo
+      //   coinbase_id: String,
+        
+      //   //// usersettings
+      //   is_purchase_enabled: true,
+      //   purchase_min: 5,
+      //   purchase_max: null,
+      //   purchase_auto: 0,
+      //   enforce_max: false,
+      //   btc_percent: 50, //0 to 1
+        
+      //   ref_code: '',
+      //   ref_by: '',
+      //   promo_code: '',
+        
+      //   //// userinfo
+      //   display_name: String,
+      //   email: String,
+      //   user_level: Number, //0 = FreeAccess, 1 = PayAccess, 2
+      //   user_type: 'free', // Free, Paid, Etc
+      //   user_signup_date: { type: Date, default: Date.now }, // *Make it today
+      //   is_new_coinbase_user: Boolean,
+        
+      //   stats_last_purchase_usd: 0,
+      //   stats_last_purchase_eth: 0,
+      //   stats_past_purchase_btc: 0,
+      //   stats_total_purchase_usd: 0,
+      //   stats_total_purchase_eth: 0,
+      //   stats_total_purchase_btc: 0,
+      //   stats_last_purchase_date: '', // **Make it today
+        
+      // }
+        
+      ref.set(userobj);
+        ref.set(obj);
+        
+        ref.on('value', function(snapshot){
         console.log('the new profile is: ', snapshot.val())
         }, function (errorObject){
         console.log('read failed: ', errorObject)
