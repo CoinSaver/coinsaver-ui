@@ -44,8 +44,7 @@ angular.module('coinsaver')
       $http.post('/retrievewallet', { useruid })
       .then((res) => {
         coinacct.wallet = res.data;
-        console.log(coinacct.wallet)
-        coinacct.connected = true;
+        if (Object.keys(coinacct.wallet).length !== 0 && coinacct.wallet.constructor === Object) coinacct.connected = true;
       });
     }
 
