@@ -137,34 +137,16 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         is_purchase_enabled: true,
         purchase_min: 5,
         purchase_max: null,
-        purchase_auto: 0,
+        purchase_additional: 0,
+        enforce_additional: false,
         enforce_max: false,
         btc_percent: 50, //0 to 100      
         ref_code: '',
         ref_by: '',
         promo_code: '',
         
-        //// userinfo
-        // display_name: '',
-        // email: '',
-        // user_level: 0, //0 = FreeAccess, 1 = NewCoinbaseUser, 2 = PremiumAccess
-        // user_type: 'free', // Free, Paid, Etc
-        // user_signup_date: new Date().toLocaleString(), // *Make it today
-        // is_new_coinbase_user: false,        
-        // stats_last_purchase_usd: 0,
-        // stats_last_purchase_eth: 0,
-        // stats_past_purchase_btc: 0,
-        // stats_total_purchase_usd: 0,
-        // stats_total_purchase_eth: 0,
-        // stats_total_purchase_btc: 0,
-        // stats_last_purchase_date: '', // **Make it today
 
-      //   //// plaidinfo
-      //   plaid_user_id: '',
-      //   plaid_account_id: '',
-
-      //   //// coinbaseinfo
-      //   coinbase_id: String,                
+                 
       }
         
         ref.set(userobj);
