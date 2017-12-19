@@ -9,11 +9,9 @@ admin.initializeApp({
 var auth = admin.auth();
 var db = admin.database();
 
-
 //!!This function prints your entire DB of a specific path to the console!!
 
 var printDB = function(path){
-
   var dbpath = db.ref(path);
 
   dbpath.once("value", snapshot => {
@@ -47,11 +45,28 @@ var updateFB = function(userid, path, property, value){
 // updateFB('bpc2buxD1DTtSWo3zDcrk1oFXY72', '/userinfo', 'name', 'huckabee')
 
 
+//! This functions returns whether or not there is data/ a file in a specific filepath.
 
+var checkDB = function(userid, path, callback){  
+  var dbpath = db.ref('users/' + userid + path);
+
+  dbpath.once("value", snapshot => {
+    const db = snapshot.val();
+    if (db){
+      callback("true")
+    } else {
+      callback("false")
+    }
+  })
+}
+
+
+
+
+//!!! COINSAVER FUNCTIONS !!!
 
 var saveCoinAuth = function(userid,access_token,refresh_token,scope){
   var userpath = db.ref('users/' + userid + '/coinbaseinfo')
-  // console.log(userpath)
 
   userpath.update({
     'access_token': access_token,
@@ -76,4 +91,4 @@ var coinAuthRefresh = function(userid, callback){
   })
 }
 
-module.exports = {updateFB, printDB, saveCoinAuth, coinAuthRefresh}
+module.exports = {updateFB, printDB, checkDB, saveCoinAuth, coinAuthRefresh}

@@ -50,7 +50,8 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   $stateProvider.state(settingsState);
 })
 .component('myApp', {
-  controller($http, $cookies, $firebaseObject, Auth, User) {
+  controller($http, $cookies, $firebaseObject, Auth, User, $state) {
+
     const ctrl = this;
 
     this.loggedIn = false;
@@ -72,6 +73,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       $cookies.remove('coinsaveruser');
       Auth.$signOut();
       User.set({})
+      location.reload()
     };
 
     this.login = function (){
@@ -84,6 +86,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
             ctrl.user.displayName = result.user.displayName;
             ctrl.loggedIn = true;
             ctrl.checkfbUser();
+            location.reload()
           })
     }
 
@@ -140,6 +143,12 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
     this.$onInit = () => {
 
+      setTimeout( () => { 
+        ctrl.currentNavitem = $state.current.name;
+        console.log(ctrl.currentNavitem)
+      }, 0)
+
+
       Auth.$onAuthStateChanged(function(firebaseUser) {
         if (firebaseUser) {
           console.log("Signed in as:", firebaseUser.uid);
@@ -160,17 +169,17 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   `
   <!-- Nav Bar -->
   <md-content layout="column" flex>
-    <md-nav-bar md-selected-nav-item="$ctrl.currentNavItem" nav-bar-aria-label="navigation links">
-      <md-nav-item  ui-sref="home" ui-sref-active="home" md-nav-click="$ctrl.view='home'" name="home">
+    <md-nav-bar md-selected-nav-item="$ctrl.currentNavitem" nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-sref="home" name="home" ui-sref-active="home">
         Home
       </md-nav-item>
-      <md-nav-item ui-sref="stats" ui-sref-active="stats" md-nav-click="$ctrl.view='stats'" name="stats">
+      <md-nav-item md-nav-sref="stats" name="stats" ui-sref-active="stats">
         Stats
       </md-nav-item>
-      <md-nav-item ui-sref="banks" ui-sref-active="banks" md-nav-click="$ctrl.view='banks'" name="banks">
+      <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
         Banks
       </md-nav-item>
-      <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-click="$ctrl.view='account'" name="account">
+      <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
         Wallet
       </md-nav-item>
       <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
