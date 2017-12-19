@@ -86,6 +86,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
             ctrl.user.displayName = result.user.displayName;
             ctrl.loggedIn = true;
             ctrl.checkfbUser();
+            location.reload()
           })
     }
 
