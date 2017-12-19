@@ -86,7 +86,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
             ctrl.user.displayName = result.user.displayName;
             ctrl.loggedIn = true;
             ctrl.checkfbUser();
-            location.reload()
+            // location.reload()
           })
     }
 
@@ -98,38 +98,61 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
       console.log('checking if this user exists...')
 
-      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/userinfo');
+      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/usersettings');
+      // console.log('ref', ref)
 
       ref.once("value", snapshot => {
         const user = snapshot.val();
         if (user){
           console.log('THIS USER ALREADY EXISTS, it is:', snapshot.val());
+          var signedinuser = Auth.$getAuth(); 
+          console.log('SIGNED IN USER: ', signedinuser);
+          console.log('signed in uid: ', signedinuser.uid);
+          console.log('signed in user email: ', signedinuser.email);
+          console.log('signed in user displayName: ', signedinuser.displayName);
         } else {
+          console.log('writing a new user')
           ctrl.writefbUser('works','true')
         }
       })
-
     }
+
 
     this.writefbUser = function (property, value) {
       
-      var currentuser = Auth.$getAuth()
+      var currentuser = Auth.$getAuth();
+      console.log('writing new user, here are items to strip off of: ', currentuser )
 
-      console.log('writing a new user for you now, ')
-      console.log('here are your items to strip off of: ', currentuser )
-
-      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/userinfo');
+      var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/usersettings');
+      // var ref = firebase.database().ref('users/' + Auth.$getAuth().uid);
+      
       var obj = {};
-
       obj[property] = value;
       obj.name = currentuser.displayName;
       obj.email = '';
       obj.signupdate = '';
-      obj.name = 
 
-      ref.set(obj)
+      var userobj = {
+        //// usersettings
+        is_purchase_enabled: true,
+        purchase_min: 5,
+        purchase_max: null,
+        purchase_additional: 0,
+        enforce_additional: false,
+        enforce_max: false,
+        btc_percent: 50, //0 to 100      
+        ref_code: '',
+        ref_by: '',
+        promo_code: '',
+        
 
-      ref.on('value', function(snapshot){
+                 
+      }
+        
+        ref.set(userobj);
+        // ref.set(obj);
+        
+        ref.on('value', function(snapshot){
         console.log('the new profile is: ', snapshot.val())
         }, function (errorObject){
         console.log('read failed: ', errorObject)
