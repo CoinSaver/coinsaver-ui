@@ -72,6 +72,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       $cookies.remove('coinsaveruser');
       Auth.$signOut();
       User.set({})
+      location.reload()
     };
 
     this.login = function (){

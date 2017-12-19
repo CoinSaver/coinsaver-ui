@@ -2,7 +2,6 @@ const COINBASE_KEYS = require('../../config/config.js').coinbaseAPI;
 const coinbase = require('coinbase');
 const axios = require('axios');
 
-
 var getClient = function(accessTokenTemp, refreshTokenTemp){
   const client = new coinbase.Client({
     'accessToken' : accessTokenTemp,
@@ -34,6 +33,28 @@ var getWallet = function(uid, accessTokenTemp, refreshTokenTemp, callback){
         console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
       });
     callback(acctobj)
+  });
+}
+
+var buyCoin = function(uid, accessTokenTemp, refreshTokenTemp, callback){
+
+  const client = new coinbase.Client({
+    'accessToken' : accessTokenTemp,
+    'refreshToken' : refreshTokenTemp
+  })
+
+  client.getAccounts({}, function(err, account) {
+    console.log('the account is,' ,account)
+    callback(account)
+  });
+
+  client.getAccount("ACCOUNTNUMBHERE", function(err, account) {
+    account.buy({"amount": "10",
+    "currency": "USD",
+    "quote": true}, function(err, tx) {
+      console.log(tx);
+      console.log(err)
+    });
   });
 }
 
@@ -76,4 +97,4 @@ var getRefreshToken = function(usercode, refreshToken, callback){
   });
 }
 
-module.exports = {getAccessToken, getClient, getWallet, getRefreshToken}
+module.exports = {getAccessToken, getClient, getWallet, getRefreshToken, buyCoin}

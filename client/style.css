@@ -61,3 +61,7 @@ main {
 .fill-space {
   flex: 1 1 auto;
 }
+
+.center {
+  text-align: center;
+}
