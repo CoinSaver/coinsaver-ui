@@ -69,7 +69,7 @@ angular.module('coinsaver')
 
                   <md-input-container>
                     <md-select style="margin-top:-5px;" ng-model="frequency" aria-label="frequencyselect" ng-disabled="!enableEdit">
-                      <md-option ng-value="monthly" selected>monthly</md-option>
+                      <md-option ng-value="weekly" selected>weekly</md-option>
                     </md-select>
                   </md-input-container>
                 </div>
@@ -170,7 +170,7 @@ angular.module('coinsaver')
     };
 
     $scope.formatCurrency = () => {
-      $scope.additionalPurchase = parseFloat(parseFloat($scope.minPurchase).toFixed(2)) || 0;
+      $scope.additionalPurchase = parseFloat(parseFloat($scope.additionalPurchase).toFixed(2)) || 0;
       $scope.maxPurchase = parseFloat(parseFloat($scope.maxPurchase).toFixed(2)) || null;
       $scope.totalMin = $scope.autoPurchase + $scope.minPurchase;
     };
