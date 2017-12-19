@@ -8,6 +8,7 @@ angular.module('coinsaver')
     let coinacct = this;
 
     this.loggedIn = false;
+    this.connected = false;
     this.coinlink = false;
     this.user = User.get();
     this.wallet = {};
@@ -44,6 +45,7 @@ angular.module('coinsaver')
       .then((res) => {
         coinacct.wallet = res.data;
         console.log(coinacct.wallet)
+        coinacct.connected = true;
       });
     }
 
@@ -64,17 +66,16 @@ angular.module('coinsaver')
 
   template: `
   <div>
-    This line is written in the account.js component;
 
-    <p>Click here to tie your coinbase account:</p>
+    <br><br>
 
-    Please click here {{$ctrl.user.displayName}}
+    <div layout="row" ng-if="$ctrl.connected == false">
+      <md-button class="md-raised md-primary" flex ng-click="$ctrl.linkCoinbase()">
+        Link A Coinbase Account
+      </md-button>
+    </div>
 
-    <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.linkCoinbase()">
-      Link Coinbase
-    </md-button>
-    
-    <div layout="row" layout-xs="column" ng-if="$ctrl.wallet !== {}">
+    <div layout="row" layout-xs="column" ng-if="$ctrl.connected == true">
       <div flex="20"></div>
         <div flex="20">    
           <center>    
@@ -97,21 +98,16 @@ angular.module('coinsaver')
             <img src="./images/ethround.svg" width="150" height= "150" alt="Etherium">
             <br>
             {{$ctrl.wallet["ETH Wallet"]}} 
-            <br> Etherium
+            <br> Ethereum
           </center>
         </div>
       <div flex="20"></div>
     </div>
 
-    <div>
+    <!--<div>
       <md-button md-autofocus class="md-primary" flex ng-click="$ctrl.buyCoin(5, $ctrl.user.uid)">
         Buy $5 BTC
       </md-button>
-    </div>
-
-
-    <!--<div>
-      {{$ctrl.wallet}}
     </div>-->
 
   </div>
