@@ -61,6 +61,42 @@ var checkDB = function(userid, path, callback){
 }
 
 
+//!! Setup Intiial Values in Firebase
+var setupNewUserFB = function(userid, display_name, email){
+  console.log('setupNewUserFB ran')
+  var userinfopath = db.ref('users/' + userid + '/userinfo')
+  var currentTime = new Date().toLocaleString();
+  console.log('current time is: ', currentTime);
+
+  userinfopath.update({
+    // userinfo
+    display_name: display_name || '',
+    email: email || '',
+    user_level: 0, //0 = FreeAccess, 1 = NewCoinbaseUser, 2 = PremiumAccess
+    user_type: 'free', // Free, Premium, Etc
+    user_signup_date: currentTime, // *Make it today
+    is_new_coinbase_user: false,        
+    stats_last_purchase_usd: 0,
+    stats_last_purchase_eth: 0,
+    stats_past_purchase_btc: 0,
+    stats_total_purchase_usd: 0,
+    stats_total_purchase_eth: 0,
+    stats_total_purchase_btc: 0,
+    stats_last_purchase_date: currentTime, // **Make it today 
+  });
+  
+  var plaidinfopath = db.ref('users/' + userid + '/plaidinfo')
+  plaidinfopath.update({
+    //// plaidinfo
+    plaid_user_id: '',
+    plaid_account_id: '',
+    
+  })
+}
+//!!  Example SetupNewUser
+// setupNewUserFB('testuserid2', 'bob', 'bobby123@gmail.com')
+
+
 
 
 //!!! COINSAVER FUNCTIONS !!!
@@ -91,4 +127,4 @@ var coinAuthRefresh = function(userid, callback){
   })
 }
 
-module.exports = {updateFB, printDB, checkDB, saveCoinAuth, coinAuthRefresh}
+module.exports = {updateFB, printDB, checkDB, setupNewUserFB, saveCoinAuth, coinAuthRefresh}

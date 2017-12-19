@@ -86,7 +86,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
             ctrl.user.displayName = result.user.displayName;
             ctrl.loggedIn = true;
             ctrl.checkfbUser();
-            location.reload()
+            // location.reload()
           })
     }
 
@@ -144,20 +144,20 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         ref_by: '',
         promo_code: '',
         
-      //   //// userinfo
-      //   display_name: '',
-      //   email: '',
-      //   user_level: 0, //0 = FreeAccess, 1 = NewCoinbaseUser, 2 = PremiumAccess
-      //   user_type: 'free', // Free, Paid, Etc
-      //   user_signup_date: new Date().toLocaleString(), // *Make it today
-      //   is_new_coinbase_user: false,        
-        stats_last_purchase_usd: 0,
-        stats_last_purchase_eth: 0,
-        stats_past_purchase_btc: 0,
-        stats_total_purchase_usd: 0,
-        stats_total_purchase_eth: 0,
-        stats_total_purchase_btc: 0,
-        stats_last_purchase_date: '', // **Make it today
+        //// userinfo
+        // display_name: '',
+        // email: '',
+        // user_level: 0, //0 = FreeAccess, 1 = NewCoinbaseUser, 2 = PremiumAccess
+        // user_type: 'free', // Free, Paid, Etc
+        // user_signup_date: new Date().toLocaleString(), // *Make it today
+        // is_new_coinbase_user: false,        
+        // stats_last_purchase_usd: 0,
+        // stats_last_purchase_eth: 0,
+        // stats_past_purchase_btc: 0,
+        // stats_total_purchase_usd: 0,
+        // stats_total_purchase_eth: 0,
+        // stats_total_purchase_btc: 0,
+        // stats_last_purchase_date: '', // **Make it today
 
       //   //// plaidinfo
       //   plaid_user_id: '',
