@@ -75,7 +75,7 @@ angular.module('coinsaver')
         .then((answer) => {
           $http.get('/transactions')
             .then((res) => {
-              console.log('Transactions: ',res.data);
+              console.log('Transactions: ', res.data);
               ctrl.transactions = res.data;
               ctrl.linked = true;
               ctrl.loading = false;
@@ -98,7 +98,7 @@ angular.module('coinsaver')
 
       $scope.cancel = () => {
         $mdDialog.cancel();
-      }
+      };
 
       $scope.selectedIndex;
 

@@ -95,7 +95,7 @@ var setupNewUserFB = function(userid, display_name, email){
   })
 }
 //!!  Example SetupNewUser
-setupNewUserFB('testuserid2', 'bob', 'bobby123@gmail.com')
+setupNewUserFB('UBnLrrSpCwSM6ianngmSqu9a8E73', 'Rich Oh', 'sioh89@gmail.com')
 
 
 
@@ -126,6 +126,6 @@ var coinAuthRefresh = function(userid, callback){
       console.log('Is your database currently empty? Try linking a google account')
     }
   })
-}
+};
 
 module.exports = {updateFB, printDB, checkDB, setupNewUserFB, saveCoinAuth, coinAuthRefresh}

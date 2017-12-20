@@ -1,6 +1,6 @@
 angular.module('coinsaver')
   .component('settings', {
-    controller() {
+    controller(Auth) {
       const ctrl = this;
 
       this.autopurchase = true;
@@ -17,7 +17,7 @@ angular.module('coinsaver')
           <form name="settingsForm">
       
             <md-input-container class="md-block">
-              <md-switch class="md-primary" name="special" ng-model="enableAutoPurchase" ng-disabled="true">
+              <md-switch class="md-primary" name="special" ng-model="toSave.enableAutoPurchase" ng-disabled="true">
                 Enable auto-purchase
                 <md-tooltip class="tooltipcolor" md-direction="bottom">
                   Please unlink your account from the banks tab
@@ -29,12 +29,11 @@ angular.module('coinsaver')
 
               <md-card-actions layout="row" layout-align="end center">
                 <md-button ng-if="!enableEdit" ng-click="activateEdit()">Edit</md-button>
-                <md-button ng-if="enableEdit" ng-click="deactivateEdit()">Cancel</md-button>
-                <md-button ng-if="enableEdit">Save</md-button>
+                <md-button ng-if="enableEdit" ng-click="cancelForm()">Cancel</md-button>
+                <md-button ng-if="enableEdit" ng-click="submitForm()">Save</md-button>
               </md-card-actions>
 
               <md-card-content>
-
                 <h4 style="margin-bottom:0px; padding-bottom:0px;">BTC:ETH purchase ratio</h4>
 
                 <div layout="row">
@@ -45,17 +44,17 @@ angular.module('coinsaver')
 
                       <div layout="column" style="margin-right:15px; text-align:center;">
                         <p style="margin-bottom:0px; padding-top:0px;"><b>BTC</b></p>
-                        <p style="margin-top:0px;">{{bitcoin}}</p>
+                        <p style="margin-top:0px;">{{toSave.btc_percent}}</p>
                       </div>
 
                       <md-slider-container ng-disabled="!enableEdit">
-                        <md-slider min="0" max="100" ng-model="bitcoin" aria-label="ratioslider" ng-change="sliderControl()">
+                        <md-slider min="0" max="100" ng-model="toSave.btc_percent" aria-label="ratioslider" ng-change="sliderControl()">
                         </md-slider>
                       </md-slider-container>
 
                       <div layout="column" style="margin-left:15px; text-align:center;">
                         <p style="margin-bottom:0px; padding-top:0px;"><b>ETH</b></p>
-                        <p style="margin-top:0px;">{{ethereum}}</p>
+                        <p style="margin-top:0px;">{{eth_percent}}</p>
                       </div>
 
                       <md-icon class="mdicon" ng-click="decETH()">keyboard_arrow_right</md-icon>
@@ -69,7 +68,7 @@ angular.module('coinsaver')
 
                   <md-input-container>
                     <md-select style="margin-top:-5px;" ng-model="frequency" aria-label="frequencyselect" ng-disabled="!enableEdit">
-                      <md-option ng-value="weekly" selected>weekly</md-option>
+                      <md-option ng-value="monthly" selected>monthly</md-option>
                     </md-select>
                   </md-input-container>
                 </div>
@@ -83,7 +82,7 @@ angular.module('coinsaver')
                     <div class="enableAdditional">
 
                       <div>
-                        <input type="checkbox" ng-model="enableAdditionalPurchase" ng-disabled="!enableEdit">
+                        <input type="checkbox" ng-model="toSave.enforce_additional" ng-disabled="!enableEdit">
                           Enable additional auto-purchase amount
                           <md-tooltip class="tooltipcolor" md-direction="bottom">This is a flat amount separate from accumulated change</md-tooltip>                        
                         </input>
@@ -93,34 +92,27 @@ angular.module('coinsaver')
                       <div layout="row">
                         <md-input-container class="amountinput">
                           <label>Additional purchase</label>
-                          <input ng-model="additionalPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit || !enableAdditionalPurchase">
-                          <p ng-show="additionalPurchase < 0" style="color:red; font-size:10px; margin-left:3px;">Cannot be a negative number</p>
+                          <input ng-model="toSave.purchase_additional" ng-change="updateTrueMin()" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit || !toSave.enforce_additional">
+                          <p ng-show="toSave.enforce_additional && toSave.purchase_additional < 0" style="color:red; font-size:10px; margin-left:3px;">Cannot be a negative number</p>
                         </md-input-container>
                       </div>
                     </div>
 
                     <div class="enableMax">
-                      <input type="checkbox" ng-model="enableMaxPurchase" ng-disabled="!enableEdit">
+                      <input type="checkbox" ng-model="toSave.enforce_max" ng-disabled="!enableEdit">
                         Enable maximum purchase limit
                       </input>
 
                       <div layout="row">
                         <md-input-container class="amountinput">
                           <label>Maximum purchase</label>
-                          <input ng-model="maxPurchase" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit || !enableAdditionalPurchase">
-                          <p ng-show="maxPurchase < trueMin" style="color:red; font-size:10px; margin-left:3px;">Maximum must be greater than {{trueMin | currency}}</p>
+                          <input ng-model="toSave.purchase_max" type="tel" ng-blur="formatCurrency()" ng-readonly="!enableEdit || !toSave.enforce_max">
+                          <p ng-show="toSave.enforce_max && toSave.purchase_max < trueMin" style="color:red; font-size:10px; margin-left:3px;">Maximum must be greater than {{trueMin | currency}}</p>
                         </md-input-container>
                       </div>
                     </div>
-                    
+
                   </div>
-
-
-
-
-
-
-
                 </div>
 
               </md-card-content>
@@ -132,55 +124,81 @@ angular.module('coinsaver')
       </div>
     `,
   })
-  .controller('SettingsController', ($scope) => {
-    $scope.project = {
-      description: 'Nuclear Missile Defense System',
-      rate: 500,
-      special: true,
-    };
+  .controller('SettingsController', ($scope, Auth) => {
 
-    $scope.enableAutoPurchase = true;
+    $scope.saved = {};
+    $scope.toSave = {};
     $scope.enableEdit = false;
-    $scope.bitcoin = 50;
-    $scope.ethereum = 100 - $scope.bitcoin;
-    $scope.frequency = 'monthly';
-    $scope.minPurchase = 0.00;
-    $scope.trueMin = Math.max(5, $scope.additionalPurchase);
-    $scope.maxPurchase = 0.00;
-    $scope.additionalPurchase = 0;
-    $scope.enableMaxPurchase = false;
-    $scope.enableAdditionalPurchase = false;
+    
+    const temp = Auth.$getAuth().uid;
+    const ref = firebase.database().ref(`users/${temp}/usersettings`);
+    
+    ref.on('value', (snapshot) => {
+      $scope.saved = snapshot.val();
+      $scope.saved.enableAutoPurchase = true;
+      
+      $scope.toSave = JSON.parse(JSON.stringify($scope.saved));
+      
+      $scope.frequency = 'monthly';
+      $scope.eth_percent = 100 - $scope.toSave.btc_percent;
+      $scope.trueMin = Math.max(5, $scope.toSave.purchase_additional) || 5;
+
+      $scope.$apply();
+    }, (errorObject) => {
+      console.log(errorObject);
+    });
 
     $scope.decBTC = () => {
-      if ($scope.bitcoin !== 0 && $scope.enableEdit) {
-        $scope.bitcoin--;
-        $scope.ethereum++;
+      if ($scope.toSave.btc_percent !== 0 && $scope.enableEdit) {
+        $scope.toSave.btc_percent--;
+        $scope.eth_percent = 100 - $scope.toSave.btc_percent;
       }
     };
 
     $scope.decETH = () => {
-      if ($scope.ethereum !== 0 && $scope.enableEdit) {
-        $scope.ethereum--;
-        $scope.bitcoin++;
+      if ($scope.eth_percent !== 0 && $scope.enableEdit) {
+        $scope.toSave.btc_percent++;
+        $scope.eth_percent = 100 - $scope.toSave.btc_percent;
       }
     };
 
     $scope.sliderControl = () => {
-      $scope.ethereum = 100 - $scope.bitcoin;
+      $scope.eth_percent = 100 - $scope.toSave.btc_percent;
+    };
+
+    $scope.updateTrueMin = () => {
+      $scope.trueMin = Math.max(5, $scope.toSave.purchase_additional) || 5;
     };
 
     $scope.formatCurrency = () => {
-      $scope.additionalPurchase = parseFloat(parseFloat($scope.additionalPurchase).toFixed(2)) || 0;
-      $scope.maxPurchase = parseFloat(parseFloat($scope.maxPurchase).toFixed(2)) || null;
-      $scope.totalMin = $scope.autoPurchase + $scope.minPurchase;
+      $scope.toSave.purchase_additional = parseFloat(parseFloat($scope.toSave.purchase_additional).toFixed(2)) || 0;
+      $scope.toSave.purchase_max = parseFloat(parseFloat($scope.toSave.purchase_max).toFixed(2)) || 0;
+      $scope.totalMin = $scope.toSave.autoPurchase + $scope.toSave.purchase_min;
     };
 
     $scope.activateEdit = () => {
       $scope.enableEdit = true;
     };
 
-    $scope.deactivateEdit = () => {
+    $scope.cancelForm = () => {
       $scope.enableEdit = false;
+      $scope.toSave = JSON.parse(JSON.stringify($scope.saved));
+      $scope.frequency = 'monthly';
+      $scope.eth_percent = 100 - $scope.toSave.btc_percent;
+      $scope.trueMin = Math.max(5, $scope.toSave.purchase_additional) || 5;
     };
 
+    $scope.submitForm = () => {
+      if ($scope.toSave.enforce_additional && $scope.toSave.purchase_additional > 0) {
+        if ($scope.toSave.enforce_max && $scope.toSave.enforce_max > $scope.trueMin) {
+          ref.update($scope.toSave, () => {
+            ref.on('value', (snapshot) => {
+              $scope.saved = snapshot.val();
+              $scope.toSave = JSON.parse(JSON.stringify($scope.saved));
+              $scope.$apply();
+            });
+          });
+        }
+      }
+    };
   });

@@ -101,7 +101,7 @@ module.exports = {
           return res.json({ error });
         }
 
-        res.json(plaidHelper.formatTransactions(transactionsResponse));
+        return res.json(plaidHelper.formatTransactions(transactionsResponse));
       });
     },
   },
