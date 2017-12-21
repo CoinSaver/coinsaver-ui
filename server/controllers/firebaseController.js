@@ -28,17 +28,17 @@ var printDB = function(path){
 
 //!!This is an example of printDB in action!!
 
-printDB('/users')
+// printDB('/users')
 
 //!!This function updates a single property, below is an example of using it to update my user info's name to huckabee
 
 var updateFB = function(userid, path, property, value){
   var userpath = db.ref('users/' + userid + path)
   // console.log(userpath)
+  const updateObj = {};
+  updateObj[property] = value;
 
-  userpath.update({
-    property: value
-  });
+  userpath.update(updateObj);
 }
 
 //!!This is an example of updateFB in action!!
@@ -76,14 +76,17 @@ var setupNewUserFB = function(userid, display_name, email){
     user_level: 0, //0 = FreeAccess, 1 = NewCoinbaseUser, 2 = PremiumAccess
     user_type: 'free', // Free, Premium, Etc
     user_signup_date: currentTime, // *Make it today
-    is_new_coinbase_user: false,        
+    is_new_coinbase_user: false, 
+    linked_plaid: false,       
     stats_last_purchase_usd: 0,
     stats_last_purchase_eth: 0,
     stats_past_purchase_btc: 0,
     stats_total_purchase_usd: 0,
     stats_total_purchase_eth: 0,
     stats_total_purchase_btc: 0,
-    stats_last_purchase_date: currentTime, // **Make it today 
+    stats_last_purchase_date: moment().format('YYYY-MM-DD'),
+    stats_next_purchase_date: '',
+    transactions: 0, 
   });
   
   var plaidinfopath = db.ref('users/' + userid + '/plaidinfo')
@@ -95,7 +98,7 @@ var setupNewUserFB = function(userid, display_name, email){
   })
 }
 //!!  Example SetupNewUser
-setupNewUserFB('testuserid2', 'bob', 'bobby123@gmail.com')
+// setupNewUserFB('UBnLrrSpCwSM6ianngmSqu9a8E73', 'Rich Oh', 'sioh89@gmail.com')
 
 
 
@@ -126,6 +129,36 @@ var coinAuthRefresh = function(userid, callback){
       console.log('Is your database currently empty? Try linking a google account')
     }
   })
-}
+};
 
-module.exports = {updateFB, printDB, checkDB, setupNewUserFB, saveCoinAuth, coinAuthRefresh}
+const fetchPlaidInfo = (uid, callback) => {  
+  const plaidKeyPath = db.ref(`users/${uid}/plaidinfo`);
+  const plaidInfoPath = db.ref(`users/${uid}/userinfo`);
+  let returnObj = {};
+  
+  plaidKeyPath.once("value", keySnapshot => {
+    const keyData = keySnapshot.val();
+    returnObj = JSON.parse(JSON.stringify(keyData));
+
+    plaidInfoPath.once("value", infoSnapshot => {
+      
+      const infoData = infoSnapshot.val();
+
+      returnObj.stats_last_purchase_date = infoData.stats_last_purchase_date;
+      returnObj.stats_next_purchase_date = infoData.stats_next_purchase_date;
+      returnObj.transactions = infoData.transactions;
+
+      callback(returnObj);
+    });
+  });
+};
+
+const fetchDB = (uid, path, callback) => {
+  const fetchPath = db.ref(`users/${uid}${path}`);
+
+  fetchPath.once('value', fetchSnapshot => {
+    callback(fetchSnapshot.val());
+  });
+};
+
+module.exports = {updateFB, printDB, checkDB, fetchDB, setupNewUserFB, saveCoinAuth, coinAuthRefresh, fetchPlaidInfo}

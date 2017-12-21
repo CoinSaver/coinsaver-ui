@@ -16,13 +16,32 @@ angular.module('coinsaver')
     </div>
     `,
   })
-  .controller('BankController', function bankControllerFunction($http, $mdDialog, User) {
+  .controller('BankController', function bankControllerFunction($scope, $http, $mdDialog, User, Auth) {
     const ctrl = this;
 
     this.linked = false;
     this.accounts = [];
     this.transactions = [];
-    this.loading = false;
+    this.loading = true;
+
+    this.$onInit = () => {
+      Auth.$onAuthStateChanged((firebaseUser) => {
+        if (firebaseUser) {
+          const ref = firebase.database().ref(`users/${firebaseUser.uid}/userinfo`);
+          ref.on('value', (snapshot) => {
+            const info = snapshot.val();
+            ctrl.linked = info.linked_plaid;
+
+            if (ctrl.linked) {
+              ctrl.transactions = info.transactions;
+            }
+
+            ctrl.loading = false;
+            $scope.$apply();
+          });
+        }
+      });
+    };
 
     this.handler = Plaid.create({
       apiVersion: 'v2',
@@ -32,15 +51,15 @@ angular.module('coinsaver')
       key: 'a2467d682553b671fe4f51d29561a3',
       onSuccess: function handlerOnSuccess(publicToken) {
         ctrl.loading = true;
-        console.log('plaid client created: public token', publicToken);
-        $http.post('/get_access_token', { publicToken })
+
+        const uid = Auth.$getAuth().uid;
+
+        $http.post('/get_access_token', { publicToken, uid })
           .then((res) => {
             console.log('Successful post to exchange tokens!', res);
 
             $http.get('/accounts')
               .then((res) => {
-                console.log('User data:');
-                console.log(res.data);
                 ctrl.accounts = res.data.accounts;
                 ctrl.handleChooseAccount();
               });
@@ -53,9 +72,14 @@ angular.module('coinsaver')
     };
 
     this.delink = () => {
-      this.linked = false;
-      this.accounts = [];
-      this.transactions = [];
+      this.loading = true;
+      $http.post('/unlinkPlaid', { uid: Auth.$getAuth().uid })
+        .then(() => {
+          ctrl.linked = false;
+          ctrl.accounts = [];
+          ctrl.transactions = [];
+          ctrl.loading = false;
+        });
     };
 
     this.status = '  ';
@@ -73,18 +97,27 @@ angular.module('coinsaver')
         fullscreen: ctrl.customFullscreen,
       })
         .then((answer) => {
-          $http.get('/transactions')
+          $http.post('/accounts', {
+            uid: Auth.$getAuth().uid,
+            i: ctrl.accounts[answer].accountId,
+          })
             .then((res) => {
-              console.log('Transactions: ',res.data);
-              ctrl.transactions = res.data;
-              ctrl.linked = true;
-              ctrl.loading = false;
+              $http.post('/transactions', { uid: Auth.$getAuth().uid })
+                .then((transRes) => {
+                  console.log('Transactions: ', transRes.data);
+                  ctrl.transactions = transRes.data;
+                  ctrl.linked = true;
+                  ctrl.loading = false;
+                });
             });
         }, () => {
-          ctrl.linked = false;
-          ctrl.accounts = [];
-          ctrl.transactions = [];
-          ctrl.loading = false;
+          $http.post('/unlinkPlaid', { uid: Auth.$getAuth().uid })
+            .then(() => {
+              ctrl.linked = false;
+              ctrl.accounts = [];
+              ctrl.transactions = [];
+              ctrl.loading = false;
+            });
         });
     };
 
@@ -98,7 +131,7 @@ angular.module('coinsaver')
 
       $scope.cancel = () => {
         $mdDialog.cancel();
-      }
+      };
 
       $scope.selectedIndex;
 

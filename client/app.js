@@ -136,7 +136,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         //// usersettings
         is_purchase_enabled: true,
         purchase_min: 5,
-        purchase_max: null,
+        purchase_max: 0,
         purchase_additional: 0,
         enforce_additional: false,
         enforce_max: false,
