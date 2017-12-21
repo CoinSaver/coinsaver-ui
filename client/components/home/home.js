@@ -72,6 +72,12 @@ body{
 h1,h2,h3,h4,h5,h6{
     font-weight: 700;
 }
+.text-primary{
+  color: #ffb300 !important;
+}
+a:-webkit-any-link{
+  color: #ffb300 !important;
+}
 b, strong{
     font-weight: 500;
 }
@@ -579,7 +585,7 @@ Pricing tables & lists
                             <li>Aenean commodo ligula eget dolor.</li>
                             <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
                         </ul>
-                        <a href="#purchase" class="btn btn-primary mr-2 page-scroll">Get Started with Comply</a>
+                        <!--<a href="#purchase" class="btn btn-primary mr-2 page-scroll">Get Started with Comply</a>-->
                     </div>
                 </div>
             </div>
@@ -682,17 +688,17 @@ Pricing tables & lists
                 </div>
                 <div class="row d-md-flex mt-1 text-center">
                     <div class="team col-sm-4 mt-2 wow fadeInLeft">
-                        <img src="img/team-1.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <img src="img/team-1.jpg" alt="it alex" class="img-team img-fluid rounded-circle"/>
                         <h5>Alex Brawley</h5>
                         <p>Cryptologist Expert</p>
                     </div>
                     <div class="team col-sm-4 mt-2 wow fadeIn">
-                        <img src="img/team-4.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <img src="img/team-4.jpg" alt="it rich" class="img-team img-fluid rounded-circle"/>
                         <h5>Richard Oh</h5>
-                        <p>The Master</p>
+                        <p>The guy we ask to do github stuff</p>
                     </div>
                     <div class="team col-sm-4 mt-2 wow fadeIn">
-                        <img src="img/team-2.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <img src="img/team-2.jpg" alt="it mike" class="img-team img-fluid rounded-circle"/>
                         <h5>Michael Walker</h5>
                         <p>"The Muscle"</p>
                     </div>
