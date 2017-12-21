@@ -27,7 +27,6 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   const homeState = {
     name: 'home',
     url: '/',
-    template: '<home />',
     authenticate: false,
     resolve: {
       // controller will not be loaded until $waitForSignIn resolves
@@ -106,7 +105,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   $stateProvider.state(banksState);
   $stateProvider.state(accountState);
   $stateProvider.state(settingsState);
-  // $urlRouterProvider.otherwise("/home");
+  $urlRouterProvider.otherwise("/");
 })
 .component('myApp', {
   controller($http, $cookies, $firebaseObject, Auth, User, $state) {
@@ -114,7 +113,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     const ctrl = this;
 
     this.loggedIn = false;
-    this.user = {};
+    this.user
 
     this.view = 'home';
 
@@ -226,49 +225,55 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
   template:
   `
+
+  <div ng-if="$ctrl.loggedIn === false">
+    <home />
+  </div>
   <!-- Nav Bar -->
-  <md-content layout="column" flex>
-    <md-nav-bar md-selected-nav-item="$ctrl.currentNavitem" nav-bar-aria-label="navigation links">
-      <md-nav-item md-nav-sref="home" name="home" ui-sref-active="home">
-        Home
-      </md-nav-item>
-      <md-nav-item md-nav-sref="stats" name="stats" ui-sref-active="stats">
-        Stats
-      </md-nav-item>
-      <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
-        Banks
-      </md-nav-item>
-      <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
-        Wallet
-      </md-nav-item>
-      <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
-        Account Settings
-      </md-nav-item>
-
-      <!-- Spacer -->
-      <span class="fill-space"></span>
-
-      <!-- Login / Welcome -->
-      <div ng-if="$ctrl.loggedIn === false">
-        <md-nav-item md-nav-click="$ctrl.login('google')" name="login">
-          [ Login ]
+  <div ng-if="$ctrl.loggedIn === true">
+    <md-content layout="column" flex>
+      <md-nav-bar md-selected-nav-item="$ctrl.currentNavitem" nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-sref="home" name="home" ui-sref-active="home">
+          Home
         </md-nav-item>
-      </div>
+        <md-nav-item md-nav-sref="stats" name="stats" ui-sref-active="stats">
+          Stats
+        </md-nav-item>
+        <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
+          Banks
+        </md-nav-item>
+        <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
+          Wallet
+        </md-nav-item>
+        <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
+          Account Settings
+        </md-nav-item>
 
-      <div ng-if="$ctrl.loggedIn === true">
-        <md-button>
-        Welcome, {{$ctrl.user.displayName}}
-        </md-button>
-        <md-button ng-click="$ctrl.logOut()" name="logout">
-        [ Log out ]
-        </md-button>
-      </div>
+        <!-- Spacer -->
+        <span class="fill-space"></span>
 
-    </md-nav-bar>
+        <!-- Login / Welcome -->
+        <div ng-if="$ctrl.loggedIn === false">
+          <md-nav-item md-nav-click="$ctrl.login('google')" name="login">
+            [ Login ]
+          </md-nav-item>
+        </div>
 
-  <!-- Ui Router Body -->
-    <ui-view></ui-view>
+        <div ng-if="$ctrl.loggedIn === true">
+          <md-button>
+          Welcome, {{$ctrl.user.displayName}}
+          </md-button>
+          <md-button ng-click="$ctrl.logOut()" name="logout">
+          [ Log out ]
+          </md-button>
+        </div>
 
-  </md-content>
+      </md-nav-bar>
+    </md-content>
+
+    <!-- Ui Router Body -->
+      <ui-view></ui-view>
+
+  </div>  
 `,
 });
