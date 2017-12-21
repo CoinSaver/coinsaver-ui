@@ -6,7 +6,7 @@ angular.module('coinsaver')
     },
     template: `
     <div>
-      This line is written in the home.js component
+      You can no longer access any other pages :)
     </div>
   `,
   });
