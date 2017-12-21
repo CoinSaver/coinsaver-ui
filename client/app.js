@@ -105,11 +105,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   $stateProvider.state(banksState);
   $stateProvider.state(accountState);
   $stateProvider.state(settingsState);
-<<<<<<< HEAD
   $urlRouterProvider.otherwise("/");
-=======
-  // $urlRouterProvider.otherwise("/home");
->>>>>>> Locking user access based on Auth state successfully
 })
 .component('myApp', {
   controller($http, $cookies, $firebaseObject, Auth, User, $state) {
