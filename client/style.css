@@ -67,3 +67,7 @@ main {
 }
 
 
+.bg-texture {
+  background-image: any;
+  background-size: cover;
+}
