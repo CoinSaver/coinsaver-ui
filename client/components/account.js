@@ -15,6 +15,8 @@ angular.module('coinsaver')
 
     this.$onInit = () => {
 
+      // console.log('the current auth is', currentAuth)
+
       Auth.$onAuthStateChanged(function(firebaseUser) {
         if (firebaseUser) {
           coinacct.user = firebaseUser;
@@ -41,11 +43,11 @@ angular.module('coinsaver')
     }
 
     this.getcoinwallet = (useruid) => {
+      console.log('getting wallet right')
       $http.post('/retrievewallet', { useruid })
       .then((res) => {
         coinacct.wallet = res.data;
-        console.log(coinacct.wallet)
-        coinacct.connected = true;
+        if (Object.keys(coinacct.wallet).length !== 0 && coinacct.wallet.constructor === Object) coinacct.connected = true;
       });
     }
 

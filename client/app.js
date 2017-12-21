@@ -14,40 +14,98 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       default: '200', // use shade 200 for default, and keep all other shades the same
     });
 })
-.config(($stateProvider) => {
+.run(["$rootScope", "$state", function($rootScope, $state) {
+  $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+    // We can catch the error thrown when the $requireSignIn promise is rejected
+    // and redirect the user back to the home page
+    if (error === "AUTH_REQUIRED") {
+      $state.go("home");
+    }
+  });
+}])
+.config(($stateProvider, $urlRouterProvider) => {
   const homeState = {
     name: 'home',
     url: '/',
-    template: '<home />',
+    authenticate: false,
+    resolve: {
+      // controller will not be loaded until $waitForSignIn resolves
+      // Auth refers to our $firebaseAuth wrapper in the factory below
+      "currentAuth": ["Auth", function(Auth) {
+        // $waitForSignIn returns a promise so the resolve waits for it to complete
+        return Auth.$waitForSignIn();
+      }]
+    }
   };
   const statsState = {
     name: 'stats',
     url: '/stats',
     template: '<stats />',
+    authenticate: true,
+    resolve: {
+      // controller will not be loaded until $requireSignIn resolves
+      // Auth refers to our $firebaseAuth wrapper in the factory below
+      "currentAuth": ["Auth", function(Auth) {
+        // $requireSignIn returns a promise so the resolve waits for it to complete
+        // If the promise is rejected, it will throw a $stateChangeError (see above)
+        return Auth.$requireSignIn();
+      }]
+    }
   };
   const banksState = {
     name: 'banks',
     url: '/banks',
     template: '<banks />',
+    authenticate: true,
+    resolve: {
+      // controller will not be loaded until $requireSignIn resolves
+      // Auth refers to our $firebaseAuth wrapper in the factory below
+      "currentAuth": ["Auth", function(Auth) {
+        // $requireSignIn returns a promise so the resolve waits for it to complete
+        // If the promise is rejected, it will throw a $stateChangeError (see above)
+        return Auth.$requireSignIn();
+      }]
+    }
   };
   const accountState = {
     name: 'account',
     url: '/account/:myParam',
     template: '<account />',
+    authenticate: true,
     controller: function ($stateParams) {
       // console.log($stateParams)
+    },
+    resolve: {
+      // controller will not be loaded until $requireSignIn resolves
+      // Auth refers to our $firebaseAuth wrapper in the factory below
+      "currentAuth": ["Auth", function(Auth) {
+        // $requireSignIn returns a promise so the resolve waits for it to complete
+        // If the promise is rejected, it will throw a $stateChangeError (see above)
+        return Auth.$requireSignIn();
+      }]
     }
   };
   const settingsState = {
     name: 'settings',
     url: '/settings',
     template: '<settings />',
+    authenticate: true,
+    resolve: {
+      // controller will not be loaded until $requireSignIn resolves
+      // Auth refers to our $firebaseAuth wrapper in the factory below
+      "currentAuth": ["Auth", function(Auth) {
+        // $requireSignIn returns a promise so the resolve waits for it to complete
+        // If the promise is rejected, it will throw a $stateChangeError (see above)
+        return Auth.$requireSignIn();
+      }]
+    }
   };
   $stateProvider.state(homeState);
   $stateProvider.state(statsState);
   $stateProvider.state(banksState);
   $stateProvider.state(accountState);
   $stateProvider.state(settingsState);
+  $urlRouterProvider.otherwise("/");
 })
 .component('myApp', {
   controller($http, $cookies, $firebaseObject, Auth, User, $state) {
@@ -55,7 +113,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     const ctrl = this;
 
     this.loggedIn = false;
-    this.user = {};
+    this.user
 
     this.view = 'home';
 
@@ -171,15 +229,16 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         console.log(ctrl.currentNavitem)
       }, 0)
 
-
       Auth.$onAuthStateChanged(function(firebaseUser) {
         if (firebaseUser) {
+          ctrl.checkfbUser();
           console.log("Signed in as:", firebaseUser.uid);
           let tempUser = firebaseUser;
           User.set(tempUser)
           console.log('factory user is: ', User.get())
           ctrl.user = firebaseUser;
           ctrl.loggedIn = true;
+          ctrl.currentNavitem = $state.current.name;
         } else {
           console.log("Signed out");
         }
@@ -190,49 +249,55 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
   template:
   `
+
+  <div ng-if="$ctrl.loggedIn === false">
+    <home />
+  </div>
   <!-- Nav Bar -->
-  <md-content layout="column" flex>
-    <md-nav-bar md-selected-nav-item="$ctrl.currentNavitem" nav-bar-aria-label="navigation links">
-      <md-nav-item md-nav-sref="home" name="home" ui-sref-active="home">
-        Home
-      </md-nav-item>
-      <md-nav-item md-nav-sref="stats" name="stats" ui-sref-active="stats">
-        Stats
-      </md-nav-item>
-      <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
-        Banks
-      </md-nav-item>
-      <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
-        Wallet
-      </md-nav-item>
-      <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
-        Account Settings
-      </md-nav-item>
-
-      <!-- Spacer -->
-      <span class="fill-space"></span>
-
-      <!-- Login / Welcome -->
-      <div ng-if="$ctrl.loggedIn === false">
-        <md-nav-item md-nav-click="$ctrl.login('google')" name="login">
-          [ Login ]
+  <div ng-if="$ctrl.loggedIn === true">
+    <md-content layout="column" flex>
+      <md-nav-bar md-selected-nav-item="$ctrl.currentNavitem" nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-sref="home" name="home" ui-sref-active="home">
+          Home
         </md-nav-item>
-      </div>
+        <md-nav-item md-nav-sref="stats" name="stats" ui-sref-active="stats">
+          Stats
+        </md-nav-item>
+        <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
+          Banks
+        </md-nav-item>
+        <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
+          Wallet
+        </md-nav-item>
+        <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
+          Account Settings
+        </md-nav-item>
 
-      <div ng-if="$ctrl.loggedIn === true">
-        <md-button>
-        Welcome, {{$ctrl.user.displayName}}
-        </md-button>
-        <md-button ng-click="$ctrl.logOut()" name="logout">
-        [ Log out ]
-        </md-button>
-      </div>
+        <!-- Spacer -->
+        <span class="fill-space"></span>
 
-    </md-nav-bar>
+        <!-- Login / Welcome -->
+        <div ng-if="$ctrl.loggedIn === false">
+          <md-nav-item md-nav-click="$ctrl.login('google')" name="login">
+            [ Login ]
+          </md-nav-item>
+        </div>
 
-  <!-- Ui Router Body -->
-    <ui-view></ui-view>
+        <div ng-if="$ctrl.loggedIn === true">
+          <md-button>
+          Welcome, {{$ctrl.user.displayName}}
+          </md-button>
+          <md-button ng-click="$ctrl.logOut()" name="logout">
+          [ Log out ]
+          </md-button>
+        </div>
 
-  </md-content>
+      </md-nav-bar>
+    </md-content>
+
+    <!-- Ui Router Body -->
+      <ui-view></ui-view>
+
+  </div>  
 `,
 });

@@ -3,10 +3,9 @@
   <head>
     <title>CoinSaver</title>
 
-
     <!-- [ Angular Material Style (CSS) ] -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <link  rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="./style.css">
 
     <!-- [ Angular Material Libraries ] -->
@@ -18,9 +17,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <!-- <script src="./angular.min.js"></script> -->
 
+
     <!-- [ Angular App! ] -->
     <script src="app.js"></script>
-    <script src="./components/home.js"></script>
+    <script src="./components/home/home.js"></script>
     <script src="./components/stats.js"></script>
     <script src="./components/banks/transactions.js"></script>    
     <script src="./components/banks/banks.js"></script>
@@ -57,7 +57,7 @@
   </head>
   <body ng-app="coinsaver">
 
-    <div class="container" ng-app="coinsaver" layout="row" layout-fill>
+    <div ng-app="coinsaver" layout="row" layout-fill>
       <div layout="column" layout-fill>
         <!-- <header>
           <md-toolbar class="md-hue-2">
@@ -67,19 +67,20 @@
           </md-toolbar>
         </header> -->
 
-        <md-content class="md-padding demo-section" layout="row" flex>
+
           <div flex>
             <my-app />
           </div>
-        </md-content>
 
-        <footer layout="row"  layout-align="center center">
+
+        <!--<footer layout="row" layout-align="center">
           <div>
             <bot-nav />
           </div>
         </footer>
+      </div>-->
       </div>
-
+    </div>
 
   </body>
 </html>
