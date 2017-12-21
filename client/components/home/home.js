@@ -30,6 +30,10 @@ angular.module('coinsaver')
     },
     template: `
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Added styled homepage.
     <!--
     <md-content layout="column" flex>
       <md-nav-bar nav-bar-aria-label="home login links">
@@ -71,12 +75,15 @@ body{
 h1,h2,h3,h4,h5,h6{
     font-weight: 700;
 }
+<<<<<<< HEAD
 .text-primary{
   color: #ffb300 !important;
 }
 a:-webkit-any-link{
   color: #ffb300 !important;
 }
+=======
+>>>>>>> Added styled homepage.
 b, strong{
     font-weight: 500;
 }
@@ -172,8 +179,16 @@ section{
 * Background Colors
 ================================================*/
 .bg-texture{
+<<<<<<< HEAD
     background-image: url("./images/alt-bitcoin.png");
   }
+=======
+    background: transparent -webkit-radial-gradient(circle farthest-side at right bottom, #00c400 5%, #006200 25%, #007600 80%, #00eb00 98%) repeat scroll 0% 0%;
+    background: transparent -o-radial-gradient(circle farthest-side at right bottom, #00c400 5%, #006200 25%, #007600 80%, #00eb00 98%) repeat scroll 0% 0%;
+    background: transparent -moz-radial-gradient(circle farthest-side at right bottom, #00c400 5%, #006200 25%, #007600 80%, #00eb00 98%) repeat scroll 0% 0%;
+    background: transparent radial-gradient(circle farthest-side at right bottom, #00c400 5%, #006200 25%, #007600 80%, #00eb00 98%) repeat scroll 0% 0%;
+}
+>>>>>>> Added styled homepage.
 .bg-texture-collage{
     background:-webkit-linear-gradient(-45deg, #ffb300 33%, transparent 0%),
         linear-gradient(-45deg, #007600 67%, transparent 33%),
@@ -249,7 +264,11 @@ section{
     box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.15);
 }
 .btn-white {
+<<<<<<< HEAD
     color: #ffb300 !important;
+=======
+    color: #00c400 !important;
+>>>>>>> Added styled homepage.
     background-color: #fff;
     border-color: #fff;
 }
@@ -368,11 +387,18 @@ Pricing tables & lists
 <html lang="en">
     <head>
         <meta charset="utf-8">
+<<<<<<< HEAD
+=======
+        <title>Comply - Bootstrap 4 Multipurpose Template</title>
+        <meta name="description" content="Download free Bootstrap 4 multipurpose template Comply." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+>>>>>>> Added styled homepage.
         <!--Bootstrap 4-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <!--icons-->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+<<<<<<< HEAD
 
         <script>
         /* 
@@ -415,6 +441,8 @@ Pricing tables & lists
            }
        });
        </script>
+=======
+>>>>>>> Added styled homepage.
     </head>
     <body>
         <!--header-->
@@ -452,17 +480,30 @@ Pricing tables & lists
             <div class="container">
                 <div class="row d-md-flex brand">
                     <div class="col-md-6 hidden-sm-down wow fadeIn">
+<<<<<<< HEAD
                         <!--<img class="img-fluid mx-auto d-block" src="img/product.png"/>-->
+=======
+                        <img class="img-fluid mx-auto d-block" src="img/product.png"/>
+>>>>>>> Added styled homepage.
                     </div>
                     <div class="col-md-6 col-sm-12 text-white wow fadeIn">
                         <h2 class="pt-4">Welcome to <b class="text-primary-light">Coinsaver</b></h2>
                         <!--<h2 class="pt-4">Start saving in crypto today!</h2>-->
+<<<<<<< HEAD
                         <p class="mt-3">
                             Here at coinsaver we believe in the future of crypto as an industry and fiat standard. Our aim is to allow you easy, one click access to start saving in crypto today.
                         </p>
                         <p class="mt-3">
                             <!--<a href="#pricing" class="btn btn-primary mr-2 mb-2 page-scroll">Buy Now</a>-->
                             <a href="#download" class="btn btn-white mb-2 page-scroll">Start Now</a>
+=======
+                        <p class="mt-5">
+                            Here at coinsaver we believe in the future of crypto as an industry and fiat standard. Our aim is to allow you easy, one click access to start saving in crypto today.
+                        </p>
+                        <p class="mt-5">
+                            <!--<a href="#pricing" class="btn btn-primary mr-2 mb-2 page-scroll">Buy Now</a>-->
+                            <a href="#download" class="btn btn-white mb-2 page-scroll">Start Now!!</a>
+>>>>>>> Added styled homepage.
                         </p>
                     </div>
                 </div>
@@ -474,13 +515,20 @@ Pricing tables & lists
             <div class="container">
                 <div class="row mb-3">
                     <div class="col-md-6 col-sm-8 mx-auto text-center wow fadeIn">
+<<<<<<< HEAD
                         <!--<h2 class="text-primary">Amazing Features</h2>-->
                         <p class="lead mt-1">
                             Coinsaver is secure, easy to use and simple to set up
+=======
+                        <h2 class="text-primary">Amazing Features</h2>
+                        <p class="lead mt-4">
+                            Comply with plenty of awesome features to <br/>wow the viewers.
+>>>>>>> Added styled homepage.
                         </p>
                     </div>
                 </div>
                 <div class="row mt-5 text-center">
+<<<<<<< HEAD
                   <div class="col-md-4 wow fadeIn">
                     <div class="card">
                       <div class="card-body">
@@ -527,6 +575,14 @@ Pricing tables & lists
                                     <em class="ion-ios-game-controller-b-outline icon-md"></em>
                                 </div>
                                 <h6>Unlimited Gaming</h6>
+=======
+                    <div class="col-md-4 wow fadeIn">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="icon-box">
+                                    <em class="ion-ios-game-controller-b-outline icon-md"></em>
+                                </div>
+                                <h6>Unlimited Gaming</h6>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
                                 </p>
@@ -550,6 +606,52 @@ Pricing tables & lists
                         <div class="card">
                             <div class="card-body">
                                 <div class="icon-box">
+                                    <em class="ion-ios-settings icon-md"></em>
+                                </div>
+                                <h6>Advanced Rate Control</h6>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeIn">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="icon-box">
+                                    <em class="ion-ios-cloud-upload-outline icon-md"></em>
+                                </div>
+                                <h6>Unlimited Cloud Storage</h6>
+>>>>>>> Added styled homepage.
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeIn">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="icon-box">
+<<<<<<< HEAD
+                                    <em class="ion-android-wifi icon-md"></em>
+                                </div>
+                                <h6>Built-in Wifi</h6>
+=======
+                                    <em class="ion-ios-locked-outline icon-md"></em>
+                                </div>
+                                <h6>Highly Secure</h6>
+>>>>>>> Added styled homepage.
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeIn">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="icon-box">
                                     <em class="ion-android-color-palette icon-md"></em>
                                 </div>
                                 <h6>Unlimited Colors</h6>
@@ -558,7 +660,11 @@ Pricing tables & lists
                                 </p>
                             </div>
                         </div>
+<<<<<<< HEAD
                     </div>-->
+=======
+                    </div>
+>>>>>>> Added styled homepage.
                 </div>
             </div>
         </section>
@@ -567,6 +673,7 @@ Pricing tables & lists
             <div class="container-fluid">
                 <div class="row d-md-flex mt-5">
                     <div class="col-sm-6 p-0 wow fadeInLeft">
+<<<<<<< HEAD
                         <img class="img-fluid" src="./components/home/img/product2.jpg" alt="Gallery">
                     </div>
                     <div class="col-sm-6 pl-5 pr-5 pt-5 pb-4 wow fadeInRight">
@@ -582,12 +689,33 @@ Pricing tables & lists
                             <li>Get with the times. Get rich. Get COINSAVED.</li>
                         </ul>
                         <!--<a href="#purchase" class="btn btn-primary mr-2 page-scroll">Get Started with Comply</a>-->
+=======
+                        <img class="img-fluid" src="img/product2.jpg" alt="Gallery">
+                    </div>
+                    <div class="col-sm-6 pl-5 pr-5 pt-5 pb-4 wow fadeInRight">
+                        <h3><a href="#">What's New in Version 5.0?</a></h3>
+                        <p class="lead pt-4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                        <ul class="pt-4 pb-3 list-default">
+                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                            <li>Aenean commodo ligula eget dolor.</li>
+                            <li>Aenean massa.</li>
+                            <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                            <li>Aenean commodo ligula eget dolor.</li>
+                            <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+                        </ul>
+                        <a href="#purchase" class="btn btn-primary mr-2 page-scroll">Get Started with Comply</a>
+>>>>>>> Added styled homepage.
                     </div>
                 </div>
             </div>
         </section>
 
+<<<<<<< HEAD
         <!--pricing-
+=======
+        <!--pricing-->
+>>>>>>> Added styled homepage.
         <section class="bg-light" id="pricing">
             <div class="container">
                 <div class="row">
@@ -650,14 +778,20 @@ Pricing tables & lists
                 </div>
             </div>
         </section>
+<<<<<<< HEAD
         -->
 
         <!--download-->
         <!--
+=======
+
+        <!--download-->
+>>>>>>> Added styled homepage.
         <section class="bg-orange pt-0" id="download">
             <div class="container">
                 <div class="row d-md-flex text-center wow fadeIn">
                     <div class="col-md-6 offset-md-3 col-sm-10 offset-sm-1 col-xs-12">
+<<<<<<< HEAD
                         <h5 class="text-primary-light">Download Our Mixtape</h5>
                         <p class="mt-4">
                             it's fire
@@ -666,10 +800,22 @@ Pricing tables & lists
                             <a href="#" class="mr-2"><img src="img/google-play.png" class="store-img"/></a>
                             <a href="#"><img src="img/apple_store.png" class="store-img"/> </a>
                         </p>--><!--
+=======
+                        <h5 class="text-primary">Download Our Mobile App</h5>
+                        <p class="mt-4">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet.
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet.
+                        </p>
+                        <p class="mt-5">
+                            <a href="#" class="mr-2"><img src="img/google-play.png" class="store-img"/></a>
+                            <a href="#"><img src="img/apple_store.png" class="store-img"/> </a>
+                        </p>
+>>>>>>> Added styled homepage.
                     </div>
                 </div>
             </div>
         </section>
+<<<<<<< HEAD
         -->
 
         <!--team-->
@@ -698,12 +844,50 @@ Pricing tables & lists
                         <img src="./components/home/img/team-3.jpg" alt="it mike" class="img-team img-fluid rounded-circle"/>
                         <h5>Michael Walker</h5>
                         <p>"The Muscle"</p>
+=======
+
+        <!--team-->
+        <section class="bg-white" id="team">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-8 mx-auto text-center">
+                        <h2 class="text-primary">Our Team</h2>
+                        <p class="lead pt-3">
+                            Meet our awesome team.
+                        </p>
+                    </div>
+                </div>
+                <div class="row d-md-flex mt-5 text-center">
+                    <div class="team col-sm-3 mt-2 wow fadeInLeft">
+                        <img src="img/team-1.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <h5>John Deo</h5>
+                        <p>CEO, Comply</p>
+                    </div>
+                    <div class="team col-sm-3 mt-2 wow fadeIn">
+                        <img src="img/team-4.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <h5>Kathrine Kaif</h5>
+                        <p>Marketing Head</p>
+                    </div>
+                    <div class="team col-sm-3 mt-2 wow fadeIn">
+                        <img src="img/team-2.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <h5>Brandon Lee</h5>
+                        <p>Lead Developer</p>
+                    </div>
+                    <div class="team col-sm-3 mt-2 wow fadeInRight">
+                        <img src="img/team-3.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <h5>Inza Fererri</h5>
+                        <p>Customer Care</p>
+>>>>>>> Added styled homepage.
                     </div>
                 </div>
             </div>
         </section>
 
+<<<<<<< HEAD
         <!--blog
+=======
+        <!--blog-->
+>>>>>>> Added styled homepage.
         <section class="bg-light" id="blog">
             <div class="container">
                 <div class="row">
@@ -769,7 +953,10 @@ Pricing tables & lists
                 </div>
             </div>
         </section>
+<<<<<<< HEAD
        -->
+=======
+>>>>>>> Added styled homepage.
 
         <!--contact-->
         <section class="bg-texture-collage p-0" id="contact">
@@ -781,11 +968,19 @@ Pricing tables & lists
                     </div>
                     <div class="col-sm-4 p-5">
                         <p><em class="ion-ios-email-outline icon-md"></em></p>
+<<<<<<< HEAD
                         <p class="lead">coinsaver@gmail.com</p>
                     </div>
                     <div class="col-sm-4 p-5">
                         <p><em class="ion-ios-location-outline icon-md"></em></p>
                         <p class="lead">Los Angeles, California</p>
+=======
+                        <p class="lead">info@comply.com</p>
+                    </div>
+                    <div class="col-sm-4 p-5">
+                        <p><em class="ion-ios-location-outline icon-md"></em></p>
+                        <p class="lead">Austin, Texas</p>
+>>>>>>> Added styled homepage.
                     </div>
                 </div>
             </div>
@@ -796,6 +991,10 @@ Pricing tables & lists
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12 text-center wow fadeIn">
+<<<<<<< HEAD
+=======
+                        <h1>COMPLY</h1>
+>>>>>>> Added styled homepage.
                         <p class="mt-4">
                             <a href="https://twitter.com/" target="_blank"><em class="ion-social-twitter text-twitter-alt icon-sm mr-3"></em></a>
                             <a href="https://facebook.com/" target="_blank"><em class="ion-social-github text-facebook-alt icon-sm mr-3"></em></a>
@@ -803,15 +1002,23 @@ Pricing tables & lists
                             <a href="https://plus.google.com/" target="_blank"><em class="ion-social-googleplus text-google-alt icon-sm mr-3"></em></a>
                         </p>
                         <p class="pt-2 text-muted">
+<<<<<<< HEAD
                             &copy; 2017, CoinsaverAPP Dev Team.
                             <a href="https://github.com/coinsaver">ARMS</a>. Developed by <a href="https://github.com/mdubbpro">@mdubbpro</a>
+=======
+                            &copy; 2017 Comply Theme. A Bootstrap 4 multipurpose theme by 
+                            <a href="https://wireddots.com">Wired Dots</a>. Developed by <a href="https://twitter.com/attacomsian">@attacomsian</a>
+>>>>>>> Added styled homepage.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Added styled homepage.
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
