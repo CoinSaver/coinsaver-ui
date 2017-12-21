@@ -574,16 +574,16 @@ Pricing tables & lists
                         <img class="img-fluid" src="img/product2.jpg" alt="Gallery">
                     </div>
                     <div class="col-sm-6 pl-5 pr-5 pt-5 pb-4 wow fadeInRight">
-                        <h3><a href="#">What's New in Version 5.0?</a></h3>
-                        <p class="lead pt-4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                        <h3><a href="#">How does coinsaver work?</a></h3>
+                        <p class="lead pt-4">Coinsaver takes your daily purchases and rounds up to the nearest dollar, saving that change to be invested at the end of the week.</p>
                         <ul class="pt-4 pb-3 list-default">
-                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                            <li>Aenean commodo ligula eget dolor.</li>
-                            <li>Aenean massa.</li>
-                            <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-                            <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                            <li>Aenean commodo ligula eget dolor.</li>
-                            <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+                            <li>By using coinbase, our service is fast, simple and easy.</li>
+                            <li>We only request read access of your transactions and don't store any sensitive information.</li>
+                            <li>Secure.</li>
+                            <li>Buzzwords.</li>
+                            <li>Crypto.</li>
+                            <li>These are the words of the future son.</li>
+                            <li>Get with the times. Get rich. Get COINSAVED.</li>
                         </ul>
                         <!--<a href="#purchase" class="btn btn-primary mr-2 page-scroll">Get Started with Comply</a>-->
                     </div>
