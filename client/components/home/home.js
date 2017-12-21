@@ -368,9 +368,6 @@ Pricing tables & lists
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Comply - Bootstrap 4 Multipurpose Template</title>
-        <meta name="description" content="Download free Bootstrap 4 multipurpose template Comply." />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--Bootstrap 4-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -570,7 +567,7 @@ Pricing tables & lists
             <div class="container-fluid">
                 <div class="row d-md-flex mt-5">
                     <div class="col-sm-6 p-0 wow fadeInLeft">
-                        <img class="img-fluid" src="img/product2.jpg" alt="Gallery">
+                        <img class="img-fluid" src="./components/home/img/product2.jpg" alt="Gallery">
                     </div>
                     <div class="col-sm-6 pl-5 pr-5 pt-5 pb-4 wow fadeInRight">
                         <h3><a href="#">How does coinsaver work?</a></h3>
@@ -660,10 +657,9 @@ Pricing tables & lists
             <div class="container">
                 <div class="row d-md-flex text-center wow fadeIn">
                     <div class="col-md-6 offset-md-3 col-sm-10 offset-sm-1 col-xs-12">
-                        <h5 class="text-primary">Download Our Mobile App</h5>
+                        <h5 class="text-primary-light">Download Our Mixtape</h5>
                         <p class="mt-4">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet.
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet.
+                            it's fire
                         </p>
                         <!--<p class="mt-5">
                             <a href="#" class="mr-2"><img src="img/google-play.png" class="store-img"/></a>
@@ -679,7 +675,7 @@ Pricing tables & lists
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-8 mx-auto text-center">
-                        <h2 class="text-primary">Our Team</h2>
+                        <h2 class="text-primary-light">Our Team</h2>
                         <p class="lead pt-3">
                             Meet our awesome team.
                         </p>
