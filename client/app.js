@@ -231,6 +231,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
       Auth.$onAuthStateChanged(function(firebaseUser) {
         if (firebaseUser) {
+          ctrl.checkfbUser();
           console.log("Signed in as:", firebaseUser.uid);
           let tempUser = firebaseUser;
           User.set(tempUser)
