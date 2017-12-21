@@ -2,13 +2,13 @@ const plaid = require('plaid');
 const moment = require('moment');
 
 module.exports = {
-  formatTransactions: function formatTransactions(transactionsResponse) {
+  formatTransactions: function formatTransactions(transactionsResponse, accountId) {
     const resArray = [];
     const indexTrack = {};
 
     // Formats an object for only checking accounts and pushes to resArray
     for (let i = 0; i < transactionsResponse.accounts.length; i++) {
-      if (transactionsResponse.accounts[i].subtype === 'checking') {
+      if (transactionsResponse.accounts[i].account_id === accountId) {
         const accObj = {
           id: transactionsResponse.accounts[i].account_id,
           name: transactionsResponse.accounts[i].name,
@@ -23,6 +23,7 @@ module.exports = {
         // indexTrack just keeps track of which index in resArray array
         // stores which account_id's information for quicker lookup
         indexTrack[accObj.id] = resArray.length - 1;
+        i = transactionsResponse.accounts.length + 1;
       }
     }
 
@@ -49,7 +50,6 @@ module.exports = {
         }
       }
     }
-
     return resArray;
   },
 };

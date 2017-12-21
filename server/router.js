@@ -7,7 +7,9 @@ const emailController = require('./controllers/emailController.js')
 
 router.post('/get_access_token', plaidController.get_access_token.post);
 router.get('/accounts', plaidController.accounts.get);
-router.get('/transactions', plaidController.transactions.get);
+router.post('/accounts', plaidController.accounts.post);
+router.post('/transactions', plaidController.transactions.post);
+router.post('/unlinkplaid', plaidController.unlinkPlaid.post);
 
 router.post('/verifybase', (req, res) => {
   var verifycode = req.body.code
