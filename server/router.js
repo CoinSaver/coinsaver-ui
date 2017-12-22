@@ -36,15 +36,8 @@ router.post('/usersetup', (req, res) => {
   var new_email = req.body.currentuser.email;
 
   firebaseController.setupNewUserFB(new_userid, new_display_name, new_email)
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   // emailController.sendCoinsaverbotEmail(emailSignup);
-=======
-  // emailController()
->>>>>>> Implemented automatic user property setup on Signup
-=======
-  emailController.sendCoinsaverbotEmail()
->>>>>>> Added setup email template
 
   res.send('Server Response: New User setup completed');
 })
