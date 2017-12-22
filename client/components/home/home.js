@@ -653,6 +653,7 @@ Pricing tables & lists
         -->
 
         <!--download-->
+        <!--
         <section class="bg-orange pt-0" id="download">
             <div class="container">
                 <div class="row d-md-flex text-center wow fadeIn">
@@ -660,24 +661,25 @@ Pricing tables & lists
                         <h5 class="text-primary-light">Download Our Mixtape</h5>
                         <p class="mt-4">
                             it's fire
-                        </p>
+                        </p>-->
                         <!--<p class="mt-5">
                             <a href="#" class="mr-2"><img src="img/google-play.png" class="store-img"/></a>
                             <a href="#"><img src="img/apple_store.png" class="store-img"/> </a>
-                        </p>-->
+                        </p>--><!--
                     </div>
                 </div>
             </div>
         </section>
+        -->
 
         <!--team-->
-        <section class="bg-white" id="team">
+        <section class="bg-white"  style="background-color:rgb(48,48,48)!important" id="team">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-8 mx-auto text-center">
-                        <h2 class="text-primary-light">Our Team</h2>
+                        <h2 class="text-primary-light">Meet the CoinSaver Devs</h2>
                         <p class="lead pt-3">
-                            Meet our awesome team.
+                            Leading the way in secured crypto futures
                         </p>
                     </div>
                 </div>

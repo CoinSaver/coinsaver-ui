@@ -26,7 +26,8 @@ var getWallet = function(uid, accessTokenTemp, refreshTokenTemp, callback){
 
   client.getAccounts({}, function(err, accounts) {
     // console.log(accounts);
-
+    if (err) {console.log('the error is, ', err); return}
+    console.log('accounts =', accounts)
     let acctobj = {};
       accounts.forEach(function(acct) {
         acctobj[acct.name] = acct.balance.amount 
@@ -44,16 +45,16 @@ var buyCoin = function(uid, accessTokenTemp, refreshTokenTemp, callback){
   })
 
   client.getAccounts({}, function(err, account) {
-    console.log('the account is,' ,account)
+    console.log('the accounts are,' ,account)
     callback(account)
   });
 
-  client.getAccount("ACCOUNTNUMBHERE", function(err, account) {
-    account.buy({"amount": "10",
-    "currency": "USD",
-    "quote": true}, function(err, tx) {
-      console.log(tx);
-      console.log(err)
+  client.getAccount("ACCOUNT ID HERE", function(err, account) {
+    // console.log('SAVE THIS ERROR: ',err)
+    account.buy({"amount": "10.00",
+    "currency": "USD"}, function(err, tx) {
+      console.log('SAVE THIS: ',tx);
+      // console.log('SAVE THIS ERROR: ',err)
     });
   });
 }

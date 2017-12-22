@@ -61,7 +61,7 @@ router.post('/purchasecoin', (req, res) => {
 //This path is responsible for handling coinbase usercodes
 //This needs to be cleaned up
 router.get('/account', (req, res) => {
-  
+  console.log('entering some coin logic stuff')
   console.log(req._parsedOriginalUrl.query.length)
 
   if (req._parsedOriginalUrl.query){
