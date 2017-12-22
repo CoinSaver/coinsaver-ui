@@ -66,7 +66,6 @@ body {
 body{
   font-family: 'Rubik', sans-serif;
   font-size: 16px;
-  background-color: #FAFAFA;
 }
 h1,h2,h3,h4,h5,h6{
   font-weight: 700;
@@ -126,16 +125,17 @@ b, strong{
   font-weight: 700;
 } 
 a {
-  color: #007600;
-  -webkit-transition: all .35s;
-  -moz-transition: all .35s;
-  transition: all .35s;
+  color: #f5b433;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  transition: all 1s;
 }
 a:hover,
 a:focus {
-  color: #007600 !important;
   outline: 0;
   text-decoration: none !important;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
 }
 section{
   padding: 80px 0px;
@@ -157,7 +157,7 @@ section{
   color: #999;
 }
 .card-outline-primary{
-  border: solid 1px #007600;
+  border: solid 1px #f5b433;
 }
 .small-xl{
   font-size: 90%;
@@ -176,14 +176,14 @@ section{
 }
 .bg-texture-collage{
   background:-webkit-linear-gradient(-45deg, #ffb300 33%, transparent 0%),
-      linear-gradient(-45deg, #007600 67%, transparent 33%),
+      linear-gradient(-45deg, #f5b433 67%, transparent 33%),
       linear-gradient(-45deg, #ffb300 100%, transparent 67%);
   background:-moz-linear-gradient(-45deg, #ffb300 33%, transparent 0%),
-      linear-gradient(-45deg, #007600 67%, transparent 33%),
+      linear-gradient(-45deg, #f5b433 67%, transparent 33%),
       linear-gradient(-45deg, #ffb300 100%, transparent 67%);
-  background:linear-gradient(-45deg, #00c400 33%, transparent 0%),
-      linear-gradient(-45deg, #006200 67%, transparent 33%),
-      linear-gradient(-45deg, #00c400 100%, transparent 67%);
+  background:linear-gradient(-45deg, #f5b433 33%, transparent 0%),
+      linear-gradient(-45deg, #af780e 67%, transparent 33%),
+      linear-gradient(-45deg, #f5b433 100%, transparent 67%);
 }
 .bg-alt {
   background-color: #fff;
@@ -192,7 +192,7 @@ section{
   background-color: #FAFAFA;
 }
 .bg-primary{
-  background-color: #007600 !important;
+  background-color: #f5b433 !important;
 }
 .bg-footer{
   background-color: #171717;
@@ -213,7 +213,7 @@ section{
   color: #fff;
 }
 .text-primary {
-  color: #007600 !important;
+  color: #f5b433 !important;
 }
 .text-primary-light{
   color: #ffb300;
@@ -242,23 +242,25 @@ section{
   -webkit-transition: 350ms ease all;
   transition: 350ms ease all;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 100;
   padding: .6rem 1.5rem;
 }
 .btn:hover, .btn:focus {
   box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.15);
 }
 .btn-white {
+  font-weight: 700;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);    
   color: #ffb300 !important;
-  background-color: #fff;
-  border-color: #fff;
+  background-color: rgba(4, 13, 23, .8);
+  border-color: rgba(4, 13, 23, 0);
 }
 .btn-white:hover{
-  color: #00c400;
+  box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.15);
 }
 .btn-primary{
-  background-color: #00c400 !important;
-  border-color: #00c400 !important;
+  background-color: #f5b433 !important;
+  border-color: #f5b433 !important;
 }
 .btn-primary:hover, .btn-primary:focus{
   color: #fff !important;
@@ -292,7 +294,7 @@ section{
 * Social Icons
 ================================================*/
 .text-twitter-alt, .text-facebook-alt, .text-linkedin-alt, .text-google-alt, .text-github-alt{
-  color:#007600;
+  color:#f5b433;
 }
 .text-twitter, .text-twitter-alt:hover{
   color:#00aced;
@@ -318,7 +320,7 @@ section{
 }
 .card .card-body .icon-box{
   padding: 20px 0;
-  color: #007600;
+  color: #f5b433;
 }
 .card .card-body h6{
   padding-bottom: 15px;
@@ -356,13 +358,59 @@ Pricing tables & lists
   left: -25px;
   top: 8px;
   font-size: 10px;
-  color: #007600;
+  color: #f5b433;
   font-family: "Ionicons";
 }
 ::selection {
   color: #fff;
   text-shadow: none;
-  background: #007600;
+  background: #f5b433;
+}
+.dark-background {
+  background-color: rgba(4, 13, 23, 0.30);
+  border-radius: 5px;
+}
+.dark-background-text {
+  text-shadow: 2px 2px 1px rgb(11, 21, 2);
+}
+.primary-shadow {
+  font-weight: bolder;
+  text-shadow: 2px 2px 3px rgb(82, 59, 13);
+}
+.navbar-background {
+  background-color: rgba(43, 35, 4, 0);    
+}
+.bold-font {
+  font-weight: bolder;
+}
+.features-container {
+  padding-top: 50px;
+  padding-bottom:50px;
+}
+#tagline-container {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#features {
+    padding: 0px;
+}
+.img-container {
+    padding:0px;
+}
+#navbar-text {
+    color: rgb(245, 179, 51);
+    text-shadow: 1px 1px 1px rgb(152, 102, 6);
+}
+.team-tag {
+    color: rgb(243, 178, 51);
+}
+#team-title {
+    font-weight: bolder;
+}
+.team-names {
+    font-weight: bold;
+    color: rgb(245, 179, 51);
 }
 </style>
 <html lang="en">
@@ -418,17 +466,17 @@ Pricing tables & lists
   </head>
   <body>
       <!--header-->
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top sticky-navigation">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top sticky-navigation navbar-background">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
               <span class="ion-grid icon-sm"></span>
           </button>
-          <a class="navbar-brand hero-heading" href="#">COINSAVER</a>
+          <a class="navbar-brand hero-heading" id="navbar-text" href="#">COINSAVER</a>
           <div class="collapse navbar-collapse" id="navbarCollapse">
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item mr-3">
-                      <a class="nav-link page-scroll" ng-click="$ctrl.login('google')"> LOGIN <span class="sr-only">(current)</span></a>
+                      <a class="nav-link page-scroll" id="navbar-text" ng-click="$ctrl.login('google')"> LOGIN </a>
                   </li>
-                  <li class="nav-item mr-3">
+                  <!--li class="nav-item mr-3">
                       <a class="nav-link page-scroll" href="#features">Features</a>
                   </li>
                   <li class="nav-item mr-3">
@@ -442,152 +490,157 @@ Pricing tables & lists
                   </li>
                   <li class="nav-item mr-3">
                       <a class="nav-link page-scroll" href="#contact">Contact</a>
-                  </li>
+                  </li>-->
               </ul>
           </div>
       </nav>
 
         <!--main section-->
         <section class="bg-texture hero" id="main">
-            <div class="container">
+            <div class="container how-container">
                 <div class="row d-md-flex brand">
                     <div class="col-md-6 hidden-sm-down wow fadeIn">
                         <!--<img class="img-fluid mx-auto d-block" src="img/product.png"/>-->
                     </div>
-                    <div class="col-md-6 col-sm-12 text-white wow fadeIn">
-                        <h2 class="pt-4"><b class="text-primary-light">Welcome to Coinsaver</b></h2>
+                    <div class="col-md-6 col-sm-12 text-white wow fadeIn dark-background">
+                        <h2 class="pt-4 text-primary-light"><p class="primary-shadow">Welcome to Coinsaver</p></h2>
                         <!--<h2 class="pt-4">Saving Change as Cryptocurrency</h2>-->
-                        <p class="mt-3">
+                        <p class="mt-3 dark-background-text">
                             Investing in cryptocurrency, made simple. Our aim is to allow you to invest spare change into Cryptocurrency.
                         </p>
                         <p class="mt-3">
                             <!--<a href="#pricing" class="btn btn-primary mr-2 mb-2 page-scroll">Buy Now</a>-->
-                            <a href="#download" class="btn btn-white mb-2 page-scroll">Start Now</a>
+                        <a href="#download" class="btn btn-white mb-2 page-scroll">Start Now</a>
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-      <!--features-->
-      <section class="bg-light" id="features">
-          <div class="container">
-              <div class="row mb-3">
-                  <div class="col-md-6 col-sm-8 mx-auto text-center wow fadeIn">
-                      <!--<h2 class="text-primary">Amazing Features</h2>-->
-                      <p class="lead mt-1">
-                          Coinsaver is secure, easy to use and simple to set up
-                      </p>
-                  </div>
-              </div>
-              <div class="row mt-5 text-center">
-                <div class="col-md-4 wow fadeIn">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="icon-box">
-                          <em class="ion-ios-locked-outline icon-md"></em>
-                      </div>
-                      <h6>Highly Secure</h6>
-                        <p>
-                          Coinsaver uses the best practices in authorization and security to ensure your business is safe with us.
+        <!--features-->
+        <section class="bg-light" id="features">
+            <div class="container-fluid">
+                <div class="row d-md-flex">
+                    <div class="col-sm-6 p-0 wow fadeInLeft img-container">
+                        <img class="img-fluid" src="./components/home/img/product2.jpg" alt="Gallery">
+                    </div>
+                    <div class="col-sm-6 pl-5 pr-5 pt-5 pb-4 wow fadeInRight">
+                        <h3><a href="#">How does coinsaver work?</a></h3>
+                        <p class="lead pt-4">Coinsaver takes your daily purchases and rounds up to the nearest dollar, saving that change to be invested at the end of the week.</p>
+                        <ul class="pt-4 pb-3 list-default">
+                            <li>By using coinbase, our service is fast, simple and easy.</li>
+                            <li>We only request read access of your transactions and don't store any sensitive information.</li>
+                            <li>Secure.</li>
+                            <li>Buzzwords.</li>
+                            <li>Crypto.</li>
+                        </ul>
+                        <!--<a href="#purchase" class="btn btn-primary mr-2 page-scroll">Get Started with Comply</a>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div>
+            <img id="tagline-container"src="./components/home/img/coffee-bitcoin-banner.png">
+        </div>
+
+        <section class="bg-white p-0">
+            <div class="container features-container">
+                <div class="row mb-3">
+                    <div class="col-md-6 col-sm-8 mx-auto text-center wow fadeIn">
+                        <!--<h2 class="text-primary">Amazing Features</h2>-->
+                        <p class="lead mt-1">
+                            Coinsaver is secure, easy to use and simple to set up
                         </p>
-                      </div>
                     </div>
-                  </div>
-                  <div class="col-md-4 wow fadeIn">
-                  <div class="card">
-                      <div class="card-body">
-                          <div class="icon-box">
-                              <em class="ion-ios-cloud-upload-outline icon-md"></em>
-                          </div>
-                          <h6>Coinbase-linked Auth</h6>
-                          <p>
-                            By utilizing your coinbase account, we can ensure all your wallets and data are protected to the maximum level.
-                          </p>
-                      </div>
+                </div>
+                <div class="row mt-5 text-center">
+                    <div class="col-md-4 wow fadeIn">
+                    <div class="card">
+                        <div class="card-body">
+                        <div class="icon-box">
+                            <em class="ion-ios-locked-outline icon-md"></em>
+                        </div>
+                        <h6>Highly Secure</h6>
+                            <p>
+                            Coinsaver uses the best practices in authorization and security to ensure your business is safe with us.
+                            </p>
+                        </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-md-4 wow fadeIn">
-                  <div class="card">
-                      <div class="card-body">
-                          <div class="icon-box">
-                              <em class="ion-ios-settings icon-md"></em>
-                          </div>
-                          <h6>Advanced Control</h6>
-                          <p>
-                              Change your settings to save every month, only based on change, or easily remove your data should you please.
-                          </p>
-                      </div>
+                    <div class="col-md-4 wow fadeIn">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="icon-box">
+                                <em class="ion-ios-cloud-upload-outline icon-md"></em>
+                            </div>
+                            <h6>Coinbase-linked Auth</h6>
+                            <p>
+                                By utilizing your coinbase account, we can ensure all your wallets and data are protected to the maximum level.
+                            </p>
+                        </div>
+                        </div>
                     </div>
-                  </div>
-                  <!--<div class="col-md-4 wow fadeIn">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="icon-box">
-                                  <em class="ion-ios-game-controller-b-outline icon-md"></em>
-                              </div>
-                              <h6>Unlimited Gaming</h6>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 wow fadeIn">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="icon-box">
-                                  <em class="ion-android-wifi icon-md"></em>
-                              </div>
-                              <h6>Built-in Wifi</h6>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 wow fadeIn">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="icon-box">
-                                  <em class="ion-android-color-palette icon-md"></em>
-                              </div>
-                              <h6>Unlimited Colors</h6>
-                              <p>
-                                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                              </p>
-                          </div>
-                      </div>
-                  </div>-->
-              </div>
-          </div>
-      </section>
+                    <div class="col-md-4 wow fadeIn">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="icon-box">
+                                <em class="ion-ios-settings icon-md"></em>
+                            </div>
+                            <h6>Advanced Control</h6>
+                            <p>
+                                Change your settings to save every month, only based on change, or easily remove your data should you please.
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    <!--<div class="col-md-4 wow fadeIn">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="icon-box">
+                                    <em class="ion-ios-game-controller-b-outline icon-md"></em>
+                                </div>
+                                <h6>Unlimited Gaming</h6>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeIn">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="icon-box">
+                                    <em class="ion-android-wifi icon-md"></em>
+                                </div>
+                                <h6>Built-in Wifi</h6>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeIn">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="icon-box">
+                                    <em class="ion-android-color-palette icon-md"></em>
+                                </div>
+                                <h6>Unlimited Colors</h6>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </section>
 
-      <section class="bg-white p-0">
-          <div class="container-fluid">
-              <div class="row d-md-flex mt-5">
-                  <div class="col-sm-6 p-0 wow fadeInLeft">
-                      <img class="img-fluid" src="./components/home/img/product2.jpg" alt="Gallery">
-                  </div>
-                  <div class="col-sm-6 pl-5 pr-5 pt-5 pb-4 wow fadeInRight">
-                      <h3><a href="#">How does coinsaver work?</a></h3>
-                      <p class="lead pt-4">Coinsaver takes your daily purchases and rounds up to the nearest dollar, saving that change to be invested at the end of the week.</p>
-                      <ul class="pt-4 pb-3 list-default">
-                          <li>By using coinbase, our service is fast, simple and easy.</li>
-                          <li>We only request read access of your transactions and don't store any sensitive information.</li>
-                          <li>Secure.</li>
-                          <li>Buzzwords.</li>
-                          <li>Crypto.</li>
-                          <li>These are the words of the future son.</li>
-                          <li>Get with the times. Get rich. Get COINSAVED.</li>
-                      </ul>
-                      <!--<a href="#purchase" class="btn btn-primary mr-2 page-scroll">Get Started with Comply</a>-->
-                  </div>
-              </div>
-          </div>
-      </section>
 
-      <!--pricing-
+      <!--pricing-->
+      <!--
       <section class="bg-light" id="pricing">
           <div class="container">
               <div class="row">
@@ -649,8 +702,7 @@ Pricing tables & lists
                   </div>
               </div>
           </div>
-      </section>
-      -->
+      </section>-->
 
       <!--download-->
       <!--
@@ -669,41 +721,42 @@ Pricing tables & lists
                   </div>
               </div>
           </div>
-      </section>
-      -->
+      </section>-->
+
 
       <!--team-->
       <section class="bg-white"  style="background-color:rgb(48,48,48)!important" id="team">
           <div class="container">
               <div class="row">
                   <div class="col-md-6 col-sm-8 mx-auto text-center">
-                      <h2 class="text-primary-light">Meet the CoinSaver Devs</h2>
-                      <p class="lead pt-3">
+                      <h2 class="text-primary-light" id="team-title">Meet the CoinSaver Devs</h2>
+                      <p class="lead pt-3 team-tag">
                           Leading the way in secured crypto futures
                       </p>
                   </div>
               </div>
               <div class="row d-md-flex mt-1 text-center">
                   <div class="team col-sm-4 mt-2 wow fadeInLeft">
-                      <img src="./components/home/img/team-1.jpg" alt="it alex" class="img-team img-fluid rounded-circle"/>
-                      <h5>Alex Brawley</h5>
+                      <img src="./components/home/img/team-1.png" alt="it alex" class="img-team img-fluid rounded-circle"/>
+                      <h5 class="team-names">Alex Brawley</h5>
                       <p>Cryptologist Expert</p>
                   </div>
                   <div class="team col-sm-4 mt-2 wow fadeIn">
-                      <img src="./components/home/img/team-2.jpg" alt="it rich" class="img-team img-fluid rounded-circle"/>
-                      <h5>Richard Oh</h5>
+                      <img src="./components/home/img/team-2.png" alt="it rich" class="img-team img-fluid rounded-circle"/>
+                      <h5 class="team-names">Richard Oh</h5>
                       <p>The guy we ask to do github stuff</p>
                   </div>
                   <div class="team col-sm-4 mt-2 wow fadeIn">
-                      <img src="./components/home/img/team-3.jpg" alt="it mike" class="img-team img-fluid rounded-circle"/>
-                      <h5>Michael Walker</h5>
+                      <img src="./components/home/img/team-3.png" alt="it mike" class="img-team img-fluid rounded-circle"/>
+                      <h5 class="team-names">Michael Walker</h5>
                       <p>"The Muscle"</p>
                   </div>
               </div>
           </div>
       </section>
 
-      <!--blog
+      <!--blog-->
+      <!--
       <section class="bg-light" id="blog">
           <div class="container">
               <div class="row">
@@ -768,8 +821,8 @@ Pricing tables & lists
                   </div>
               </div>
           </div>
-      </section>
-     -->
+      </section>-->
+
 
       <!--contact-->
       <section class="bg-texture-collage p-0" id="contact">
