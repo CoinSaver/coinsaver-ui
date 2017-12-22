@@ -52,7 +52,7 @@ angular.module('coinsaver')
             <md-menu-item>
               <md-button>
                 <md-icon md-menu-align-target>monetization_on</md-icon>
-                <a id="pagechange"  ng-click="$ctrl.updateCoin()" ui-sref="account({myParam: 'home'})">
+                <a id="pagechange"  ng-click="$ctrl.updateCoin()" ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account" ui-sref="account({myParam: 'home'})">
                   Cash-in your change
                 </a>
               </md-button>
