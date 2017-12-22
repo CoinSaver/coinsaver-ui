@@ -1,9 +1,9 @@
 angular.module('coinsaver')
 .component('account', {
   bindings: {
-
+    info: '<',
   },
-  controller($http, $mdDialog, $cookies, $firebaseObject, Auth, User) {
+  controller($http, $mdDialog, $cookies, $firebaseObject, Auth, User, CoinMover) {
 
     let coinacct = this;
 
@@ -12,8 +12,12 @@ angular.module('coinsaver')
     this.coinlink = false;
     this.user = User.get();
     this.wallet = {};
+    this.receipts = [];
+    this.buyAmount;
 
-    this.receipts = [
+    this.passedVal = false;
+
+    this.receiptdata = [
       {
         transaction: null,
         user_reference: 'ZDEWMXFH',
@@ -93,7 +97,11 @@ angular.module('coinsaver')
           coinacct.loggedIn = true;
           coinacct.testcoincode(coinacct.user.uid)
           coinacct.getcoinwallet(coinacct.user.uid)
-          console.log(coinacct.receipts)
+          coinacct.passedVal = CoinMover.get().working
+          console.log(coinacct.passedVal)
+          if (coinacct.user.uid === "bpc2buxD1DTtSWo3zDcrk1oFXY72"){
+            coinacct.receipts = coinacct.receiptdata
+          }
         } else {
           console.log("Not currently signed in");
         }
@@ -119,6 +127,18 @@ angular.module('coinsaver')
       .then((res) => {
         coinacct.wallet = res.data;
         if (Object.keys(coinacct.wallet).length !== 0 && coinacct.wallet.constructor === Object) coinacct.connected = true;
+      });
+    }
+
+    this.getcurrentbuy = (useruid) => {
+      const temp = Auth.$getAuth().uid;
+      const ref = firebase.database().ref(`users/${temp}/userinfo`);
+    
+      ref.on('value', (snapshot) => {
+        buyAmount = snapshot.val().stats_next_purchase_usd;
+        coinacct.buyAmount = buyAmount;
+      }, (errorObject) => {
+        console.log(errorObject);
       });
     }
 
@@ -161,11 +181,14 @@ angular.module('coinsaver')
 
     <div ng-if="$ctrl.connected == true">
 
+    <!--
           <div layout="row" layout-align="center center">
             <md-button class="md-raised md-primary" style="min-width:300px" ng-click="$ctrl.buyCoin(10.00, $ctrl.user.uid)">
               Buy some Coin!!
             </md-button>
           </div>
+
+    -->
 
       <div layout="row" layout-xs="column" layout-align="center center">
         <div>

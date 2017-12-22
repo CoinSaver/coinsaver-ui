@@ -73,7 +73,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     template: '<account />',
     authenticate: true,
     controller: function ($stateParams) {
-      // console.log($stateParams)
+      console.log('state params are:', $stateParams)
     },
     resolve: {
       // controller will not be loaded until $requireSignIn resolves
@@ -295,7 +295,6 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         <div style="min-height: 22px; background-color: black; position:fixed; bottom:0px; width:100%; color: rgba(255,255,255,0.7);" >
             <div layout="row" layout-align="end center">
               <bot-nav/>
-              <c style="margin-top:2px">CoinSaverApp &copy;2017, ARMS Corp.</c>
             </div>
         </div>
       </footer>
