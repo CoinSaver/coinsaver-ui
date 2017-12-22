@@ -75,7 +75,7 @@ angular.module('coinsaver')
 
     <md-content>
       <md-list>
-        <md-list-item class="md-2-line transactionitem" layout="row" ng-repeat="transaction in $ctrl.info.transactions" style="width:600px;">
+        <md-list-item class="md-2-line transactionitem" layout="row" ng-repeat="transaction in $ctrl.info.transactions" style="width:600px;overflow-x: hidden;">
 
           <div class="md-list-item-text">
             <p>{{transaction.date}}</p>
