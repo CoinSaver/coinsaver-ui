@@ -63,7 +63,7 @@ angular.module('coinsaver')
 
       $http.post('/get_access_token', { publicToken, uid })
         .then((res) => {
-          console.log('Successful post to exchange tokens!', res);
+          // console.log('Successful post to exchange tokens!', res);
 
           $http.get('/accounts')
             .then((res) => {
@@ -111,7 +111,7 @@ angular.module('coinsaver')
           .then((res) => {
             $http.post('/transactions', { uid: Auth.$getAuth().uid })
               .then((transRes) => {
-                console.log('Transactions: ', transRes.data);
+                // console.log('Transactions: ', transRes.data);
                 ctrl.transactions = transRes.data;
                 ctrl.linked = true;
                 ctrl.loading = false;

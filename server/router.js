@@ -16,10 +16,10 @@ router.post('/verifybase', (req, res) => {
   var verifycode = req.body.code
   var userid = req.body.useruid
 
-  console.log('the code is:', verifycode)
+  // console.log('the code is:', verifycode)
   // NEED RICHARDS HELP MAKING A PROMISE
   coinbaseController.getAccessToken(req.body.code, function(token){
-    console.log('working on a token that is: ', token);
+    // console.log('working on a token that is: ', token);
     firebaseController.saveCoinAuth(userid, token.access_token, token.refresh_token, token.scope)
   })
   res.send(req.body)
@@ -28,7 +28,7 @@ router.post('/verifybase', (req, res) => {
 
 // -- User Setup -- //
 router.post('/usersetup', (req, res) => {
-  console.log('/usersetup post received')
+  // console.log('/usersetup post received')
   // console.log('/usersetup req.body: ', req.body.currentuser)
 
   var new_userid = req.body.currentuser.uid
@@ -38,14 +38,14 @@ router.post('/usersetup', (req, res) => {
   firebaseController.setupNewUserFB(new_userid, new_display_name, new_email)
 
   var firstname = new_display_name.split(' ')[0];
-  console.log('firstname: ', firstname)
+  // console.log('firstname: ', firstname)
 
 
 
   emailSignup.to = new_email;
   emailSignup.subject = `Welcome to Coinsaver, ${firstname}! Here's how to get started`;
 
-  console.log('emailSignup Obj: ', emailSignup)
+  // console.log('emailSignup Obj: ', emailSignup)
   // emailController.sendCoinsaverbotEmail(emailSignup);
 
   res.send('Server Response: New User setup completed');
@@ -89,8 +89,8 @@ router.post('/purchasecoin', (req, res) => {
 //This path is responsible for handling coinbase usercodes
 //This needs to be cleaned up
 router.get('/account', (req, res) => {
-  console.log('entering some coin logic stuff')
-  console.log(req._parsedOriginalUrl.query.length)
+  // console.log('entering some coin logic stuff')
+  // console.log(req._parsedOriginalUrl.query.length)
 
   if (req._parsedOriginalUrl.query){
     if (req._parsedOriginalUrl.query.length === 69){

@@ -118,11 +118,11 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     this.view = 'home';
 
     this.testFunc = function () {
-      console.log('The test func has been clicked,');
+      // console.log('The test func has been clicked,');
       // console.log('The current user data is; ');
       // console.log(ctrl.user);
-      console.log('Auth options are: ', Auth)
-      console.log('Current auth is: ', Auth.$getAuth())
+      // console.log('Auth options are: ', Auth)
+      // console.log('Current auth is: ', Auth.$getAuth())
     };
 
     this.logOut = function () {
@@ -138,7 +138,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
         // logwin.showProgress = true;
         Auth.$signInWithPopup('google')
           .then((result) => {
-            console.log(`Signed into google as: ${result.user.displayName}`);
+            // console.log(`Signed into google as: ${result.user.displayName}`);
             ctrl.user.firebaseId = result.user.uid;
             ctrl.user.accountInfo = result.user;
             ctrl.user.displayName = result.user.displayName;
@@ -154,7 +154,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
     
     this.checkfbUser = () => {
 
-      console.log('checking if this user exists...')
+      // console.log('checking if this user exists...')
 
       var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/usersettings');
       // console.log('ref', ref)
@@ -166,10 +166,10 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
           var signedinuser = Auth.$getAuth(); 
           // console.log('SIGNED IN USER: ', signedinuser);
           // console.log('signed in uid: ', signedinuser.uid);
-          console.log('signed in user email: ', signedinuser.email);
+          // console.log('signed in user email: ', signedinuser.email);
           // console.log('signed in user displayName: ', signedinuser.displayName);
         } else {
-          console.log('writing a new user')
+          // console.log('writing a new user')
           ctrl.writefbUser('works','true')
         }
       })
@@ -185,7 +185,7 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
       $http.post('/usersetup', { currentuser })
       .then((res) => {
-        console.log('Usersetup Response Received: ', res.data)
+        // console.log('Usersetup Response Received: ', res.data)
       });           
       
       var ref = firebase.database().ref('users/' + Auth.$getAuth().uid + '/usersettings');
@@ -212,9 +212,9 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
       // ref.set(obj);
         
       ref.on('value', function(snapshot){
-        console.log('the new profile is: ', snapshot.val())
+        // console.log('the new profile is: ', snapshot.val())
         }, function (errorObject){
-        console.log('read failed: ', errorObject)
+        // console.log('read failed: ', errorObject)
       })
       
     } 
@@ -227,21 +227,21 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
       setTimeout( () => { 
         ctrl.currentNavitem = $state.current.name;
-        console.log(ctrl.currentNavitem)
+        // console.log(ctrl.currentNavitem)
       }, 0)
 
       Auth.$onAuthStateChanged(function(firebaseUser) {
         if (firebaseUser) {
           ctrl.checkfbUser();
-          console.log("Signed in as:", firebaseUser.uid);
+          // console.log("Signed in as:", firebaseUser.uid);
           let tempUser = firebaseUser;
           User.set(tempUser)
-          console.log('factory user is: ', User.get())
+          // console.log('factory user is: ', User.get())
           ctrl.user = firebaseUser;
           ctrl.loggedIn = true;
           ctrl.currentNavitem = $state.current.name;
         } else {
-          console.log("Signed out");
+          // console.log("Signed out");
         }
       });
 

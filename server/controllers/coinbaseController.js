@@ -11,7 +11,7 @@ var getClient = function(accessTokenTemp, refreshTokenTemp){
 
   client.getAccounts({}, function(err, accounts) {
     accounts.forEach(function(acct) {
-      console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
+      // console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
     });
 
   // set something = accounts
@@ -26,12 +26,15 @@ var getWallet = function(uid, accessTokenTemp, refreshTokenTemp, callback){
 
   client.getAccounts({}, function(err, accounts) {
     // console.log(accounts);
-    if (err) {console.log('the error is, ', err); return}
-    console.log('accounts =', accounts)
+    if (err) {
+      // console.log('the error is, ', err);
+      return;
+    }
+    // console.log('accounts =', accounts)
     let acctobj = {};
       accounts.forEach(function(acct) {
         acctobj[acct.name] = acct.balance.amount 
-        console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
+        // console.log('my bal: ' + acct.balance.amount + ' for ' + acct.name);
       });
     callback(acctobj)
   });
@@ -45,7 +48,7 @@ var buyCoin = function(uid, accessTokenTemp, refreshTokenTemp, callback){
   })
 
   client.getAccounts({}, function(err, account) {
-    console.log('the accounts are,' ,account)
+    // console.log('the accounts are,' ,account)
     callback(account)
   });
 
@@ -53,14 +56,14 @@ var buyCoin = function(uid, accessTokenTemp, refreshTokenTemp, callback){
     // console.log('SAVE THIS ERROR: ',err)
     account.buy({"amount": "10.00",
     "currency": "USD"}, function(err, tx) {
-      console.log('SAVE THIS: ',tx);
+      // console.log('SAVE THIS: ',tx);
       // console.log('SAVE THIS ERROR: ',err)
     });
   });
 }
 
 var getAccessToken = function(usercode, callback){
-  console.log('working on code: ', usercode)
+  // console.log('working on code: ', usercode)
 
   return axios.post("https://api.coinbase.com/oauth/token", {
     grant_type: 'authorization_code',
@@ -70,17 +73,17 @@ var getAccessToken = function(usercode, callback){
     redirect_uri: 'http://localhost:9001/account/',
   })
   .then(function (response) {
-    console.log('the response data is:', response.data);
+    // console.log('the response data is:', response.data);
     callback(response.data)
     // getClient(response.data.access_token, response.data.refresh_token)
   })
   .catch(function (error) {
-    console.log('fail: ', error)
+    // console.log('fail: ', error)
   });
 }
 
 var getRefreshToken = function(usercode, refreshToken, callback){
-  console.log('working on refresh code: ', usercode)
+  // console.log('working on refresh code: ', usercode)
   
   return axios.post("https://api.coinbase.com/oauth/token", {
     grant_type: 'refresh_token',
@@ -89,12 +92,12 @@ var getRefreshToken = function(usercode, refreshToken, callback){
     refresh_token: refreshToken
   })
   .then(function (response) {
-    console.log('the response data is:', response.data);
+    // console.log('the response data is:', response.data);
     callback(response.data)
     // getClient(response.data.access_token, response.data.refresh_token)
   })
   .catch(function (error) {
-    console.log('fail: ', error)
+    // console.log('fail: ', error)
   });
 }
 

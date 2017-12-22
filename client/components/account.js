@@ -99,12 +99,12 @@ angular.module('coinsaver')
           coinacct.getcoinwallet(coinacct.user.uid)
           coinacct.getcurrentbuy()
           coinacct.passedVal = CoinMover.get().working
-          console.log(coinacct.passedVal)
+          // console.log(coinacct.passedVal)
           if (coinacct.user.uid === "bpc2buxD1DTtSWo3zDcrk1oFXY72"){
             coinacct.receipts = coinacct.receiptdata
           }
         } else {
-          console.log("Not currently signed in");
+          // console.log("Not currently signed in");
         }
       });
     }
@@ -112,18 +112,18 @@ angular.module('coinsaver')
     this.testcoincode = function (useruid){
       if (window.location.href.length === 96 && window.location.href.includes('/account')){
         var code = window.location.href.slice(window.location.href.length-64, window.location.href.length)
-        console.log('processing code for: ', code)
+        // console.log('processing code for: ', code)
 
         $http.post('/verifybase', { code , useruid })
         .then((res) => {
-          console.log('Successful post to exchange tokens!', res);
+          // console.log('Successful post to exchange tokens!', res);
         });
         window.location.replace('http://localhost:9001/#/account/home')
       }
     }
 
     this.getcoinwallet = (useruid) => {
-      console.log('getting wallet right')
+      // console.log('getting wallet right')
       $http.post('/retrievewallet', { useruid })
       .then((res) => {
         coinacct.wallet = res.data;
@@ -139,14 +139,14 @@ angular.module('coinsaver')
         buyAmount = snapshot.val().stats_next_purchase_usd;
         coinacct.buyAmount = buyAmount;
       }, (errorObject) => {
-        console.log(errorObject);
+        // console.log(errorObject);
       });
     }
 
     this.buyCoin = (amount, useruid) => {
       $http.post('/purchasecoin', { amount , useruid })
       .then((res) => {
-        console.log('Successful purchase post to /purchasecoin!!', res);
+        // console.log('Successful purchase post to /purchasecoin!!', res);
       });
     }
 
