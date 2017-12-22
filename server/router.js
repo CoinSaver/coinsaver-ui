@@ -3,7 +3,8 @@ const router = require('express').Router();
 const plaidController = require('./controllers/plaidController.js');
 const coinbaseController = require('./controllers/coinbaseController.js');
 const firebaseController = require('./controllers/firebaseController.js');
-const emailController = require('./controllers/emailController.js')
+const emailController = require('./controllers/emailController.js');
+const emailSignup = require('./controllers/emailTemplates/emailSignup.js');
 
 router.post('/get_access_token', plaidController.get_access_token.post);
 router.get('/accounts', plaidController.accounts.get);
@@ -23,6 +24,23 @@ router.post('/verifybase', (req, res) => {
   })
   res.send(req.body)
 })
+
+
+// -- User Setup -- //
+router.post('/usersetup', (req, res) => {
+  console.log('/usersetup post received')
+  // console.log('/usersetup req.body: ', req.body.currentuser)
+
+  var new_userid = req.body.currentuser.uid
+  var new_display_name = req.body.currentuser.displayName;
+  var new_email = req.body.currentuser.email;
+
+  firebaseController.setupNewUserFB(new_userid, new_display_name, new_email)
+  // emailController.sendCoinsaverbotEmail(emailSignup);
+
+  res.send('Server Response: New User setup completed');
+})
+// -- End User Setup -- //
 
 router.post('/retrievewallet', (req, res) => {
     var userid = req.body.useruid

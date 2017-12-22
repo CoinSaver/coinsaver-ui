@@ -18,7 +18,8 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-
+// -- Sample Mail Options Template //
+/*
 var emailList = ['coinsaverbot@gmail.com'];
 var emailMessage = 'This is the message from CoinSaverBot!';
 var emailSubject = 'Greetings from CoinSaverBot';
@@ -33,9 +34,11 @@ var mailOptions = {
   html: `Our message is: ${emailMessage}
   Our message is: ${emailHtml}`
 };
-// console.log('Email was triggered - server TEXT: ', mailOptions);
+*/
+// -- Sample Mail Options Template //
 
 var sendCoinsaverbotEmail = function (mailOptions) { 
+  console.log('Email was triggered - server TEXT: ', mailOptions);
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log('Your Coinsaverbot Email Error: ', error);
@@ -46,4 +49,6 @@ var sendCoinsaverbotEmail = function (mailOptions) {
   console.log('sendCoinsaverbotEmail function ran');
 }
 // sendCoinsaverbotEmail(mailOptions);
+
+module.exports = {sendCoinsaverbotEmail}
 
