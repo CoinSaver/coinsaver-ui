@@ -255,52 +255,52 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
   </div>
 
   <div layout="column">
-
-    <div layout="row" style="max-height: 42px; background-color: black;">
-      <a class="navbar-brand hero-heading" style="font-size: 56px; margin-top: -10px; margin-left: 5px;"> Coinsaver</a>
-
-      <md-nav-bar md-selected-nav-item="$ctrl.currentNavitem" nav-bar-aria-label="navigation links">
-        <md-nav-item md-nav-sref="home" name="home" value= "home" ui-sref-active="home">
-          Home
-        </md-nav-item>
-        <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
-          Banks
-        </md-nav-item>
-        <md-nav-item ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
-          Wallet
-        </md-nav-item>
-        <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
-          Settings
-        </md-nav-item>
-      </md-nav-bar>
-
-      <span class="fill-space"></span>
-      
-      <a style="margin-top: 12px; margin-right: 20px">
-        <c style="color: rgba(255,255,255,0.7);">welcome,</c> {{$ctrl.user.displayName}}
-          <b ng-click="$ctrl.logOut()" style="margin-left:18px; text-transform:uppercase;"name="logout">
-            [ Log out ]
-          </b>
-        </a>
-    </div>
-
-  <main flex>
     <div ng-if="$ctrl.loggedIn === true">
 
-      <!-- Ui Router Body -->
+      <div layout="row" style="max-height: 42px; background-color: black;">
+        <a class="navbar-brand hero-heading" style="font-size: 56px; margin-top: -10px; margin-left: 5px;"> Coinsaver</a>
+
+        <md-nav-bar md-selected-nav-item="$ctrl.currentNavitem" nav-bar-aria-label="navigation links">
+
+          <md-nav-item ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
+            Wallet
+          </md-nav-item>
+          <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
+            Banks
+          </md-nav-item>
+          <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
+            Settings
+          </md-nav-item>
+        </md-nav-bar>
+
+        <span class="fill-space"></span>
+        
+        <a style="margin-top: -2px; margin-right: 10px">
+          <c style="color: rgba(255,255,255,0.7);">welcome,</c> {{$ctrl.user.displayName}}
+            <b md-button ng-click="$ctrl.logOut()" style="margin-left:18px; text-transform:lowercase;"name="logout">
+              [ sign out ]
+            </b>
+          </a>
+      </div>
+
+
+
+      <main flex>
+        <!-- Ui Router Body -->
         <ui-view></ui-view>
 
-    </div>
-  </main>  
+      </main>  
 
-  <footer>
-    <div style="min-height: 22px; background-color: black; position:fixed; bottom:0px; width:100%; color: rgba(255,255,255,0.7);" >
-        <div layout="row" layout-align="end center">
-          <c style="margin-top:2px">&copy; 2017, CoinsaverAPP Dev Team, ARMS Corp.</c>
+      <footer>
+        <div style="min-height: 22px; background-color: black; position:fixed; bottom:0px; width:100%; color: rgba(255,255,255,0.7);" >
+            <div layout="row" layout-align="end center">
+              <bot-nav/>
+              <c style="margin-top:2px">CoinSaverApp &copy;2017, ARMS Corp.</c>
+            </div>
         </div>
-    </div>
-  </footer>
+      </footer>
 
+    </div>
   </div>
 `,
 });

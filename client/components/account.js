@@ -14,6 +14,73 @@ angular.module('coinsaver')
     this.wallet = {};
 
     this.receipts = [
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-22T01:01:36Z',
+        updated_at: '2017-12-22T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.03294239', currency: 'BTC' },
+        total: { amount: '10.99', currency: 'USD' },
+        subtotal: { amount: '10.00', currency: 'USD' },
+        imgurl: './images/btcround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-21T01:01:36Z',
+        updated_at: '2017-12-21T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.016471195', currency: 'BTC' },
+        total: { amount: '5.99', currency: 'USD' },
+        subtotal: { amount: '5.00', currency: 'USD' },
+        imgurl: './images/btcround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-20T01:01:36Z',
+        updated_at: '2017-12-20T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.005217133', currency: 'ETH' },
+        total: { amount: '5.99', currency: 'USD' },
+        subtotal: { amount: '5.00', currency: 'USD' },
+        imgurl: './images/ethround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-21T01:01:36Z',
+        updated_at: '2017-12-21T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.005352631', currency: 'ETH' },
+        total: { amount: '5.99', currency: 'USD' },
+        subtotal: { amount: '5.00', currency: 'USD' },
+        imgurl: './images/ethround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-15T01:01:36Z',
+        updated_at: '2017-12-15T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.004922831', currency: 'ETH' },
+        total: { amount: '5.99', currency: 'USD' },
+        subtotal: { amount: '5.00', currency: 'USD' },
+        imgurl: './images/ethround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-15T01:01:36Z',
+        updated_at: '2017-12-15T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.000156497', currency: 'BTC' },
+        total: { amount: '2.99', currency: 'USD' },
+        subtotal: { amount: '2.00', currency: 'USD' },
+        imgurl: './images/btcround.svg'
+      },
+      
       ]
 
     this.$onInit = () => {
@@ -102,30 +169,54 @@ angular.module('coinsaver')
 
       <div layout="row" layout-xs="column" layout-align="center center">
         <div>
-          <center>    
-            <img src="./images/btcround.svg" width="150" height= "150" alt="Bitcoin">
-            <br>
-              {{$ctrl.wallet["BTC Wallet"].substring(0,7)}} 
-            <br> Bitcoin
-          </center>
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch style="min-width:240px">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Bitcoin</span>
+                  <span class="md-subhead">{{"BTC"}}</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                  <div class="md-media-sm card-media"> <img src="./images/btcround.svg" width="80" height= "80" alt="Bitcoin" style="padding-left:4px; margin-top:-4px"></div>
+                </md-card-title-media>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <span class="md-subhead">{{$ctrl.wallet["BTC Wallet"]}}</span>
+              </md-card-actions>
+            </md-card>
         </div>
-          <div flex="5"></div>
+          <div flex="3"></div>
         <div>
-          <center>
-            <img src="./images/ltcround.svg" width="150" height= "150"alt="Litecoin">
-            <br>
-              {{$ctrl.wallet["LTC Wallet"].substring(0,7)}}
-              <br> Litecoin
-          </center>
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch style="min-width:240px">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Litecoin</span>
+                  <span class="md-subhead">{{"LTC"}}</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                  <div class="md-media-sm card-media"> <img src="./images/ltcround.svg" width="80" height= "80" alt="Litecoin" style="padding-left:4px; margin-top:-4px"></div>
+                </md-card-title-media>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <span class="md-subhead">{{$ctrl.wallet["LTC Wallet"]}}</span>
+              </md-card-actions>
+            </md-card>
         </div>
-          <div flex="5"></div>
+          <div flex="3"></div>
         <div>
-          <center>
-            <img src="./images/ethround.svg" width="150" height= "150" alt="Etherium">
-            <br>
-            {{$ctrl.wallet["ETH Wallet"].substring(0,7)}} 
-            <br> Ethereum
-          </center>
+          <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch style="min-width:240px">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Ethereum</span>
+                  <span class="md-subhead">{{"ETH"}}</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                  <div class="md-media-sm card-media"> <img src="./images/ethround.svg" width="80" height= "80" alt="Etheriem" style="padding-left:4px; margin-top:-4px"></div>
+                </md-card-title-media>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <span class="md-subhead">{{$ctrl.wallet["BTC Wallet"]}}</span>
+              </md-card-actions>
+            </md-card>
         </div>
       </div>
     </div>
@@ -137,37 +228,34 @@ angular.module('coinsaver')
 
     <div ng-if="$ctrl.receipts.length>0">
       <div layout="row" layout-wrap>
-        <div flex="20" style="text-align:right!important">
-          ]
-        </div>
+        <div flex="20"></div>
         <div flex="60">
 
-        <md-content>
-        <md-list flex>
-          <md-list-item class="md-3-line" ng-repeat="item in $ctrl.receipts">
-            <div layout="column">
-              <img src="./images/ltcround.svg" alt="Litecoin" class="md-avatar" style="margin-top:10px"/>
-            </div>
-            <div class="md-list-item-text" layout="column">
-              <h3>{{ item.amount.currency }}</h3>
-              <h3>{{ item.amount.amount }}</h3>
-            </div>
-            <div class="md-list-item-text" layout="column">
-              <p>{{item.created_at.split('T0')[0]}}
-              {{item.created_at.split('T0')[1].split('Z')[0]}}</p>
-            </div>
-            <div class="md-list-item-text" layout="column">
-              <h3>{{ item.subtotal.currency}}</h3>
-              <h3>$ {{item.subtotal.amount}}</h3>
-            </div>
-          </md-list-item>
-        </md-list>
-      </md-content>
+          <md-content>
+          <md-list>
+            <md-list-item flex class="md-2-line transactionitem" layout="row" ng-repeat="item in $ctrl.receipts" style="overflow-x: hidden;">
+
+                <div class="md-list-item-text">
+                  <p>{{item.created_at.split('T0')[0]}}</p>
+                  <p>$ {{ item.subtotal.amount }} {{ item.subtotal.currency}}  >  {{item.amount.currency}}</p>
+                </div>
+
+                <div layout="column">
+                  <div class="md-secondary"  style="margin-right:10px">{{item.amount.amount.substring(0,8)}} {{item.amount.currency}} </div>
+                </div>
+
+                <div layout="column" class="md-secondary" style="margin-right:-26px">
+                  <img data-ng-src="{{item.imgurl}}" alt="Coin" class="md-avatar" style="margin-top:8px"/>
+                </div>
+
+                <md-divider class="transactiondivider"></md-divider>
+              
+              </md-list-item>
+            </md-list>
+          </md-content>
 
         </div>
-        <div flex="20">
-          [
-        </div>
+        <div flex="20"></div>
       </div>
     </div>
 
