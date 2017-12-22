@@ -32,8 +32,8 @@ angular.module('coinsaver')
     };
   },
   template: `
-  <div class="transactions">
-    <md-toolbar class="md-hue-2">
+  <div layout="column" layout-align="center center">
+    <md-toolbar style="width:600px;margin-top:50px;">
       <div class="md-toolbar-tools">
         <h2 flex md-truncate>{{$ctrl.info.name}}</h2>
 
@@ -52,6 +52,14 @@ angular.module('coinsaver')
                 </a>
               </md-button>
             </md-menu-item>
+            <md-menu-item>
+            <md-button>
+              <md-icon md-menu-align-target>settings</md-icon>
+              <a id="pagechange" ui-sref="settings">
+                Account settings
+              </a>
+            </md-button>
+          </md-menu-item>
             <md-menu-divider />
             <md-menu-item>
               <md-button ng-click="handleDelink($event)">
@@ -67,7 +75,7 @@ angular.module('coinsaver')
 
     <md-content>
       <md-list>
-        <md-list-item class="md-2-line" layout="row" ng-repeat="transaction in $ctrl.info.transactions">
+        <md-list-item class="md-2-line transactionitem" layout="row" ng-repeat="transaction in $ctrl.info.transactions" style="width:600px;">
 
           <div class="md-list-item-text">
             <p>{{transaction.date}}</p>
@@ -76,7 +84,7 @@ angular.module('coinsaver')
 
           <div class="md-secondary">{{transaction.round | currency}}</div>
 
-          <md-divider />
+          <md-divider class="transactiondivider"></md-divider>
           
         </md-list-item>
       </md-list>
