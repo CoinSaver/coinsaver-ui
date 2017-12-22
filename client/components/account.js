@@ -99,7 +99,7 @@ angular.module('coinsaver')
           coinacct.getcoinwallet(coinacct.user.uid)
           coinacct.getcurrentbuy()
           coinacct.passedVal = CoinMover.get().working
-          console.log(coinacct.passedVal)
+          // console.log(coinacct.passedVal)
           if (coinacct.user.uid === "bpc2buxD1DTtSWo3zDcrk1oFXY72"){
             coinacct.receipts = coinacct.receiptdata
           }
@@ -139,7 +139,7 @@ angular.module('coinsaver')
         buyAmount = snapshot.val().stats_next_purchase_usd;
         coinacct.buyAmount = buyAmount;
       }, (errorObject) => {
-        console.log(errorObject);
+        // console.log(errorObject);
       });
     }
 
