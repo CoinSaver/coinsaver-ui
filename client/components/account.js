@@ -14,8 +14,7 @@ angular.module('coinsaver')
     this.wallet = {};
 
     this.receipts = [
-      // Dummy receipt data here
-    ]
+      ]
 
     this.$onInit = () => {
 
@@ -27,7 +26,7 @@ angular.module('coinsaver')
           coinacct.loggedIn = true;
           coinacct.testcoincode(coinacct.user.uid)
           coinacct.getcoinwallet(coinacct.user.uid)
-          console.log(coinacct.receipt)
+          console.log(coinacct.receipts)
         } else {
           console.log("Not currently signed in");
         }
@@ -95,39 +94,39 @@ angular.module('coinsaver')
 
     <div ng-if="$ctrl.connected == true">
 
-          <div>
+          <div layout="row" layout-align="center center">
             <md-button class="md-raised md-primary" style="min-width:300px" ng-click="$ctrl.buyCoin(10.00, $ctrl.user.uid)">
               Buy some Coin!!
             </md-button>
           </div>
 
-      <div layout="row" layout-xs="column">
-        <div flex="20"></div>
-          <div flex="20">    
-            <center>    
-              <img src="./images/btcround.svg" width="150" height= "150" alt="Bitcoin">
-              <br>
-              {{$ctrl.wallet["BTC Wallet"]}} 
-              <br> Bitcoin
-            </center>
-          </div>
-          <div flex="20">
-            <center>
-              <img src="./images/ltcround.svg" width="150" height= "150"alt="Litecoin">
-              <br>
-              {{$ctrl.wallet["LTC Wallet"]}}
+      <div layout="row" layout-xs="column" layout-align="center center">
+        <div>
+          <center>    
+            <img src="./images/btcround.svg" width="150" height= "150" alt="Bitcoin">
+            <br>
+              {{$ctrl.wallet["BTC Wallet"].substring(0,7)}} 
+            <br> Bitcoin
+          </center>
+        </div>
+          <div flex="5"></div>
+        <div>
+          <center>
+            <img src="./images/ltcround.svg" width="150" height= "150"alt="Litecoin">
+            <br>
+              {{$ctrl.wallet["LTC Wallet"].substring(0,7)}}
               <br> Litecoin
-            </center>
-          </div>
-          <div flex="20">
-            <center>
-              <img src="./images/ethround.svg" width="150" height= "150" alt="Etherium">
-              <br>
-              {{$ctrl.wallet["ETH Wallet"]}} 
-              <br> Ethereum
-            </center>
-          </div>
-        <div flex="20"></div>
+          </center>
+        </div>
+          <div flex="5"></div>
+        <div>
+          <center>
+            <img src="./images/ethround.svg" width="150" height= "150" alt="Etherium">
+            <br>
+            {{$ctrl.wallet["ETH Wallet"].substring(0,7)}} 
+            <br> Ethereum
+          </center>
+        </div>
       </div>
     </div>
     <!--<div>
@@ -136,17 +135,38 @@ angular.module('coinsaver')
       </md-button>
     </div>-->
 
-
     <div ng-if="$ctrl.receipts.length>0">
       <div layout="row" layout-wrap>
         <div flex="20" style="text-align:right!important">
-          [frame reference]
+          ]
         </div>
         <div flex="60">
-          Render transactions here :)
+
+        <md-content>
+        <md-list flex>
+          <md-list-item class="md-3-line" ng-repeat="item in $ctrl.receipts">
+            <div layout="column">
+              <img src="./images/ltcround.svg" alt="Litecoin" class="md-avatar" style="margin-top:10px"/>
+            </div>
+            <div class="md-list-item-text" layout="column">
+              <h3>{{ item.amount.currency }}</h3>
+              <h3>{{ item.amount.amount }}</h3>
+            </div>
+            <div class="md-list-item-text" layout="column">
+              <p>{{item.created_at.split('T0')[0]}}
+              {{item.created_at.split('T0')[1].split('Z')[0]}}</p>
+            </div>
+            <div class="md-list-item-text" layout="column">
+              <h3>{{ item.subtotal.currency}}</h3>
+              <h3>$ {{item.subtotal.amount}}</h3>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-content>
+
         </div>
         <div flex="20">
-          [frame reference]
+          [
         </div>
       </div>
     </div>
