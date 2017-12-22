@@ -15,7 +15,11 @@ angular.module('coinsaver')
     this.receipts = [];
     this.buyAmount;
 
+<<<<<<< HEAD
+    this.passedVal = 'false';
+=======
     this.passedVal = false;
+>>>>>>> refs/remotes/origin/master
 
     this.receiptdata = [
       {
@@ -97,6 +101,10 @@ angular.module('coinsaver')
           coinacct.loggedIn = true;
           coinacct.testcoincode(coinacct.user.uid)
           coinacct.getcoinwallet(coinacct.user.uid)
+<<<<<<< HEAD
+          coinacct.getcurrentbuy()
+=======
+>>>>>>> refs/remotes/origin/master
           coinacct.passedVal = CoinMover.get().working
           console.log(coinacct.passedVal)
           if (coinacct.user.uid === "bpc2buxD1DTtSWo3zDcrk1oFXY72"){
@@ -137,6 +145,10 @@ angular.module('coinsaver')
       ref.on('value', (snapshot) => {
         buyAmount = snapshot.val().stats_next_purchase_usd;
         coinacct.buyAmount = buyAmount;
+<<<<<<< HEAD
+        console.log('coinacct buy is', coinacct.buyAmount)
+=======
+>>>>>>> refs/remotes/origin/master
       }, (errorObject) => {
         console.log(errorObject);
       });
@@ -184,11 +196,33 @@ angular.module('coinsaver')
     <!--
           <div layout="row" layout-align="center center">
             <md-button class="md-raised md-primary" style="min-width:300px" ng-click="$ctrl.buyCoin(10.00, $ctrl.user.uid)">
-              Buy some Coin!!
+              Invest change now
             </md-button>
           </div>
 
     -->
+<<<<<<< HEAD
+      <div layout="row" layout-xs="column" layout-align="center center">
+        <div ng-if="$ctrl.passedVal == 'true'">
+          <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch style="min-width:150px; min-height:150px; border-radius:4px">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Uninvested change:</span>
+                <span class="md-subhead" style="font-size:48px; margin-top:16px; text-align:center;">{{ $ctrl.buyAmount | currency}}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="center center">
+              <span class="md-subhead">
+                <md-button class="md-raised md-primary" flex ng-click="$ctrl.buyCoin(10.00, $ctrl.user.uid)">
+                  Invest change now
+                </md-button>
+              </span>
+            </md-card-actions>
+          </md-card>
+        </div>
+      </div>
+=======
+>>>>>>> refs/remotes/origin/master
 
       <div layout="row" layout-xs="column" layout-align="center center">
         <div>
