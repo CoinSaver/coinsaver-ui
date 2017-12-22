@@ -250,55 +250,57 @@ angular.module('coinsaver', ['ngMaterial', 'firebase', 'ngCookies', 'ui.router']
 
   template:
   `
-
   <div ng-if="$ctrl.loggedIn === false">
     <home />
   </div>
-  <!-- Nav Bar -->
-  <div ng-if="$ctrl.loggedIn === true">
-    <md-content layout="column" flex>
+
+  <div layout="column">
+
+    <div layout="row" style="max-height: 42px; background-color: black;">
+      <a class="navbar-brand hero-heading" style="font-size: 56px; margin-top: -10px; margin-left: 5px;"> Coinsaver</a>
+
       <md-nav-bar md-selected-nav-item="$ctrl.currentNavitem" nav-bar-aria-label="navigation links">
-        <md-nav-item md-nav-sref="home" name="home" ui-sref-active="home">
+        <md-nav-item md-nav-sref="home" name="home" value= "home" ui-sref-active="home">
           Home
-        </md-nav-item>
-        <md-nav-item md-nav-sref="stats" name="stats" ui-sref-active="stats">
-          Stats
         </md-nav-item>
         <md-nav-item md-nav-sref="banks" name="banks" value="banks" ui-sref-active="banks">
           Banks
         </md-nav-item>
-        <md-nav-item ui-sref="account({myParam: 'home'})" ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
+        <md-nav-item ui-sref-active="account" md-nav-sref="account({myParam: 'home'})" name="account">
           Wallet
         </md-nav-item>
         <md-nav-item ui-sref="settings" ui-sref-active="settings" md-nav-click="$ctrl.view='account'" name="settings">
-          Account Settings
+          Settings
         </md-nav-item>
-
-        <!-- Spacer -->
-        <span class="fill-space"></span>
-
-        <!-- Login / Welcome -->
-        <div ng-if="$ctrl.loggedIn === false">
-          <md-nav-item md-nav-click="$ctrl.login('google')" name="login">
-            [ Login ]
-          </md-nav-item>
-        </div>
-
-        <div ng-if="$ctrl.loggedIn === true">
-          <md-button>
-          Welcome, {{$ctrl.user.displayName}}
-          </md-button>
-          <md-button ng-click="$ctrl.logOut()" name="logout">
-          [ Log out ]
-          </md-button>
-        </div>
-
       </md-nav-bar>
-    </md-content>
 
-    <!-- Ui Router Body -->
-      <ui-view></ui-view>
+      <span class="fill-space"></span>
+      
+      <a style="margin-top: 12px; margin-right: 20px">
+        <c style="color: rgba(255,255,255,0.7);">welcome,</c> {{$ctrl.user.displayName}}
+          <b ng-click="$ctrl.logOut()" style="margin-left:18px; text-transform:uppercase;"name="logout">
+            [ Log out ]
+          </b>
+        </a>
+    </div>
 
-  </div>  
+  <main flex>
+    <div ng-if="$ctrl.loggedIn === true">
+
+      <!-- Ui Router Body -->
+        <ui-view></ui-view>
+
+    </div>
+  </main>  
+
+  <footer>
+    <div style="min-height: 22px; background-color: black; position:fixed; bottom:0px; width:100%; color: rgba(255,255,255,0.7);" >
+        <div layout="row" layout-align="end center">
+          <c style="margin-top:2px">&copy; 2017, CoinsaverAPP Dev Team, ARMS Corp.</c>
+        </div>
+    </div>
+  </footer>
+
+  </div>
 `,
 });

@@ -1,5 +1,5 @@
 main {
-  overflow-y: auto;
+  overflow-y: auto!important;
 }
 
 .demo-md-panel {
