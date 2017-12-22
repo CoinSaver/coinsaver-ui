@@ -18,7 +18,7 @@ var printDB = function(path){
   dbpath.once("value", snapshot => {
     const db = snapshot.val();
     if (db){
-      console.log('Your current database is: ', db);
+      // console.log('Your current database is: ', db);
     } else {
       // ctrl.writefbUser('works','true')
       console.log('Is your database currently empty? Try linking a google account')
@@ -62,13 +62,13 @@ var checkDB = function(userid, path, callback){
 }
 
 
-//!! Setup Intiial Values in Firebase
+// -- User Setup -- //
 var setupNewUserFB = function(userid, display_name, email){
   console.log('setupNewUserFB ran')
-  var userinfopath = db.ref('users/' + userid + '/userinfo')
   var currentTime = new Date().toLocaleString();
-  console.log('current time is: ', currentTime);
+  console.log(`fbController - User: ${display_name}, with Email: ${email}, was created at: ${currentTime}`);
 
+  var userinfopath = db.ref('users/' + userid + '/userinfo')
   userinfopath.update({
     // userinfo
     display_name: display_name || '',
