@@ -15,11 +15,7 @@ angular.module('coinsaver')
     this.receipts = [];
     this.buyAmount;
 
-<<<<<<< HEAD
     this.passedVal = 'false';
-=======
-    this.passedVal = false;
->>>>>>> refs/remotes/origin/master
 
     this.receiptdata = [
       {
@@ -101,10 +97,7 @@ angular.module('coinsaver')
           coinacct.loggedIn = true;
           coinacct.testcoincode(coinacct.user.uid)
           coinacct.getcoinwallet(coinacct.user.uid)
-<<<<<<< HEAD
           coinacct.getcurrentbuy()
-=======
->>>>>>> refs/remotes/origin/master
           coinacct.passedVal = CoinMover.get().working
           console.log(coinacct.passedVal)
           if (coinacct.user.uid === "bpc2buxD1DTtSWo3zDcrk1oFXY72"){
@@ -145,10 +138,6 @@ angular.module('coinsaver')
       ref.on('value', (snapshot) => {
         buyAmount = snapshot.val().stats_next_purchase_usd;
         coinacct.buyAmount = buyAmount;
-<<<<<<< HEAD
-        console.log('coinacct buy is', coinacct.buyAmount)
-=======
->>>>>>> refs/remotes/origin/master
       }, (errorObject) => {
         console.log(errorObject);
       });
@@ -201,7 +190,6 @@ angular.module('coinsaver')
           </div>
 
     -->
-<<<<<<< HEAD
       <div layout="row" layout-xs="column" layout-align="center center">
         <div ng-if="$ctrl.passedVal == 'true'">
           <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch style="min-width:150px; min-height:150px; border-radius:4px">
@@ -221,8 +209,6 @@ angular.module('coinsaver')
           </md-card>
         </div>
       </div>
-=======
->>>>>>> refs/remotes/origin/master
 
       <div layout="row" layout-xs="column" layout-align="center center">
         <div>
