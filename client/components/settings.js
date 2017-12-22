@@ -217,11 +217,13 @@ angular.module('coinsaver')
       }
 
       if ($scope.submitErrors.length === 0) {
+        $scope.loading = true;
         ref.update($scope.toSave, () => {
           ref.on('value', (snapshot) => {
             $scope.saved = snapshot.val();
             $scope.toSave = JSON.parse(JSON.stringify($scope.saved));
             $scope.enableEdit = false;
+            $scope.loading = false;
           });
         });
       }
