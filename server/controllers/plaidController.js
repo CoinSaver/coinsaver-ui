@@ -29,8 +29,8 @@ module.exports = {
         }
         accessToken = tokenResponse.access_token;
         itemId = tokenResponse.item_id;
-        console.log('------Access token: ', accessToken);
-        console.log('------Item ID: ', itemId);
+        // console.log('------Access token: ', accessToken);
+        // console.log('------Item ID: ', itemId);
 
         const updateObj = {
           plaid_account_id: '',
@@ -52,7 +52,7 @@ module.exports = {
           res.json({ error });
         }
 
-        console.log(authResponse.accounts);
+        // console.log(authResponse.accounts);
 
         const resArray = [];
 
@@ -95,12 +95,12 @@ module.exports = {
             offset: 0,
           }, (error, transactionsResponse) => {
             if (error) {
-              console.log('Could not get transactions: ', error);
+              // console.log('Could not get transactions: ', error);
               return res.json({ error });
             }
 
             const transactions = plaidHelper.formatTransactions(transactionsResponse, plaidInfoObj.plaid_account_id);
-            console.log('^^^^^^transactions', parseFloat(parseFloat(transactions[0].roundSum).toFixed(2)));
+            // console.log('^^^^^^transactions', parseFloat(parseFloat(transactions[0].roundSum).toFixed(2)));
             firebaseController.updateFB(req.body.uid, '/userinfo', 'transactions', transactions);
             firebaseController.updateFB(req.body.uid, '/userinfo', 'linked_plaid', true);
             firebaseController.updateFB(req.body.uid, '/userinfo', 'stats_next_purchase_date', moment().add(1, 'months').format('YYYY-MM-DD'));

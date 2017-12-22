@@ -21,7 +21,7 @@ var printDB = function(path){
       // console.log('Your current database is: ', db);
     } else {
       // ctrl.writefbUser('works','true')
-      console.log('Is your database currently empty? Try linking a google account')
+      // console.log('Is your database currently empty? Try linking a google account')
     }
   })  
 }
@@ -64,9 +64,9 @@ var checkDB = function(userid, path, callback){
 
 // -- User Setup -- //
 var setupNewUserFB = function(userid, display_name, email){
-  console.log('setupNewUserFB ran')
+  ('setupNewUserFB ran')
   var currentTime = new Date().toLocaleString();
-  console.log(`fbController - User: ${display_name}, with Email: ${email}, was created at: ${currentTime}`);
+  // console.log(`fbController - User: ${display_name}, with Email: ${email}, was created at: ${currentTime}`);
 
   var userinfopath = db.ref('users/' + userid + '/userinfo')
   userinfopath.update({
@@ -127,7 +127,7 @@ var coinAuthRefresh = function(userid, callback){
       callback(refreshToken);
     } else {
       // ctrl.writefbUser('works','true')
-      console.log('Is your database currently empty? Try linking a google account')
+      // console.log('Is your database currently empty? Try linking a google account')
     }
   })
 };

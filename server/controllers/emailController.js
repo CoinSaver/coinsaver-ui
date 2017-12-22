@@ -38,15 +38,15 @@ var mailOptions = {
 // -- Sample Mail Options Template //
 
 var sendCoinsaverbotEmail = function (mailOptions) { 
-  console.log('Email was triggered - server TEXT: ', mailOptions);
+  // console.log('Email was triggered - server TEXT: ', mailOptions);
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
-      console.log('Your Coinsaverbot Email Error: ', error);
+      // console.log('Your Coinsaverbot Email Error: ', error);
     } else {
-      console.log('Coinsaverbot Email sent: ' + info.response);
+      // console.log('Coinsaverbot Email sent: ' + info.response);
     }
   });
-  console.log('sendCoinsaverbotEmail function ran');
+  // console.log('sendCoinsaverbotEmail function ran');
 }
 // sendCoinsaverbotEmail(mailOptions);
 

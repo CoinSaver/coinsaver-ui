@@ -5,7 +5,7 @@ module.exports = {
   testCronJob: new CronJob({
     cronTime: '* * * * * *',
     onTick: () => {
-      console.log('-----Cron tick!');
+      // console.log('-----Cron tick!');
     },
     start: false,
   }),

@@ -16,13 +16,13 @@ angular.module('coinsaver')
       
       Auth.$onAuthStateChanged(function(firebaseUser) {
         if (firebaseUser) {
-          console.log('user exists, redirecting')
+        //   console.log('user exists, redirecting')
           // $state.go('stats')
           // $state.reload('stats')
           // $state.transitionTo('stats', null, {reload: true, notify:true});
           // location.reload()
         } else {
-          console.log("Signed out");
+        //   console.log("Signed out");
         }
       });
 

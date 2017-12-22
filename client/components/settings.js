@@ -160,7 +160,7 @@ angular.module('coinsaver')
 
       $scope.loading = false;
     }, (errorObject) => {
-      console.log(errorObject);
+      // console.log(errorObject);
     });
 
     $scope.decBTC = () => {
