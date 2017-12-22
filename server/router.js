@@ -37,6 +37,15 @@ router.post('/usersetup', (req, res) => {
 
   firebaseController.setupNewUserFB(new_userid, new_display_name, new_email)
 
+  var firstname = new_display_name.split(' ')[0];
+  console.log('firstname: ', firstname)
+
+
+
+  emailSignup.to = new_email;
+  emailSignup.subject = `Welcome to Coinsaver, ${firstname}! Here's how to get started`;
+
+  console.log('emailSignup Obj: ', emailSignup)
   // emailController.sendCoinsaverbotEmail(emailSignup);
 
   res.send('Server Response: New User setup completed');
