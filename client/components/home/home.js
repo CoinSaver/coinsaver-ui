@@ -447,29 +447,6 @@ Pricing tables & lists
           </div>
       </nav>
 
-<<<<<<< HEAD
-      <!--main section-->
-      <section class="bg-texture hero" id="main">
-          <div class="container">
-              <div class="row d-md-flex brand">
-                  <div class="col-md-6 hidden-sm-down wow fadeIn">
-                      <!--<img class="img-fluid mx-auto d-block" src="img/product.png"/>-->
-                  </div>
-                  <div class="col-md-6 col-sm-12 text-white wow fadeIn">
-                      <h2 class="pt-4">Welcome to <b class="text-primary-light">Coinsaver</b></h2>
-                      <!--<h2 class="pt-4">Start saving in crypto today!</h2>-->
-                      <p class="mt-3">
-                          Here at coinsaver we believe in the future of crypto as an industry and fiat standard. Our aim is to allow you easy, one click access to start saving in crypto today.
-                      </p>
-                      <p class="mt-3">
-                          <!--<a href="#pricing" class="btn btn-primary mr-2 mb-2 page-scroll">Buy Now</a>-->
-                          <a href="#download" class="btn btn-white mb-2 page-scroll">Start Now</a>
-                      </p>
-                  </div>
-              </div>
-          </div>
-      </section>
-=======
         <!--main section-->
         <section class="bg-texture hero" id="main">
             <div class="container">
@@ -491,7 +468,6 @@ Pricing tables & lists
                 </div>
             </div>
         </section>
->>>>>>> Home page edited
 
       <!--features-->
       <section class="bg-light" id="features">
