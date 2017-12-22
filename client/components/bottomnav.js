@@ -51,9 +51,19 @@ angular.module('coinsaver')
               </md-toolbar>
             
               <div class="demo-dialog-content">
-                <p>
-                  Frequently asked questions etc
+                <p align="center">
+                  <b><u>How does it work?</u></b><br>
+                  After linking your Bank account and Coinbase account, Coinsaver calculates your accumulated spare change and invests it into Bitcoin/Ethereum.
                 </p>
+                <p align="center">
+                  <b><u>Do I need a Coinbase Account?</u></b><br>
+                  Yes. Coinsaver does not ever hold your coins. Rather, Coinsaver automatically makes purchases to your personal Coinbase account for you based on your preferences.     
+                </p>
+                <p align="center">
+                  <b><u>Is it secure?</u></b><br>
+                  Yes. After making a secure connection via your bank, and via Coinbase, you are essentially giving us permission to buy Bitcoin/Ethereum to your Coinbase account for you. Coinsaver does not save your credit card data, and does not have permission to send your coins (only buy).     
+                </p>
+
               </div>
             
               <div layout="row" class="demo-dialog-button">
@@ -76,13 +86,13 @@ angular.module('coinsaver')
               </md-toolbar>
             
               <div class="demo-dialog-content">
-                <p>
+                <p align="center">
                   I'm an expert in bird law and this is 100% legal
                 </p>
-                <p>
+                <p align="center">
                   I'm an expert in bird law and this is 100% legal
                 </p>
-                <p>
+                <p align="center">
                   I'm an expert in bird law and this is 100% legal
                 </p>
               </div>
@@ -107,8 +117,9 @@ angular.module('coinsaver')
               </md-toolbar>
             
               <div class="demo-dialog-content">
-                <p>
-                  Contact us at . . .
+                <p align="center">
+                  For all inqueries and customer support, please contact us at: 
+                  <b>coinsavermain@gmail.com</b>
                 </p>
               </div>
             
@@ -140,7 +151,7 @@ angular.module('coinsaver')
   template: `
     <div>
       <section layout="row" layout-sm="column" layout-align="center center" layout-wrap style="max-height:22px;">
-        <md-button class="md-primary md-hue-1" style="min-height:20px;max-height:20px;line-height:20px;text-transform:lowercase" ng-click="$ctrl.showDialog('faq')">FAQ</md-button>
+        <md-button class="md-primary md-hue-1" style="min-height:20px;max-height:20px;line-height:20px;" ng-click="$ctrl.showDialog('faq')">FAQ</md-button>
         <md-button class="md-primary md-hue-1" style="min-height:20px;max-height:20px;line-height:20px;text-transform:lowercase" ng-click="$ctrl.showDialog('legal')">Legal</md-button>
         <md-button class="md-primary md-hue-1" style="min-height:20px;max-height:20px;line-height:20px;text-transform:lowercase" ng-click="$ctrl.showDialog('contact')">Contact</md-button>
         <!-- <div class="label">Themed</div> -->

@@ -506,11 +506,11 @@ Pricing tables & lists
                         <h2 class="pt-4 text-primary-light"><p class="primary-shadow">Welcome to Coinsaver</p></h2>
                         <!--<h2 class="pt-4">Saving Change as Cryptocurrency</h2>-->
                         <p class="mt-3 dark-background-text">
-                            Investing in cryptocurrency, made simple. Our aim is to allow you to invest spare change into Cryptocurrency.
+                            Investing in cryptocurrency, made simple.
                         </p>
                         <p class="mt-3">
                             <!--<a href="#pricing" class="btn btn-primary mr-2 mb-2 page-scroll">Buy Now</a>-->
-                        <a href="#download" class="btn btn-white mb-2 page-scroll">Start Now</a>
+                        <a href="#download" class="btn btn-white mb-2 page-scroll">Get Started</a>
                         </p>
                     </div>
                 </div>
@@ -525,14 +525,14 @@ Pricing tables & lists
                         <img class="img-fluid" src="./components/home/img/product2.jpg" alt="Gallery">
                     </div>
                     <div class="col-sm-6 pl-5 pr-5 pt-5 pb-4 wow fadeInRight">
-                        <h3><a href="#">How does coinsaver work?</a></h3>
-                        <p class="lead pt-4">Coinsaver takes your daily purchases and rounds up to the nearest dollar, saving that change to be invested at the end of the week.</p>
+                        <h3><a href="#">Investing Change in Crypto</a></h3>
+                        <p class="lead pt-4">Coinsaver takes your daily purchases and rounds up to the nearest dollar, and invests the change into Bitcoin/Ethereum</p>
                         <ul class="pt-4 pb-3 list-default">
-                            <li>By using coinbase, our service is fast, simple and easy.</li>
-                            <li>We only request read access of your transactions and don't store any sensitive information.</li>
-                            <li>Secure.</li>
-                            <li>Buzzwords.</li>
-                            <li>Crypto.</li>
+                            <li>- By using a secure connection coinbase, our service is fast, simple and easy.</li>
+                            <li>- Choose a mix of Bitcoin or Ethereum</li>
+                            <li>- Automatic, periodic investments with customizable preferences</li>
+                            <li>- Secure. We only request read access of your transactions and don't store any sensitive information.</li>
+                            <li></li>
                         </ul>
                         <!--<a href="#purchase" class="btn btn-primary mr-2 page-scroll">Get Started with Comply</a>-->
                     </div>
@@ -577,7 +577,7 @@ Pricing tables & lists
                             </div>
                             <h6>Coinbase-linked Auth</h6>
                             <p>
-                                By utilizing your coinbase account, we can ensure all your wallets and data are protected to the maximum level.
+                                By utilizing your Coinbase account, we can ensure all your wallets and data are protected to the maximum level.
                             </p>
                         </div>
                         </div>
@@ -588,7 +588,7 @@ Pricing tables & lists
                             <div class="icon-box">
                                 <em class="ion-ios-settings icon-md"></em>
                             </div>
-                            <h6>Advanced Control</h6>
+                            <h6>Fully Customizable Control</h6>
                             <p>
                                 Change your settings to save every month, only based on change, or easily remove your data should you please.
                             </p>
@@ -729,7 +729,7 @@ Pricing tables & lists
           <div class="container">
               <div class="row">
                   <div class="col-md-6 col-sm-8 mx-auto text-center">
-                      <h2 class="text-primary-light" id="team-title">Meet the CoinSaver Devs</h2>
+                      <h2 class="text-primary-light" id="team-title">Meet the Team</h2>
                       <p class="lead pt-3 team-tag">
                           Leading the way in secured crypto futures
                       </p>
@@ -739,17 +739,17 @@ Pricing tables & lists
                   <div class="team col-sm-4 mt-2 wow fadeInLeft">
                       <img src="./components/home/img/team-1.png" alt="it alex" class="img-team img-fluid rounded-circle"/>
                       <h5 class="team-names">Alex Brawley</h5>
-                      <p>Cryptologist Expert</p>
+                      <p>Founder / Cryptologist Expert</p>
                   </div>
                   <div class="team col-sm-4 mt-2 wow fadeIn">
                       <img src="./components/home/img/team-2.png" alt="it rich" class="img-team img-fluid rounded-circle"/>
                       <h5 class="team-names">Richard Oh</h5>
-                      <p>The guy we ask to do github stuff</p>
+                      <p>Scrum Master / The guy we ask to do github stuff</p>
                   </div>
                   <div class="team col-sm-4 mt-2 wow fadeIn">
                       <img src="./components/home/img/team-3.png" alt="it mike" class="img-team img-fluid rounded-circle"/>
                       <h5 class="team-names">Michael Walker</h5>
-                      <p>"The Muscle"</p>
+                      <p>Lead Developer /   "The Muscle"</p>
                   </div>
               </div>
           </div>
@@ -830,11 +830,11 @@ Pricing tables & lists
               <div class="row d-md-flex text-white text-center wow fadeIn">
                   <div class="col-sm-4 p-5">
                       <p><em class="ion-ios-telephone-outline icon-md"></em></p>
-                      <p class="lead">+1 5456 87595</p>
+                      <p class="lead">+1 626 807 8000</p>
                   </div>
                   <div class="col-sm-4 p-5">
                       <p><em class="ion-ios-email-outline icon-md"></em></p>
-                      <p class="lead">coinsaver@gmail.com</p>
+                      <p class="lead">coinsavermain@gmail.com</p>
                   </div>
                   <div class="col-sm-4 p-5">
                       <p><em class="ion-ios-location-outline icon-md"></em></p>
