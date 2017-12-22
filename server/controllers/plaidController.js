@@ -76,7 +76,7 @@ module.exports = {
     },
     post: function postAccount(req, res, next) {
       firebaseController.updateFB(req.body.uid, '/plaidinfo', 'plaid_account_id', req.body.i);
-      firebaseController.updateFB(req.body.uid, '/userinfo', 'stats_last_purchase_date', moment().format('YYYY-MM-DD'));
+      firebaseController.updateFB(req.body.uid, '/userinfo', 'stats_last_purchase_date', moment().subtract(1, 'months').format('YYYY-MM-DD'));
       res.json({ error: false });
     },
   },
@@ -100,9 +100,11 @@ module.exports = {
             }
 
             const transactions = plaidHelper.formatTransactions(transactionsResponse, plaidInfoObj.plaid_account_id);
+            console.log('^^^^^^transactions', parseFloat(parseFloat(transactions[0].roundSum).toFixed(2)));
             firebaseController.updateFB(req.body.uid, '/userinfo', 'transactions', transactions);
             firebaseController.updateFB(req.body.uid, '/userinfo', 'linked_plaid', true);
             firebaseController.updateFB(req.body.uid, '/userinfo', 'stats_next_purchase_date', moment().add(1, 'months').format('YYYY-MM-DD'));
+            firebaseController.updateFB(req.body.uid, '/userinfo', 'stats_next_purchase_usd', parseFloat(parseFloat(transactions[0].roundSum).toFixed(2)));
             return res.json(transactions);
           });
         });

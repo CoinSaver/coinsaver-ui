@@ -86,6 +86,7 @@ var setupNewUserFB = function(userid, display_name, email){
     stats_total_purchase_btc: 0,
     stats_last_purchase_date: moment().format('YYYY-MM-DD'),
     stats_next_purchase_date: '',
+    stats_next_purchase_usd: 0,
     transactions: 0, 
   });
   
