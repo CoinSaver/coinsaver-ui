@@ -14,6 +14,72 @@ angular.module('coinsaver')
     this.wallet = {};
 
     this.receipts = [
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-22T01:01:36Z',
+        updated_at: '2017-12-22T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.03294239', currency: 'BTC' },
+        total: { amount: '10.99', currency: 'USD' },
+        subtotal: { amount: '10.00', currency: 'USD' },
+        imgurl: './images/btcround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-21T01:01:36Z',
+        updated_at: '2017-12-21T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.016471195', currency: 'BTC' },
+        total: { amount: '5.99', currency: 'USD' },
+        subtotal: { amount: '5.00', currency: 'USD' },
+        imgurl: './images/btcround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-20T01:01:36Z',
+        updated_at: '2017-12-20T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.005217133', currency: 'ETH' },
+        total: { amount: '5.99', currency: 'USD' },
+        subtotal: { amount: '5.00', currency: 'USD' },
+        imgurl: './images/ethround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-21T01:01:36Z',
+        updated_at: '2017-12-21T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.005352631', currency: 'ETH' },
+        total: { amount: '5.99', currency: 'USD' },
+        subtotal: { amount: '5.00', currency: 'USD' },
+        imgurl: './images/ethround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-15T01:01:36Z',
+        updated_at: '2017-12-15T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.004922831', currency: 'ETH' },
+        total: { amount: '5.99', currency: 'USD' },
+        subtotal: { amount: '5.00', currency: 'USD' },
+        imgurl: './images/ethround.svg'
+      },
+      {
+        transaction: null,
+        user_reference: 'ZDEWMXFH',
+        created_at: '2017-12-15T01:01:36Z',
+        updated_at: '2017-12-15T01:01:36Z',
+        fee: { amount: '0.99', currency: 'USD' },
+        amount: { amount: '0.000156497', currency: 'BTC' },
+        total: { amount: '2.99', currency: 'USD' },
+        subtotal: { amount: '2.00', currency: 'USD' },
+        imgurl: './images/btcround.svg'
+      },
       
       ]
 
@@ -163,7 +229,13 @@ angular.module('coinsaver')
     <div ng-if="$ctrl.receipts.length>0">
       <div layout="row" layout-wrap>
         <div flex="20"></div>
-        <div flex="60">
+        <div flex="60" style="margin-bottom:30px">
+
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2 flex md-truncate>Transactions</h2>
+          </div>
+        </md-toolbar>
 
           <md-content>
           <md-list>
