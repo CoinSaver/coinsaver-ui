@@ -17,4 +17,16 @@ angular.module('coinsaver')
         Object.assign(state.data, data);
       },
     };
+  })
+  .factory('CoinMover', () => {
+    const state = {};
+
+    return {
+      get() {
+        return state;
+      },
+      set(data) {
+        Object.assign(state, data)
+      },
+    };
   });
