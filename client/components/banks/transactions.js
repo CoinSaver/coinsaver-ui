@@ -33,7 +33,7 @@ angular.module('coinsaver')
   },
   template: `
   <div layout="column" layout-align="center center">
-    <md-toolbar style="width:600px;margin-top:50px;">
+    <md-toolbar style="width:600px;margin-top:50px;border-radius:3px!important">
       <div class="md-toolbar-tools">
         <h2 flex md-truncate>{{$ctrl.info.name}}</h2>
 

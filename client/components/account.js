@@ -231,8 +231,8 @@ angular.module('coinsaver')
         <div flex="20"></div>
         <div flex="60" style="margin-bottom:30px">
 
-        <md-toolbar>
-          <div class="md-toolbar-tools">
+        <md-toolbar style="border-radius:3px">
+          <div class="md-toolbar-tools" style="border-radius:3px">
             <h2 flex md-truncate>Transactions</h2>
           </div>
         </md-toolbar>
