@@ -3,7 +3,8 @@ const router = require('express').Router();
 const plaidController = require('./controllers/plaidController.js');
 const coinbaseController = require('./controllers/coinbaseController.js');
 const firebaseController = require('./controllers/firebaseController.js');
-const emailController = require('./controllers/emailController.js')
+const emailController = require('./controllers/emailController.js');
+const emailSignup = require('./controllers/emailTemplates/emailSignup.js');
 
 router.post('/get_access_token', plaidController.get_access_token.post);
 router.get('/accounts', plaidController.accounts.get);
@@ -35,7 +36,7 @@ router.post('/usersetup', (req, res) => {
   var new_email = req.body.currentuser.email;
 
   firebaseController.setupNewUserFB(new_userid, new_display_name, new_email)
-  emailController.sendCoinsaverbotEmail()
+  // emailController.sendCoinsaverbotEmail(emailSignup);
 
   res.send('Server Response: New User setup completed');
 })
