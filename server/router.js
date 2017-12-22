@@ -46,7 +46,7 @@ router.post('/usersetup', (req, res) => {
   emailSignup.subject = `Welcome to Coinsaver, ${firstname}! Here's how to get started`;
 
   // console.log('emailSignup Obj: ', emailSignup)
-  // emailController.sendCoinsaverbotEmail(emailSignup);
+  emailController.sendCoinsaverbotEmail(emailSignup);
 
   res.send('Server Response: New User setup completed');
 })
