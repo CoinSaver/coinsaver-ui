@@ -43,7 +43,7 @@ angular.module('coinsaver')
       if (page === 'faq'){
         config.template =
             `
-            <div role="dialog" aria-label="Frequently Asked Questions" layout="column" layout-align="center center">
+            <div role="dialog" aria-label="Frequently Asked Questions" layout="column" layout-align="center center" style="background-color:rgba(77, 77, 77, 1)">
               <md-toolbar>
                 <div class="md-toolbar-tools">
                   <h2>FAQ</h2>
@@ -68,7 +68,7 @@ angular.module('coinsaver')
       if (page === 'legal'){
         config.template =
             `
-            <div role="dialog" aria-label="Legal" layout="column" layout-align="center center">
+            <div role="dialog" aria-label="Legal" layout="column" layout-align="center center"  style="background-color:rgba(77, 77, 77, 1)">
               <md-toolbar>
                 <div class="md-toolbar-tools">
                   <h2>Legal</h2>
@@ -99,7 +99,7 @@ angular.module('coinsaver')
       if (page === 'contact'){
         config.template =
             `
-            <div role="dialog" aria-label="Eat me!" layout="column" layout-align="center center">
+            <div role="dialog" aria-label="Eat me!" layout="column" layout-align="center center"  style="background-color:rgba(77, 77, 77, 1)">
               <md-toolbar>
                 <div class="md-toolbar-tools">
                   <h2>Contact</h2>
@@ -139,12 +139,14 @@ angular.module('coinsaver')
   
   template: `
     <div>
-      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-        <md-button class="md-primary md-hue-1" ng-click="$ctrl.showDialog('faq')">FAQ</md-button>
-        <md-button class="md-primary md-hue-1" ng-click="$ctrl.showDialog('legal')">Legal</md-button>
-        <md-button class="md-primary md-hue-1" ng-click="$ctrl.showDialog('contact')">Contact</md-button>
+      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap style="max-height:22px;">
+        <md-button class="md-primary md-hue-1" style="min-height:20px;max-height:20px;line-height:20px;text-transform:lowercase" ng-click="$ctrl.showDialog('faq')">FAQ</md-button>
+        <md-button class="md-primary md-hue-1" style="min-height:20px;max-height:20px;line-height:20px;text-transform:lowercase" ng-click="$ctrl.showDialog('legal')">Legal</md-button>
+        <md-button class="md-primary md-hue-1" style="min-height:20px;max-height:20px;line-height:20px;text-transform:lowercase" ng-click="$ctrl.showDialog('contact')">Contact</md-button>
         <!-- <div class="label">Themed</div> -->
-
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <c style="margin-top:-2px; font-size:12px">CoinSaverApp &copy;2017, ARMS Corp.</c>
+        <c> </c>
       </section>
     </div>
   `
