@@ -224,4 +224,3 @@ angular.module('coinsaver')
     // this.writefbcoincode = function (property, value) {
     //   coinacct.firebaseUpdate(property, value, '/coinbaseinfo')
     // } 
-
