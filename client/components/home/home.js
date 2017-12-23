@@ -367,8 +367,8 @@ Pricing tables & lists
   background: #f5b433;
 }
 .dark-background {
-  background-color: rgba(4, 13, 23, 0.30);
-  border-radius: 5px;
+  background-color: rgba(4, 13, 23, 0.15);
+  border-radius: 20px;
 }
 .dark-background-text {
   text-shadow: 2px 2px 1px rgb(11, 21, 2);
@@ -502,15 +502,16 @@ Pricing tables & lists
                     <div class="col-md-6 hidden-sm-down wow fadeIn">
                         <!--<img class="img-fluid mx-auto d-block" src="img/product.png"/>-->
                     </div>
-                    <div class="col-md-6 col-sm-12 text-white wow fadeIn dark-background">
+                    <!--<div class="col-md-6 col-sm-12 text-white wow fadeIn dark-background">-->
+                    <div class="col-md-7 col-sm-12 text-white wow fadeIn dark-background">
                         <h2 class="pt-4 text-primary-light"><p class="primary-shadow">Welcome to Coinsaver</p></h2>
                         <!--<h2 class="pt-4">Saving Change as Cryptocurrency</h2>-->
                         <p class="mt-3 dark-background-text">
-                            Investing in cryptocurrency, made simple.
+                            Investing in cryptocurrency, made simple. Signup below to get started.
                         </p>
                         <p class="mt-3">
                             <!--<a href="#pricing" class="btn btn-primary mr-2 mb-2 page-scroll">Buy Now</a>-->
-                        <a href="#download" class="btn btn-white mb-2 page-scroll">Get Started</a>
+                        <a href="#download" class="btn btn-white mb-2 page-scroll" ng-click="$ctrl.login('google')">Signup</a>
                         </p>
                     </div>
                 </div>
