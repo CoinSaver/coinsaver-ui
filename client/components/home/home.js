@@ -506,11 +506,11 @@ Pricing tables & lists
                         <h2 class="pt-4 text-primary-light"><p class="primary-shadow">Welcome to Coinsaver</p></h2>
                         <!--<h2 class="pt-4">Saving Change as Cryptocurrency</h2>-->
                         <p class="mt-3 dark-background-text">
-                            Investing in cryptocurrency, made simple.
+                            Investing in cryptocurrency, made simple. Signup below to get started.
                         </p>
                         <p class="mt-3">
                             <!--<a href="#pricing" class="btn btn-primary mr-2 mb-2 page-scroll">Buy Now</a>-->
-                        <a href="#download" class="btn btn-white mb-2 page-scroll">Get Started</a>
+                        <a href="#download" class="btn btn-white mb-2 page-scroll" ng-click="$ctrl.login('google')">Signup</a>
                         </p>
                     </div>
                 </div>
